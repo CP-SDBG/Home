@@ -9,9 +9,10 @@ body{
 }
 
 .header {
-  background-color: #f1f1f1;
+  
   padding: 20px;
   text-align: center;
+  color: white;
 }
 
 .topnav {
@@ -66,7 +67,7 @@ body{
   width: 270px;
   margin: 10px;
   
-  border-radius: 15px;
+  border-radius: 20px 20px 15px 15px;
 
 }
 
