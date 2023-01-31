@@ -16,6 +16,7 @@ body{
   color: white;
 }
 
+
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -66,7 +67,7 @@ body{
 .card{
   background: white;
   width: 270px;
-  margin: 10px;
+  margin: 10px 10px 10px 10px;
   
   border-radius: 20px 20px 15px 15px;
 
@@ -79,16 +80,44 @@ body{
   background-size: cover;
   border-radius: 15px 15px 0 0;
 }
+.card-top{
+  
+  height: 200px;
+  margin-bottom: 0px;
+  border-radius: 15px 15px 0 0;
+  
+}
+.card-center {
+  height: 100px;
+  
+}
+.card-bottom {
+  
+  height: 100px;
+}
 .card h2{
+  padding-top: 10px;
   justify-content: center;
   text-align: center;
 }
-
+.card-center p{
+  
+  text-align: center;
+}
 .card p{
   padding: 10px;
 }
-
-.card a{
+.card-bottom a{
+  text-decoration: none;
+  background-color: black;
+  color:white;
+  text-align: center;
+  padding: 25px 20px;
+  display: block;
+  margin: 0px 50px 0px 50px;
+  
+}
+/* .card a{
   background-color: black;
   color:white;
   padding: 25px 20px;
@@ -96,12 +125,27 @@ body{
   text-align: center;
   margin: 20px 50px;
   text-decoration: none;
-}
+} */
 
 .card:hover{
   background-color: rgb(62, 62, 62);
   color:white;
-  cursor: pointer;
+  /* cursor: pointer; */
   transform: scale(1.03);
   transition: all 1s ease;
 }
+
+/* Responsive navigation menu (for mobile devices) */
+/* @media screen and (max-width: 600px) {
+  .topnav a, .topnav-right {
+    float: none;
+    display: block;
+  }
+  
+  .topnav-centered a {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+} */
