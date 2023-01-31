@@ -54,6 +54,12 @@ body{
   clear: both;
 }
 
+h1{
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 10px;
+}
 
 .container{
   display: flex;

@@ -55,6 +55,12 @@ body{
   clear: both;
 }
 
+h1{
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 10px;
+}
 
 .container{
   display: flex;
@@ -75,13 +81,13 @@ body{
 
 .card-image{
   background-color:aqua;
-  height: 250px;
+  
   margin-bottom: 15px;
-  background-size: cover;
+  background-size:cover;
   border-radius: 15px 15px 0 0;
 }
 .card-top{
-  
+  background-size:cover;
   height: 200px;
   margin-bottom: 0px;
   border-radius: 15px 15px 0 0;
@@ -134,18 +140,3 @@ body{
   transform: scale(1.03);
   transition: all 1s ease;
 }
-
-/* Responsive navigation menu (for mobile devices) */
-/* @media screen and (max-width: 600px) {
-  .topnav a, .topnav-right {
-    float: none;
-    display: block;
-  }
-  
-  .topnav-centered a {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
-  }
-} */
