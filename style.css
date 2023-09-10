@@ -48,13 +48,14 @@ body{
 .column.middle {
   width: 70%;
 }
+.downloads{
+  color:white;
 
+}
 .downloads a {
   color:white;
-  
   display: block;
   text-align: center;
-  
   text-decoration: none;
 }
 .row:after {
