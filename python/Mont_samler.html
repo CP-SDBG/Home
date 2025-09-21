@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mønt samler</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+<body>
+  <h1>Mønt Samler</h1>
+  <p class="left">I dette lille spil skal ræven samle mønter på tid.<br>
+  For hver mønt der samle får man point og det gælder om få flest mulige point inden tiden er gået.<br>
+Bemærk linje nummer fortæller hvor de små bider af koden skal indsættes i forhold til hinanden.<br>
+Vi skriver koden i Mu Editor og mode er sat til Pygame Zero.</p>
+
+  <img src="./images/coin_collector.png" alt="Mønt Samler">
+
+  
+  <h2>Program Flow</h2>
+  <img src="./images/coin_collector_flow.png" alt="Flow">
+
+  <h2>Assets</h2>
+  <p class="left">Der skal bruges nogle assets i spillet.<br>
+  filerne skal placeres i undermapper til din .py kode fil.<br>
+  filerne skal placers in en mappe der hedder ”images”<br> Sådan her skal strukturen være: <br></p>
+  <pre class="left">
+Folder
+├── coin_collector.py
+└── images/
+    ├── coin.png
+    └── fox.png
+</pre>
+
+
+    <div class="asset-block">
+      <h3>Mønt</h3>
+      <p>Mønten som spilleren skal fange</p>
+      <img src="./code/moent_samler/coin.png" alt="Mønt">
+      <p><a href="./code/moent_samler/coin.png" download="coin.png" class="download-link">Download</a></p>
+      <h3>Ræv</h3>
+      <p>Vores spiller</p>
+      <img src="./code/moent_samler/fox.png" alt="Ræv">
+      <p><a href="./code/moent_samler/fox.png" download="fox.png" class="download-link">Download</a></p>
+    </div>
+  
+      <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Vi skaber program vinduet</h3>
+    <p>Pygame Zero har nogle indbygget variabler</p>
+    <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
+HEIGHT = 400
+TITLE = "Coin Collector" 
+    </code></pre>
+    </div>
+
+      <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Kontrol variabler</h3>
+    <p>Når spillet starter har man 0 point og man er ikke game over</p>
+    <pre class="line-numbers" data-start="5"><code class="language-python">score = 0
+game_over = False
+  </code></pre>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Load spillets Actor's</h3>
+    <p>En actor et indbygget element i Pygame Zero<br>
+      Vi kan tilføre grafik med vores asset (sprite)<br>
+      I dette spil vores fox og coin billeder<br>
+      en actor har indbygget metoder vi kan bruge i spillet<br>
+      Den første metode er .pos hvor vi sætter en start position for hver actor.</p>
+    <pre class="line-numbers" data-start="8"><code class="language-python">fox = Actor("fox")
+fox.pos = 100,100
+
+coin = Actor("coin")
+coin.pos = 200,200
+  </code></pre>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Noget på skærmen</h3>
+    <p>Vi skal have noget på skærmen. Derfor tilføjer vi draw funktionen. <br>
+      I funktionen sætte vi baggrundsfarve og kalder actor metoden draw. <br>
+      Vi viser også en statisk tekst (noget som ikke ændre sig) + værdien som er i variablen score. <br>
+      placering er 10,10 fra top venstre hjørne af spil vinduet.</p>
+    <pre class="line-numbers" data-start="14"><code class="language-python">def draw():
+    screen.fill("green")
+    fox.draw()
+    coin.draw()
+    screen.draw.text("Score:" + str(score), color="black", topleft=(10,10))
+    </code></pre>
+  </div>
+
+  <h3>Afprøv</h3>
+  <p>Det er nu tid til at afprøve første gang. <br>
+    Det skulle gerne se sådan her ud</p>
+  <img src="./images/coin_collector.png" alt="Mønt Samler">
+  
+  <details>
+  <summary>Kontrol</summary>
+  <div class="code-block">
+          <!-- <span class="lang-label">Pygame Zero</span> -->
+      
+      <p>Hele program koden skal gerne se sådan her ud lige nu:</p>
+      <pre class="line-numbers"><code class="language-python">WIDTH = 400
+HEIGHT = 400
+TITLE = "Coin Collector" 
+
+score = 0
+game_over = False
+
+fox = Actor("fox")
+fox.pos = 100,100
+
+coin = Actor("coin")
+coin.pos = 200,200
+
+def draw():
+    screen.fill("green")
+    fox.draw()
+    coin.draw()
+    screen.draw.text("Score:" + str(score), color="black", topleft=(10,10))
+    </code></pre>
+    </div>
+
+</details>
+
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Spil logik</h3>
+    <p>Vi skal have noget bevægelse i spillet. Men først skal vi have lavet noget forberedelse.<br>
+    Vi starter med at oprette tre funktioner som vi skal bruge senere.</p>
+    <pre class="line-numbers" data-start="20"><code class="language-python">def place_coin():
+    pass
+
+def time_up():
+    pass
+
+def update():
+    pass
+  </code></pre>
+  <p>Vi starter med at give funktionerne en ”pass” instruktion. <br>
+    Det betyder bare at vi helt bevist har valgt ikke at lave noget ”rigtig” kode.<br><br>
+    <b>Husk at slette ”pass” så snart vi begynder at tilføje kode til funktionen!</b></p>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Random funktion</h3>
+    <p>Programmet skal selv bestemme hvor mønten dukker op.<br>
+    Til det skal vi bruge en metode der hedder randint (random integer)<br>
+    Den metode skal importeres fra et bibliotek der hedder random.</p>
+    <pre class="line-numbers" data-start="1"><code class="language-python">from random import randint
+  </code></pre>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>place_coin() funktionen</h3>
+    <p>Ændre nu funktionen place_coin() så den ser sådan her ud.</p>
+    <pre class="line-numbers" data-start="22"><code class="language-python">def place_coin():
+    coin.x = randint(20,(WIDTH - 20))
+    coin.y = randint(20,(HEIGHT - 20))
+  </code></pre>
+  <p>Kan du gætte hvad koden gør?</p>
+  </div>
+
+  <details>
+  <summary>Forklaring</summary>
+  <h2>Import af bibliotek (libraries)</h2>
+  <p>Ofte skal man bruge elementer i sit program som allerede findes,<br>
+  man behøver derfor ikke lave dem selv.<br><br>
+for at få adgang til disse elementer skal man enten importer helt library eller del af et library.<br><br>
+Ovenfor importerede vi kun randint fra biblioteket random.<br>
+ville vi importer hele biblioteket ville koden have set sådan her ud</p>
+
+  <div class="code-block">
+  <pre class="line-numbers" data-start="1"><code class="language-python">import random</code></pre>
+    </div>
+
+  <p>Men vi ville så også fortælle i vores kode at vi nu vil bruge randint fra random</p>
+  <div class="code-block">
+  <pre class="line-numbers" data-start="22"><code class="language-python">def place_coin():
+    coin.x = random.randint(20,(WIDTH - 20))
+    coin.y = random.randint(20,(HEIGHT - 20))</code></pre>
+    </div>
+  <p>Skal man bruge mange funktioner for et library kan det være smart at importer det hele.<br>
+  men ellers tager man kun de enkelte funktioner.</p>
+</details>
+
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Kald place_coin()</h3>
+    <p>Vi vil nu tilføje kald af funktionen så snart programet køre.<br>
+    Derved får vi en tilfældig placering af mønten ved hver opstart.</p>
+    <pre class="line-numbers" data-start="32"><code class="language-python">place_coin()
+  </code></pre>
+  <p>Prøv nu at starter og stoppe spillet et par gange. Hold øje med hvor mønten er på skærmen.</p>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Stop spillet på tid</h3>
+    <p>Ændre time_up() funktionen så den ser sådan her ud.</p>
+    <pre class="line-numbers" data-start="26"><code class="language-python">def time_up():
+    global game_over
+    game_over = True
+  </code></pre>
+  <p>Denne linje kode placeres lige før linjen med place_coin()</p>
+  <pre class="line-numbers" data-start="33"><code class="language-python">clock.schedule(time_up, 7.0)</code></pre>
+  <p>Den linje kode starter en timer på 7 sekunder så snart spillet starter.<br>
+    Når tiden er gået, går programmet til funktionen time_up()<br>
+    time_up() sætter vores game_over variable til True.<br><br>
+  
+  Nu skal vi tilføje koden som får spillet til at stoppe.<br>
+tilføj i draw() funktionen denne if betingelsen.</p>
+  <pre class="line-numbers" data-start="22"><code class="language-python">    if game_over == True:
+        screen.fill("pink")
+        screen.draw.text("Final Score:" + str(score), color="black", topleft=(10,10), fontsize=60)
+</code></pre>
+<p><b>Husk indrykkene skal passe!</b><br><br>
+Når skærmen gentegner vil den hvis game_over variablen er True<br>sætte baggrundsfarven til pink og ændre score teksten.</p>
+  </div>
+
+  <h2>Afprøv</h2>
+  <p>Afprøv spillet ved at starte det og vente 7 sekunder.<br>
+    Efter 7 sekunder skal skærmen  se sådan her ud</p>
+  <img src="./images/coin_collector_gameover.png" alt="Game Over">
+
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Bevægelse</h3>
+    <p>Vi skal have ræven til at flytte sig. <br>
+      Ændre update() funktionen så den ser sådan her ud</p>
+    <pre class="line-numbers" data-start="34"><code class="language-python">def update():
+    if keyboard.left:
+        fox.x = fox.x -2
+        
+    if keyboard.right:
+        fox.x = fox.x +2
+        
+    if keyboard.up:
+        fox.y = fox.y -2
+        
+    if keyboard.down:
+        fox.y = fox.y +2
+  </code></pre>
+  <p>Afprøv om du kan bevæge ræven med pile tasterne. <br>
+    Hvis du kan så kan du gå videre</p>
+  </div>
+
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Kollision</h3>
+    <p>Vi skal finde ud om ræven rammer mønten. <br>Hvis den rammer mønten skal vi øge vores score <br>og flytte mønten til en ny placering.<br><br>
+    Det første er at hente score variablen ind i update, så vi kan skrive variablen</p>
+    <pre class="line-numbers" data-start="35"><code class="language-python">    global score</code></pre>
+    <p>Derefter bruger vi actor (ræven) elements indbygget funktion til at se om den rammer en anden actor (mønten).</p>
+    <pre class="line-numbers" data-start="48"><code class="language-python">    if fox.colliderect(coin):
+        score = score + 10
+        place_coin()
+   </code></pre>
+  </div>
+
+    <h2>Afprøv</h2>
+  <p>Vores spil er nu færdig<br>Du kan nu styre ræven med piletasterne ind i mønterne.<br>Fanger du mønterne får du point.<br> Når der er gået 7 sekunder er spillet slut.<br>Det gælder om at få fange så mange mønter som muligt.</p>
+  
+  <details>
+  <summary>Komplet kode</summary>
+  <div class="code-block">
+          <!-- <span class="lang-label">Pygame Zero</span> -->
+      <p>Hele koden ser sådan ud:</p>
+      <pre class="line-numbers"><code class="language-python">from random import randint
+
+WIDTH = 400
+HEIGHT = 400
+TITLE = "Coin Collector" 
+
+score = 0
+game_over = False
+
+fox = Actor("fox")
+fox.pos = 100,100
+
+coin = Actor("coin")
+coin.pos = 200,200
+
+def draw():
+    screen.fill("green")
+    fox.draw()
+    coin.draw()
+    screen.draw.text("Score:" + str(score), color="black", topleft=(10,10))
+
+    if game_over == True:
+        screen.fill("pink")
+        screen.draw.text("Final Score:" + str(score), color="black", topleft=(10,10), fontsize=60)
+
+def place_coin():
+    coin.x = randint(20,(WIDTH - 20))
+    coin.y = randint(20,(HEIGHT - 20))
+
+def time_up():
+    global game_over
+    game_over = True
+
+def update():
+    global score
+    if keyboard.left:
+        fox.x = fox.x -2
+        
+    if keyboard.right:
+        fox.x = fox.x +2
+        
+    if keyboard.up:
+        fox.y = fox.y -2
+        
+    if keyboard.down:
+        fox.y = fox.y +2
+
+    if fox.colliderect(coin):
+        score = score + 10
+        place_coin()
+        
+clock.schedule(time_up, 7.0)
+place_coin()
+  </code></pre>
+    </div>
+
+</details>
+
+<h3>Forslag til udvidelser</h3> 
+<p>Prøv at udvide spillet på egen hånd.<br>Her er nogen forslag du måske kan blive inspireret af.</p> 
+<ul class="left">
+  <li>Øg hvor lang tid man har til spillet</li>
+  <li>Ændre hastigheden på ræven</li>
+  <li>Ændre Actor billedet når ræven går til venstre/højre</li>
+  <li>Vis hvor lang tid der er tilbage i spillet (hint. update() kaldes 60 gange i sekundet)</li>
+  <li>Lav bonus tid actors som dukker op på tilfældig tidspunkt og forsvinder igen</li>
+  <li>Flyt mønten hvis den ikke er taget efter noget tid</li>
+</ul>
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Prism.js Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+  <!-- Prism.js Components (multi-language support) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+  <!-- Prism.js Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+</html>

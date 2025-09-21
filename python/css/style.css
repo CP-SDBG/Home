@@ -1,0 +1,97 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background: #fafafa;
+}
+
+h1, h2 {
+  margin-top: 30px;
+}
+
+.left {
+  text-align: left;
+}
+
+/* Shared look for block containers */
+.code-block, .asset-block {
+  position: relative;
+  margin: 30px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.code-block h3,
+.asset-block h3 {
+  margin: 0 0 10px 0;
+}
+
+.code-block p,
+.asset-block p {
+  margin: 0 0 15px 0;
+}
+
+/* Language badge for code */
+.lang-label {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: #333;
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+pre {
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+img {
+  max-width: 100%;
+  margin: 20px 0;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Asset block download link */
+.download-link {
+  display: inline-block;
+  padding: 8px 12px;
+  margin-right: 12px;
+  background: #0066cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.download-link:hover {
+  background: #004999;
+}
+
+details {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  text-align: left;
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

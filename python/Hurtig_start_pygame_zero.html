@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hurtig Start på Python Zero</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+<body>
+
+  <h1>Hurtig Start på Python Zero</h1>
+  <p class="left">Resultatet af koden nedenfor er en bold som bevæger sig over skærmen.<br>
+Når den rammer kanterne ændre den farve og retning.
+
+Klikker du med musen skrives der noget tekst i konsollen.<br>
+
+Bemærk linje nummer fortæller hvor de små bider af koden skal indsættes i forhold til hinanden.<br>
+
+Vi skriver koden i Mu Editor og mode er sat til Pygame Zero.
+</p>
+
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Vi skaber program vinduet</h3>
+    <p>Pygame Zero har nogle indbygget variabler</p>
+    <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 600
+HEIGHT = 400
+TITLE = "Bold" </code></pre>
+  </div>
+
+  <p class="left">Gem filen som bold.py og klik på Play</p>
+
+  <!-- Collapsible Section -->
+<details>
+  <summary>Vinduets start placering</summary>
+  <h2></h2>
+  <p>Det er muligt at bestemme hvor vinduet starter på skærmen.<br>
+  klik på det lille tandhjul i Mu Editor vinduet nederst til højre.</p>
+  
+  <img src="./images/vindue_start_placering.png" alt="Indstilling">
+  
+  <div class="code-block">
+    
+      <h3>Start placering</h3>
+      <p>Sæt start koordinat for vinduets top venstre hjørne</p>
+      <pre><code class="language-python">SDL_VIDEO_WINDOW_POS=100,200</code></pre>
+
+      <p>Sæt start placering mit på skærmen</p>
+      <pre><code class="language-python">SDL_VIDEO_WINDOW_POS=CENTER</code></pre>
+    </div>
+
+  
+</details>
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>draw() funktionen</h3>
+    <p>Dette er en indbygget funktion i Pygame Zero.<br>
+      Den køre automatisk når der er behov for at opdater det som vises på skærmen<br></p>
+    <pre class="line-numbers" data-start="5"><code class="language-python">def draw():
+    screen.clear()
+    screen.fill((255,255,255))</code></pre>
+  </div>
+
+    <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Variabler for bolden</h3>
+    <p>Vi opretter nogle variabler som skal bruges til vores bold</p>
+    <pre class="line-numbers" data-start="5"><code class="language-python">ball_radius = 10
+ball_x = WIDTH // 2
+ball_y = HEIGHT // 2
+ball_color = "red"
+    </code></pre>
+  </div>
+
+    <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Ændre draw()</h3>
+    <p>Vi må nu tilpasse draw() function så vi får tegnet bolden</p>
+    <pre class="line-numbers" data-start="10"><code class="language-python">def draw():
+    screen.clear()
+    screen.fill((255,255,255))
+    screen.draw.filled_circle((ball_x, ball_y), ball_radius, ball_color)
+  </code></pre>
+  </div>
+
+  <p class="left">Afprøv</p>
+  
+  <br><!-- Insert Image -->
+  <h2>Resultat indtil videre</h2>
+  <p class="left">Vi skal nu gerne have et program vindue som ser sådan her ud</p>
+  <img src="./images/bold_paa_skærm.png" alt="skærmbilled">
+
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Komplet program kode indtil nu</h3>
+    <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 600
+HEIGHT = 400
+TITLE = "Bold" 
+
+ball_radius = 10
+ball_x = WIDTH // 2
+ball_y = HEIGHT // 2
+ball_color = "red"
+
+def draw():
+    screen.clear()
+    screen.fill((255,255,255))
+    screen.draw.filled_circle((ball_x, ball_y), ball_radius, ball_color)
+  </code></pre>
+  </div>
+
+  <!-- Collapsible Section -->
+<details>
+  <summary>Ekstra</summary>
+  <h2>Leg lidt med koden</h2>
+  <p>Prøv at finde ud af hvordan du ændre:<br>
+    <ul>
+      <li>Vinduets størrelse</li>
+      <li>Boldens størrelse</li>
+      <li>Boldens placering</li>
+      <li>Boldens farve</li>
+    </ul>
+    Når du har prøvet det. Ændre så koden tilbage som ovenfor og fortsæt.</p>
+</details>
+
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Registre muse klik</h3>
+    <p>Med denne kode finder vi ud af hvor på skærmen der bliver klikket.<br>
+      Hvis der bliver klikket på bolden skriver vi en tekst i terminalen,<br>hvis vi ikke klikker på bolden skriver vi en anden tekst. </p>
+    <pre class="line-numbers" data-start="15"><code class="language-python">def on_mouse_down(pos):
+    dx = pos[0] - ball_x
+    dy = pos[1] - ball_y
+    if dx * dx + dy * dy <= ball_radius * ball_radius:
+        print("Du ramte mig!")
+
+    else:
+        print("Forbi! Ha Ha :-)")
+      </code></pre>
+  </div>
+  <p class="left">Afprøv ved at klikke forskellige steder i program vinduet.<br>Hold øje med nederste del af Mu Editor (terminalen)</p>
+
+  <details>
+  <!-- Insert Image -->
+  <summary>Sammenligning af afstanden</summary>
+  <p class="left">Der laves en Pythagoras beregning (retvinklet trekant) fra boldens centrum til musens placering<br>
+  Der laves så en sammenligning med afstand på bolden selv (radius).<br>
+  På den måde ved vi om klikket er inden i bolden eller udenfor.</p>
+  <img src="./images/afstand.png" alt="Afstands illustration">
+
+  <p>Vi behøver ikke at tage kvadratroden på hver side for at sammenligne.<br>
+  men det var måske mere tydeligt hvis vi skrev betingelsen således:</p>
+    <!-- Python Code snippet -->
+    <div class="code-block">
+      <pre class="line-numbers" data-start="18"><code class="language-python">if math.sqrt(dx * dx + dy * dy) <= math.sqrt(ball_radius * ball_radius):</code></pre>
+    </div>
+    <p class="left">Det ville dog også have krævet at vi benyttede math biblioteket</p>
+  <div class="code-block">
+      <pre class="line-numbers" data-start="1"><code class="language-python">import math</code></pre>
+    </div>
+</details>
+
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Sæt bolden i bevægelse</h3>
+    <p>Vi skal have oprettet to variabler for boldens hastighed og retning.</p>
+    
+    <pre class="line-numbers" data-start="10"><code class="language-python">ball_vx = 3
+ball_vy = 1
+  </code></pre>
+  
+  <p>Vi skal også have tilføjet Pygame Zero's update() funktion<br>
+Denne funktion køre 60 gange i sekundet og vi kan derfor i denne funktion ændre boldens placering på skærmen.<br>
+når vi har ændret boldens placering, køre draw() automatisk og billedet bliver opdateret </p>
+  <pre class="line-numbers" data-start="13"><code class="language-python">def update():
+    global ball_x, ball_y, ball_vx, ball_vy
+
+    ball_x += ball_vx
+    ball_y += ball_vy
+  </code></pre>
+  <p class="left">Bemærk at vi benytter global og lister variablerne som vi ønsker at ændre indefra update() funktionen</p>
+  
+  <pre><code  class="language-python">global ball_x, ball_y, ball_vx, ball_vy</code></pre>
+  </div>
+  
+<!-- Collapsible Section -->
+<details>
+  <summary>Boldens bevægelse</summary>
+  <h2>vx og vy er en vektor (retning og længde) </h2>
+  <p>Vores to variabler vx og vy er det man kalder en vektor.<br>
+  For hvert frame flytter vi bolden i x og y retning som her på billdet.</p>
+  <img src="./images/bold_bevaegelse.png" alt="Boldens bevægelse">
+  <p>Du kan ændre hastighed ved at øge tal værdien og du kan ændre retning ved at ændre fortegn.<br>
+  Prøv:</p>
+  <pre class="line-numbers" data-start="10"><code class="language-python">ball_vx = -5
+ball_vy = 1
+  </code></pre>
+</details>
+
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Få bolden til at skifte retning</h3>
+    <p>Vi vil gerne have bolden til at skifte retning når den rammer program vinduets vægge.<br>
+    tilføj disse linjer til update(funktionen)</p>
+
+    <pre class="line-numbers" data-start="19"><code class="language-python">  if ball_x <= 0 or ball_x  >= WIDTH:
+        ball_vx = -ball_vx
+
+  if ball_y <= 0 or ball_y >= HEIGHT:
+        ball_vy = -ball_vy
+        </code></pre>
+
+    <p class="left">Hvis vi kigger godt efter så kan vi se at halv delen af bolder er uden for kanterne.<br>
+    for at rette op på det må vi tage højde for boldens radius.<br><br>
+  Ændre linjerne så de ser sådan her ud:</p>
+
+    <pre class="line-numbers" data-start="19"><code class="language-python">  if ball_x - ball_radius <= 0 or ball_x + ball_radius >= WIDTH:
+        ball_vx = -ball_vx
+
+  if ball_y - ball_radius <= 0 or ball_y + ball_radius >= HEIGHT:
+        ball_vy = -ball_vy
+        </code></pre>
+  </div>
+
+    <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Ændre boldens farve når den rammer kanten</h3>
+    <p>Lad os leg lidt med boldens farve.<br>
+    tilføj ball_color variablen i update() funktionen, så vi kan ændre dens værdi</p>
+    <pre><code class="language-python">global ball_x, ball_y, ball_vx, ball_vy, ball_color</code></pre>
+
+    <p>Tilføj nu disse to linjer:</p>
+    <pre class="line-numbers" data-start="21"><code class="language-python">        ball_color = "yellow"</code></pre>
+    
+            <pre class="line-numbers" data-start="25"><code class="language-python">        ball_color = "black"</code></pre>
+  </div>
+<h2>Tilykke!</h2>
+  <p>Du har nu kodet et lille program hvor en bold bevæger sig over skærmen.<br>
+Når den rammer kanterne ændre den farve og retning.<br>
+Klikker du med musen skrives der noget tekst i konsollen.</p>
+
+  <!-- Python Code snippet -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Hele program koden</h3>
+    <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 600
+HEIGHT = 400
+TITLE = "Bold" 
+
+ball_radius = 10
+ball_x = WIDTH // 2
+ball_y = HEIGHT // 2
+ball_color = "red"
+
+ball_vx = 3
+ball_vy = 1
+
+def update():
+    global ball_x, ball_y, ball_vx, ball_vy, ball_color
+
+    ball_x += ball_vx
+    ball_y += ball_vy
+    
+    if ball_x - ball_radius <= 0 or ball_x + ball_radius >= WIDTH:
+        ball_vx = -ball_vx
+        ball_color = "yellow"
+
+    if ball_y - ball_radius <= 0 or ball_y + ball_radius >= HEIGHT:
+        ball_vy = -ball_vy
+        ball_color = "black"
+        
+def draw():
+    screen.clear()
+    screen.fill((255,255,255))
+    screen.draw.filled_circle((ball_x, ball_y), ball_radius, ball_color)
+
+def on_mouse_down(pos):
+    dx = pos[0] - ball_x
+    dy = pos[1] - ball_y
+    if dx * dx + dy * dy <= ball_radius * ball_radius:
+        print("Du ramte mig!")
+
+    else:
+        print("Forbi! Ha Ha :-)")</code></pre>
+  </div>
+
+  <!-- Collapsible Section -->
+<details>
+  <summary>Extra</summary>
+  <h2>Lave en tæller for antal gange bolden rammer kanten</h2>
+  <p>Hint: Benyt en variable som hedder counter og brug denne kode til at vise tekst på skærmen</p>
+
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
+      <pre><code class="language-python">screen.draw.text("Counter: " + str(counter),(10,10),color = "black")</code></pre>
+    </div>
+  <!-- Insert Image -->
+<img src="./images/counter.png" alt="Tæller på skærm">
+
+</details>
+
+
+
+
+
+
+
+  <!-- Prism.js Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+  <!-- Prism.js Components (multi-language support) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+
+  <!-- Prism.js Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+</html>

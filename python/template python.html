@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Python template</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+<body>
+
+  <h1>Page header</h1>
+  <p class="left">This is some text.</p>
+
+  <h2>Image Example</h2>
+  <p class="left">Here is the test image:</p>
+  <img src="./test.png" alt="Test Image">
+  <!-- Python -->
+  <div class="code-block">
+    <span class="lang-label">Python</span>
+    <h3>Example 1: Hello World</h3>
+    <p>This is the most basic Python program.</p>
+    <pre class="line-numbers" data-start="1"><code class="language-python">def hello_world():
+  print("Hello, World!")</code></pre>
+  </div>
+
+  
+  
+
+  <!-- Collapsible Section -->
+  <details>
+    <summary>Extra Information (click to expand)</summary>
+    <h2>Inside Collapsible Section</h2>
+    <p>This content is useful but optional. You can hide or show it by clicking.</p>
+
+    <div class="code-block">
+      <span class="lang-label">Python</span>
+      <h3>Example 8: Square Function</h3>
+      <p>This function returns the square of a number.</p>
+      <pre class="line-numbers"><code class="language-python">def square(x):
+    return x * x</code></pre>
+    </div>
+
+    <img src="./test.png" alt="Another test image">
+  </details>
+
+
+
+  <!-- Prism.js Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+  <!-- Prism.js Components (multi-language support) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+
+  <!-- Prism.js Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+</html>
