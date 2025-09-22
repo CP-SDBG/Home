@@ -4,7 +4,7 @@ import math
 
 WIDTH = 600
 HEIGHT = 800
-
+TITLE = "Komet Draberen"
 # Spiller
 ship = Actor('ship')
 ship.pos = (WIDTH // 2, HEIGHT // 2)
