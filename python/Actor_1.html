@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Actor Leg</title>
+  <title>Actor - Load, vis, placer</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./css/style.css">
@@ -13,15 +13,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>Actor Leg</h1>
-  <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objectet.<br>
+  <h1>Actor - Load, vis, placer</h1>
+  <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objektet.<br>
   Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
 
  <div class="asset-block">
   <h3>Actor sprite</h3>
   <p>Grafisk element til vores Actor</p>
   <img src="./code/actor/images/brick_face.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/brick_face.png" download class="download-link">Download Asset</a></p>
+  <p><a href="./code/actor/images/brick_face.png" download class="download-link">Download</a></p>
 </div>
 
   <div class="code-block">
@@ -30,13 +30,13 @@
     <p>Lad os hurtigt få kodet et lille program vindue</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
 HEIGHT = 400
-TITLE = "Actor Leg"
+TITLE = "Actor - Load, vis, placer"
 
 def draw():
     screen.clear()
     screen.fill("white")
   </code></pre>
-  <p class="left">Gem kode filen som "actor_leg.py". Afprøv at din kode virker inden du går videre</p>
+  <p class="left">Gem kode filen som "actor.py". Afprøv at din kode virker inden du går videre</p>
 
   </div>
 
@@ -107,14 +107,16 @@ player.pos = WIDTH/2,HEIGHT/2
   </code></pre>
   <p>Typisk vil man dog bruge .pos når man skal aflæse hvor en actor er placeret på skærmen.<br>
       Da .pos er en tuple (flere værdier i en attribute) kan man udlæse x værdien med .pos[0] og y værdien med .pos[1]<br>
-      
-    </p>
+      </p>
+  </div>
 
   <div class="code-block">
       <!-- <span class="lang-label">Pygame Zero</span> -->
-    <h3>Flytte Actor</h3>
-    <p>Vil man tilføje en ændring til den aktuelle placering, kan man med fordel sætte actors x og y værdier særskilt.<br><br>
-      Prøve dette lidt større eksempel. </p>
+    <h3>Udlæsning af Actor x og y koordinater</h3>
+    <p>Her er et lille eksemple hvor man kan ændre Actor placering og se udlæsning af x y koordinater</p>
+    </code></pre>
+  <pre><code class="language-python">screen.draw.text("X: " + str(player.pos[0]) + "     Y: " + str(player.pos[1]), (10,10))</code></pre>
+  <p>Tænk ikke for meget over resten af koden på nuværende tidspunkt.</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
 HEIGHT = 400
 TITLE = "Actor Leg"
@@ -151,6 +153,7 @@ def ground():
 def coordinates():
     screen.draw.text("X: " + str(player.pos[0]) + "     Y: " + str(player.pos[1]), (10,10))
   </code></pre>
+  </div>
 
 
 
