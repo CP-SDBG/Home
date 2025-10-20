@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Actor - Afstand til, Retning til</title>
+  <title>Actor - Kollision</title>
 
   <!-- CSS -->
   <link rel="stylesheet" href="./css/style.css">
@@ -13,27 +13,258 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
 </head>
 <body>
-  <h1>Actor - Afstand til, Retning til</h1>
+  <h1>Actor - Kollision</h1>
   <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objektet.<br>
   Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
-<h1>Kommer snart!</h1>
 
  <div class="asset-block">
-  <h3>Actor sprite</h3>
-  <p>Grafisk element til vores Actor</p>
-  <img src="./code/actor/images/brick_face.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/brick_face.png" download class="download-link">Download Asset</a></p>
+  <h3>Actor sprites</h3>
+  <p>0 grader roteret rumskib</p>
+  <img src="./code/actor/images/spaceship0.png" alt="Actor sprite">
+  <p><a href="./code/actor/images/spaceship0.png" download class="download-link"> Download</a></p>
+  <p>0 grader roteret missil</p>
+  <img src="./code/actor/images/bullet0.png" alt="Actor sprite">
+  <p><a href="./code/actor/images/bullet0.png" download class="download-link"> Download</a></p>
+  <p>0 grader roteret missil</p>
+  <img src="./code/actor/images/astroid.png.png" alt="Actor sprite">
+  <p><a href="./code/actor/images/astroid.png.png" download class="download-link"> Download</a></p>
 </div>
 
   <div class="code-block">
       <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Basis program</h3>
-    <p>Vi bruger dette lille program som en start</p>
-    <pre class="line-numbers" data-start="1"><code class="language-python">
-  </code></pre>
-  
+    <p>Vi bruger det færdige program fra Actor - Roter som udgangspunkt</p>
+    <pre class="line-numbers" data-start="1"><code class="language-python">import math
 
+WIDTH = 400
+HEIGHT = 400
+TITLE = 'Rotation'
+
+ship = Actor('spaceship0',center=(200, 200))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+def update():
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+      
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+            
+        b.x += b.vx
+        b.y += b.vy
+        
+            
+    if keyboard.right:
+        ship.angle -= 1
+        
+    if keyboard.left:
+        ship.angle += 1
+    
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4 
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+    
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8 
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+        
+def draw():
+    screen.clear()
+    
+    for b in bullets:
+        b.draw()
+    
+    ship.draw()
+  </code></pre>
   </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Spawn nogle astroids</h3>
+    <p>Før vi kan tjekke om vores missiler rammer noget, skal vi have nogle kometer ind i spillet.<br>
+    Det kræver lidt kode så følg godt med.<br><br>
+  Først et array til at gemme vores kometer i</p>
+    <pre class="line-numbers" data-start="12"><code class="language-python">astroids =[]</code></pre>
+    <p>En timer til tiden mellem vi spawner en komet</p>
+    <pre class="line-numbers" data-start="13"><code class="language-python">spawn_timer = 2</code></pre>
+    <p>En spawn funktion</p>
+    <pre class="line-numbers" data-start="65"><code class="language-python">def spawn():
+    astroid = Actor('astroid')
+    astroid.x = randint(10, WIDTH-10)
+    astroid.y = randint(10, HEIGHT-10)
+    astroids.append(astroid)
+  </code></pre>
+  <p>vi benytter randint fra random biblioteket. Så den skal vi have importeret</p>
+    <pre class="line-numbers" data-start="2"><code class="language-python">from random import randint
+ </code></pre>
+    <p>Vi skal have ændret lidt i update() signaturen og tilføjet betingelse for at kalde spawn()</p>
+    <pre class="line-numbers" data-start="15"><code class="language-python">def update(dt):
+    global spawn_timer
+    spawn_timer -= dt
+    if spawn_timer < 0:
+        spawn()
+        spawn_timer = 2
+      </code></pre>
+    <p>Og til sidste skal vi have tilføjet astroids array til draw() for at få vist vores kometer på skærmen</p>
+    <pre class="line-numbers" data-start="73"><code class="language-python">    for a in astroids:
+        a.draw()
+
+</code></pre>
+  </div>
+
+    <h2>Nu med kometer</h2>
+  <p class="left">Prøv nu programmet af.</p>
+  <img src="./images/Actor_kollision.png" alt="Kometer på skærmen">
+
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Skyd dem ned!</h3>
+    <p>Nu er det tid til at lave kollision tjek.<br>I vores update har vi allerede en for loop på vores bullets.<br>
+    I for loopen flytter vi misilerne fremad. Så lige efter vi har flyttet dem fremad kan vi nu tjekke om missilet har ramt noget.<br><br>
+  Så indsæt koden nedenfor.<br><br>Koden løber astroids igennem og ser som der er kollision mellem misilet og komet.<br>
+  Hvis der er kollision slettes både missil og komet.<br><br>Der laves et break af astroids loop da det nuværende missil er slettet og der for ikke rammer mere.</p>
+    <pre class="line-numbers" data-start="38"><code class="language-python">        for a in astroids[:]:
+            if b.colliderect(a):
+                bullets.remove(b)
+                astroids.remove(a)
+                break  </code></pre>
+  
+  <p>Prøv det af.<br> Vi kan godt gøre det lidt bedre end det.</p>
+  </div>
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Vi skal tættere på.</h3>
+    <p>vi har rent kollision tjek på på om den "usynlige" firkantet kasse rundt om vores missil sprite<br>
+      rammer den "usynlige" kasse på vores komet sprite.<br><br>
+    Lad os gøre det lidt bedre ved at tjekke afstanden og hvis den er tilpas lille, så ser vi det som et "kill"</p>
+    <pre class="line-numbers" data-start="40"><code class="language-python">                if b.distance_to(a) <= a.width/2:
+                    bullets.remove(b)
+                    astroids.remove(a)
+                break 
+              </code></pre>
+  <p>Prøv nu. Måske vil du gøre afstanden mindre eks. a.width/2 <br>Det kan også være en fordel at reducer missil hastigheden lidt mens du prøver ad.</p>
+  </div>
+
+  <details>
+  <summary>Komplet kode</summary>
+  <h2>Her er det fulde program</h2>
+  <div class="code-block">
+          <!-- <span class="lang-label">Pygame Zero</span> -->
+
+      <pre class="line-numbers"><code class="language-python">import math
+from random import randint
+
+WIDTH = 400
+HEIGHT = 400
+TITLE = 'Rotation'
+
+ship = Actor('spaceship0',center=(200, 200))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+astroids =[]
+spawn_timer = 2
+def update(dt):
+    global spawn_timer
+    spawn_timer -= dt
+    if spawn_timer < 0:
+        spawn()
+        spawn_timer = 2
+        
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+      
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+                
+        b.x += b.vx
+        b.y += b.vy
+        
+        for a in astroids[:]:
+            if b.colliderect(a):
+                if b.distance_to(a) <= a.width/4:
+                    bullets.remove(b)
+                    astroids.remove(a)
+                break 
+                
+    if keyboard.right:
+        ship.angle -= 1
+        
+    if keyboard.left:
+        ship.angle += 1
+    
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4 
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+    
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8 
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+        
+def draw():
+    screen.clear()
+    
+    for b in bullets:
+        b.draw()
+
+    ship.draw()
+    
+    for a in astroids:
+        a.draw()
+        
+def spawn():
+    astroid = Actor('astroid')
+    astroid.x = randint(10, WIDTH-10)
+    astroid.y = randint(10, HEIGHT-10)
+    astroids.append(astroid)</code></pre>
+    </div>
+</details>
+
+
+
+
+
 
 
 
