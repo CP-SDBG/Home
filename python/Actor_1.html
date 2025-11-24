@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Actor - Load, vis, placer</title>
@@ -9,23 +10,26 @@
 
   <!-- Prism.js CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css"
+    rel="stylesheet" />
 </head>
+
 <body>
   <h1>Actor - Load, vis, placer</h1>
   <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objektet.<br>
-  Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
+    Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
 
- <div class="asset-block">
-  <h3>Actor sprite</h3>
-  <p>Grafisk element til vores Actor</p>
-  <img src="./code/actor/images/brick_face.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/brick_face.png" download class="download-link">Download</a></p>
-</div>
+  <div class="asset-block">
+    <h3>Actor sprite</h3>
+    <p>Grafisk element til vores Actor</p>
+    <img src="./code/assets/sprites/brick_face.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/brick_face.png" download class="download-link">Download</a></p>
+  </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Program vinduet</h3>
     <p>Lad os hurtigt få kodet et lille program vindue</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
@@ -36,44 +40,48 @@ def draw():
     screen.clear()
     screen.fill("white")
   </code></pre>
-  <p class="left">Gem kode filen som "actor.py". Afprøv at din kode virker inden du går videre</p>
+    <p class="left">Gem kode filen som "actor.py". Afprøv at din kode virker inden du går videre</p>
 
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Load og vis Actor</h3>
     <p>Vi skal nu have loaded vores actor og vist den i program vinduet.<br>
-    Det første du skal gøre er at hente Actor asset på link ovenfor og gemme den i undermappen "images" til din .py fil<br><br>
-  Indsæt nu disse linjer kode</p>
+      Det første du skal gøre er at hente Actor asset på link ovenfor og gemme den i undermappen "images" til din .py
+      fil<br><br>
+      Indsæt nu disse linjer kode</p>
     <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
   </code></pre>
-  <pre class="line-numbers" data-start="10"><code class="language-python">    player.draw()
+    <pre class="line-numbers" data-start="10"><code class="language-python">    player.draw()
   </code></pre>
-  <p>Afprøv. Bliver player vist og hvor er den på skærmen?</p>
+    <p>Afprøv. Bliver player vist og hvor er den på skærmen?</p>
   </div>
 
-    <h2>Actor reference pukter</h2>
+  <h2>Actor reference pukter</h2>
   <p class="left">Når vi ikke definer en placering af vores actor objekt<br>
-  så bliver det "smidt" med top venstre hjørne på koordinat 0,0<br><br>
-Vi vil nu se på forskellige muligheder for at placer vores Actor efter vores ønske.<br><br>
-Et actor objekt har en form for usynlig boks omkring sin grafik. <br>
-Den boks har nogle forud defineret punkter vi kan benytte.</p>
+    så bliver det "smidt" med top venstre hjørne på koordinat 0,0<br><br>
+    Vi vil nu se på forskellige muligheder for at placer vores Actor efter vores ønske.<br><br>
+    Et actor objekt har en form for usynlig boks omkring sin grafik. <br>
+    Den boks har nogle forud defineret punkter vi kan benytte.</p>
   <img src="./images/actor_anchors.png" alt="Actor reference punkter">
 
-    <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Placering af Actor 1</h3>
     <p>Vi kan definer placering samtidig med vi opretter vores actor objekt.<br>
       Prøv disse forskellige muligheder
     </p>
-    <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face", center=(100,100))</code></pre>
-    <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face", midright=(WIDTH,300))</code></pre>
-    <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face", bottomleft=(0,HEIGHT))</code></pre>
+    <pre class="line-numbers"
+      data-start="5"><code class="language-python">player = Actor("brick_face", center=(100,100))</code></pre>
+    <pre class="line-numbers"
+      data-start="5"><code class="language-python">player = Actor("brick_face", midright=(WIDTH,300))</code></pre>
+    <pre class="line-numbers"
+      data-start="5"><code class="language-python">player = Actor("brick_face", bottomleft=(0,HEIGHT))</code></pre>
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Placering af Actor 2</h3>
     <p>Vi kan også definer placering særskilt efter vi har oprettet vores object <br>
       Prøv disse forskellige muligheder
@@ -84,39 +92,40 @@ player.center = 200,200
     <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
 player.midleft = 100,300
   </code></pre>
-  <p>Man kan faktisk også bare bruge top, bottom, left og right sådan her</p>
+    <p>Man kan faktisk også bare bruge top, bottom, left og right sådan her</p>
     <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
 player.right = WIDTH
   </code></pre>
-      <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
+    <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
 player.right = 300
 player.bottom = HEIGHT
   </code></pre>
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Placering af Actor 3</h3>
     <p>Et actor objekt har også en indbygget pos attribute. Med den sætter man placering for Actor center punkt.
     </p>
     <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
 player.center = 100,100
   </code></pre>
-  <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
+    <pre class="line-numbers" data-start="5"><code class="language-python">player = Actor("brick_face")
 player.pos = WIDTH/2,HEIGHT/2
   </code></pre>
-  <p>Typisk vil man dog bruge .pos når man skal aflæse hvor en actor er placeret på skærmen.<br>
-      Da .pos er en tuple (flere værdier i en attribute) kan man udlæse x værdien med .pos[0] og y værdien med .pos[1]<br>
-      </p>
+    <p>Typisk vil man dog bruge .pos når man skal aflæse hvor en actor er placeret på skærmen.<br>
+      Da .pos er en tuple (flere værdier i en attribute) kan man udlæse x værdien med .pos[0] og y værdien med
+      .pos[1]<br>
+    </p>
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Udlæsning af Actor x og y koordinater</h3>
     <p>Her er et lille eksemple hvor man kan ændre Actor placering og se udlæsning af x y koordinater</p>
     </code></pre>
-  <pre><code class="language-python">screen.draw.text("X: " + str(player.pos[0]) + "     Y: " + str(player.pos[1]), (10,10))</code></pre>
-  <p>Tænk ikke for meget over resten af koden på nuværende tidspunkt.</p>
+    <pre><code class="language-python">screen.draw.text("X: " + str(player.pos[0]) + "     Y: " + str(player.pos[1]), (10,10))</code></pre>
+    <p>Tænk ikke for meget over resten af koden på nuværende tidspunkt.</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
 HEIGHT = 400
 TITLE = "Actor Leg"
@@ -174,9 +183,12 @@ def coordinates():
 
 
   <!-- Prism.js Plugins -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 </body>
+
 </html>

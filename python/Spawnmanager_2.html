@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spawn Manager</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Prism.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Spawn Manager - En anden type enemy</h1>
+    <p class="left">Nu hvor vi har en spawn manager skal vi have arbejdet videre med den.<br>I det følgende vil vi
+        tilføje en anden type enemy.<br>
+        En enemy som bevæger sig hen over skærmen fra venstre mod højre og som skyder efter vores player.<br><br>
+
+        Vi arbejder videre med programmet fra første del af spawn manager.<br>
+        Men skal have tilføjet et par ekstra sprites.</p>
+
+    <div class="asset-block">
+        <h3>Actor sprites</h3>
+
+        <p>Enemy</p>
+        <img src="./code/assets/sprites/enemy.png" alt="Actor sprite">
+        <p><a href="./code/assets/sprites/enemy.png" download class="download-link"> Download</a></p>
+        <p>Enemy Missile</p>
+        <img src="./code/assets/sprites/enemy_missile.png" alt="Actor sprite">
+        <p><a href="./code/assets/sprites/enemy_missile.png" download class="download-link"> Download</a></p>
+
+
+
+    </div>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Basis program</h3>
+        <p>Vi bruger dette program som en start</p>
+        <pre class="line-numbers" data-start="1"><code class="language-python">import math
+from random import randint
+
+WIDTH = 800
+HEIGHT = 800
+TITLE = 'Spawn Manager'
+
+ship = Actor('spaceship0',center=(WIDTH//2, HEIGHT//2))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+enemies =[]
+
+class SpawnManager:
+    def __init__(self):
+        self.spawn_rules = [            
+            {'sprite': 'asteroid', 'interval': 2, 'timer': 2},
+            {'sprite': 'meteor', 'interval': 5, 'timer': 5}
+        ]
+
+    def update(self, dt):
+        for rule in self.spawn_rules:
+            rule['timer'] -= dt
+            if rule['timer'] <= 0:
+                self.spawn_enemy(rule['sprite'])
+                rule['timer'] = rule['interval']
+
+    def spawn_enemy(self, enemy_sprite):
+        enemy = Actor(enemy_sprite)
+        enemy.x = randint(10, WIDTH-10)
+        enemy.y = randint(10, HEIGHT-10)
+        enemies.append(enemy)
+ 
+spawn_manager = SpawnManager()
+
+def update(dt):
+    spawn_manager.update(dt)
+    
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+
+        b.x += b.vx
+        b.y += b.vy
+
+        for e in enemies[:]:
+            if b.colliderect(e):
+                if b.distance_to(e) <= e.width/4:
+                    bullets.remove(b)
+                    enemies.remove(e)
+                break
+
+    if keyboard.right:
+        ship.angle -= 1
+
+    if keyboard.left:
+        ship.angle += 1
+
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+
+def draw():
+    screen.clear()
+
+    for b in bullets:
+        b.draw()
+
+    for e in enemies:
+        e.draw()
+
+    ship.draw()
+    
+</code></pre>
+    </div>
+
+    <h2>Tilpas Spawn Manager Klasse</h2>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Tilføj den nye enemy til spawn klassen.</h3>
+        <p>Ændre spawn klassen trin for trin</p>
+        <p>Det første vi gør er at tilføje den nye enemy til spawn_rules arrayet.
+        </p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self):
+        self.spawn_rules = [            
+            {'sprite': 'asteroid', 'interval': 2, 'timer': 2},
+            {'sprite': 'meteor', 'interval': 5, 'timer': 5},
+            {'sprite': 'enemy', 'interval': 2, 'timer': 2}
+        ]
+    </code></pre>
+        <p>interval og timer for enemy er sat lidt lavt. Det kan nemt ændres senere når alt virker som ønsket.</p>
+        <p>Ændre spawn_enemy metoden</p>
+        <pre class="line-numbers" data-start="30"><code class="language-python">    def spawn_enemy(self, enemy_sprite):
+        enemy = Actor(enemy_sprite)
+
+        if enemy_sprite == 'enemy':
+            enemy.x = 0
+            enemy.y = 50
+            enemy.vx = 2
+            enemy.vy = 0
+            enemy.shoot_timer = 0
+        else:
+            enemy.x = randint(10, WIDTH-10)
+            enemy.y = randint(10, HEIGHT-10)
+            enemy.vx = 0
+            enemy.vy = 0
+
+        enemies.append(enemy)</code></pre>
+        <p>Vi laver en betingelse der tjekker om vores sprite er en 'enemy' hvis der, så sætter vi nogle specifikke
+            værdier for denne enemy type.<br><br>
+            Det er start position x og y. Bevægelses hastigheden vx og vy. og shoot_ timer så vi senere kan ændre så den
+            ikke skyder konstant.<br><br>
+            vi sætter også vx og vy for de andre enemy typer. Det gør det nemmere senere når vi skal beregne ny
+            positioner for enemies.<br>
+            Så behøver vi ikke tænker på typen. Da deres værdi er 0 betyder det at de ikke flytter sig.
+        </p>
+        <p>Spawn klassen ser nu sådan her ud i sin helhed</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self):
+        self.spawn_rules = [            
+            {'sprite': 'asteroid', 'interval': 2, 'timer': 2},
+            {'sprite': 'meteor', 'interval': 5, 'timer': 5},
+            {'sprite': 'enemy', 'interval': 2, 'timer': 2}
+        ]
+
+    def update(self, dt):
+        for rule in self.spawn_rules:
+            rule['timer'] -= dt
+            if rule['timer'] <= 0:
+                self.spawn_enemy(rule['sprite'])
+                rule['timer'] = rule['interval']
+
+    def spawn_enemy(self, enemy_sprite):
+        enemy = Actor(enemy_sprite)
+
+        if enemy_sprite == 'enemy':
+            enemy.x = 0
+            enemy.y = 50
+            enemy.vx = 2
+            enemy.vy = 0
+            enemy.shoot_timer = 1
+        else:
+            enemy.x = randint(10, WIDTH-10)
+            enemy.y = randint(10, HEIGHT-10)
+            enemy.vx = 0
+            enemy.vy = 0
+
+        enemies.append(enemy)</code></pre>
+        <p>Afprøv den nye kode.<br>Alt skal gerne være som før, men der skal komme en enemy halvvejs ind på skærmen i
+            top venstre hjørne.</p>
+    </div>
+
+    <h2>Tilpas kode til vores nye enemy</h2>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Vi skal have vores enemy til at bevæge sig og skyde efter vores player</h3>
+        <p>Tilføj bevægelses kode for vores enemy</p>
+        <pre class="line-numbers" data-start="75"><code class="language-python">    for e in enemies[:]:
+        e.x += e.vx
+        e.y += e.vy
+    </code></pre>
+        <p>Vi skal ikke glemme at slette vores enemy hvis den kommer uden for skærmen.</p>
+        <p>Kan du huske hvordan du tester om enemies der er uden for skærmen bliver slettet?<br>
+            Kan du komme med en forklaring på hvorfor der bruges break i denne kode og ikke continue?</p>
+        <pre class="line-numbers" data-start="79"><code class="language-python">        if e.image == 'enemy':
+            if e.x > WIDTH + 50:
+                enemies.remove(e)
+                break
+    </code></pre>
+
+        <p>Vi skal have skudt nogle missiler mod vores player.</p><br>
+        Først skal vi have tilføjet et array som holder styr på missilerne.
+        <pre class="line-numbers" data-start="14"><code class="language-python">enemy_missiles = []
+    </code></pre>
+        <p>Så skal vi have lagt betingelse på hvornår enemy skal skyde</p>
+        <p>Vi starter med at tælle vores shoot_timer ned, så vi kan sikre enemy ikke skyder før tilladt.<br><br>
+            I vores betingelse sikre vi at enemy er tæt på vores player og skud timer er i orden<br><br>
+            Når betingelsen er opfyldt opretter vi en missil med vores enemy_missile sprite.<br>sætter en start
+            placering.<br>
+            giver det en hastighed. bemærk vi benytter kun vy. <br><br>Så tilføjer vi det til vores enemy_missile array
+            og starter shoot timer på ny.</p>
+        <pre class="line-numbers" data-start="85"><code class="language-python">            e.shoot_timer -= dt
+            if abs(e.x - ship.x) < 40 and e.shoot_timer <= 0: 
+                missile = Actor('enemy_missile')
+                missile.x = e.x
+                missile.y = e.y
+                missile.vy = 4
+                enemy_missiles.append(missile)
+                e.shoot_timer = 1
+                </code></pre>
+        <p>Vi skal lige ikke glemme at tegne missilerne på skærmen </p>
+
+        <pre class="line-numbers" data-start="129"><code class="language-python">    for m in enemy_missiles:
+        m.draw()
+        </code></pre>
+        <p>Du kan nu afprøve koden.<br><br>Du vil se at enemy_missile ikke bevæger sig men du kan skyde enemy
+            ned<br><br></p>
+
+        <p>Så skal vi til at flytte missilerne mod vores player. Vi må ikke glemme at slette de missiler der er uden for
+            skærmen</p>
+        <pre class="line-numbers" data-start="94"><code class="language-python">    for m in enemy_missiles[:]:
+        m.y += m.vy
+
+        if m.y > HEIGHT + 50:
+            enemy_missiles.remove(m)
+            break
+            </code></pre>
+
+        <p>Afprøv og benyt lejligheden til at ændre lidt på start placering og missilerne, missil hastigh og
+            nedkølingstiden<br><br></p>
+        <p>Så kan vi lige tage det sidste med. Tjek om missilerne rammer vores player</p>
+        <pre class="line-numbers" data-start="101"><code class="language-python">        if m.colliderect(ship):
+            enemy_missiles.remove(m)
+            print("Player hit!")
+
+</code></pre>
+        <p>Du kan nu selv lave justering så det sidste kommer på plads.</p>
+    </div>
+    <details>
+        <summary>Færdig kode</summary>
+
+        <div class="code-block">
+            <!-- <span class="lang-label">Pygame Zero</span> -->
+
+            <pre class="line-numbers"><code class="language-python">import math
+from random import randint
+
+WIDTH = 800
+HEIGHT = 800
+TITLE = 'Spawn Manager'
+
+ship = Actor('spaceship0',center=(WIDTH//2, HEIGHT//2))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+enemies = []
+enemy_missiles = []
+
+class SpawnManager:
+    def __init__(self):
+        self.spawn_rules = [            
+            {'sprite': 'asteroid', 'interval': 2, 'timer': 2},
+            {'sprite': 'meteor', 'interval': 5, 'timer': 5},
+            {'sprite': 'enemy', 'interval': randint(5,10), 'timer': randint(5,10)}
+        ]
+
+    def update(self, dt):
+        for rule in self.spawn_rules:
+            rule['timer'] -= dt
+            if rule['timer'] <= 0:
+                self.spawn_enemy(rule['sprite'])
+                rule['timer'] = rule['interval']
+
+    def spawn_enemy(self, enemy_sprite):
+        enemy = Actor(enemy_sprite)
+
+        if enemy_sprite == 'enemy':
+            enemy.x = 0
+            enemy.y = 50
+            enemy.vx = 2
+            enemy.vy = 0
+            enemy.shoot_timer = 1
+        else:
+            enemy.x = randint(10, WIDTH-10)
+            enemy.y = randint(10, HEIGHT-10)
+            enemy.vx = 0
+            enemy.vy = 0
+
+        enemies.append(enemy)
+ 
+spawn_manager = SpawnManager()
+
+def update(dt):
+    spawn_manager.update(dt)
+    
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+
+        b.x += b.vx
+        b.y += b.vy
+
+        for e in enemies[:]:
+            if b.colliderect(e):
+                if b.distance_to(e) <= e.width/4:
+                    bullets.remove(b)
+                    enemies.remove(e)
+                break
+
+    for e in enemies[:]:
+        e.x += e.vx
+        e.y += e.vy
+
+        if e.image == 'enemy':
+            if e.x > WIDTH + 50:
+                enemies.remove(e)
+                break
+
+            e.shoot_timer -= dt
+            if abs(e.x - ship.x) < 40 and e.shoot_timer <= 0: 
+                missile = Actor('enemy_missile')
+                missile.x = e.x
+                missile.y = e.y + 50
+                missile.vy = 5
+                enemy_missiles.append(missile)
+                e.shoot_timer = 0.5
+    
+    for m in enemy_missiles[:]:
+        m.y += m.vy
+
+        if m.y > HEIGHT + 50:
+            enemy_missiles.remove(m)
+            break
+        
+        if m.colliderect(ship):
+            enemy_missiles.remove(m)
+            ship.pos = WIDTH//2,HEIGHT//2
+
+    if keyboard.right:
+        ship.angle -= 1
+
+    if keyboard.left:
+        ship.angle += 1
+
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+
+def draw():
+    screen.clear()
+
+    for b in bullets:
+        b.draw()
+
+    for e in enemies:
+        e.draw()
+
+    for m in enemy_missiles:
+        m.draw()
+        
+    ship.draw()
+    
+</code></pre>
+        </div>
+
+    </details>
+
+
+
+
+
+
+
+    <!-- Prism.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <!-- Prism.js Components (multi-language support) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+
+    <!-- Prism.js Plugins -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Actor - Flyt</title>
@@ -9,23 +10,26 @@
 
   <!-- Prism.js CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css"
+    rel="stylesheet" />
 </head>
+
 <body>
   <h1>Actor - Flyt</h1>
   <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objektet.<br>
-  Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
+    Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
 
- <div class="asset-block">
-  <h3>Actor sprite</h3>
-  <p>Grafisk element til vores Actor</p>
-  <img src="./code/actor/images/brick_face.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/brick_face.png" download class="download-link">Download</a></p>
-</div>
+  <div class="asset-block">
+    <h3>Actor sprite</h3>
+    <p>Grafisk element til vores Actor</p>
+    <img src="./code/assets/sprites/brick_face.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/brick_face.png" download class="download-link">Download</a></p>
+  </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Basis program</h3>
     <p>Vi bruger dette lille program som en start</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
@@ -45,17 +49,17 @@ def ground():
     ground = Rect((0,350),(WIDTH,HEIGHT))
     screen.draw.filled_rect(ground, color="lightgreen")
   </code></pre>
-  <p class="left">Gem kode filen som "actor_move.py". Afprøv at din kode virker inden du går videre</p>
-  <img src="./images/actor_move.png" alt="Basis Program Vindue">
+    <p class="left">Gem kode filen som "actor_move.py". Afprøv at din kode virker inden du går videre</p>
+    <img src="./images/actor_move.png" alt="Basis Program Vindue">
   </div>
 
 
-    <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Flyt til højre og venstre</h3>
     <p>Vi kan flytte vores Actor ved at ændre dens x værdi.<br>
-    For at gøre det tilføjer vi et tjek om venstre eller højre piletast er trykket ned.<br>
-  Det før vi i dette eksempel i update() funktionen.</p>
+      For at gøre det tilføjer vi et tjek om venstre eller højre piletast er trykket ned.<br>
+      Det før vi i dette eksempel i update() funktionen.</p>
     <pre class="line-numbers" data-start="8"><code class="language-python">def update():
     if keyboard.left:
         player.x -= 1
@@ -63,44 +67,45 @@ def ground():
     if keyboard.right:
         player.x += 1
         </code></pre>
-        <p>Gem og afprøv</p>
+    <p>Gem og afprøv</p>
   </div>
 
-    <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Hoppe funktion - Op</h3>
     <p>Tilføj denne kode for at få actor til at springe "op" når der trykkes på mellemrumstasten.</p>
     <pre class="line-numbers" data-start="15"><code class="language-python">    if keyboard.space:
         player.y -= 10
   </code></pre>
-  <p>Afprøv. Mangler der noget?</p>
+    <p>Afprøv. Mangler der noget?</p>
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Hoppe funktion - Ned igen</h3>
-    <p>Da vi bevægede os sidevers var der ingen problem, men nu da vi vil hoppe skal vi gerne have actor til at falde ned igen.<br>
-    Det kan vi gøre ved at lave et tjek om player y værdi er større en start positionen.<br>
-  hvis den er juster vi y værdien.</p>
+    <p>Da vi bevægede os sidevers var der ingen problem, men nu da vi vil hoppe skal vi gerne have actor til at falde
+      ned igen.<br>
+      Det kan vi gøre ved at lave et tjek om player y værdi er større en start positionen.<br>
+      hvis den er juster vi y værdien.</p>
     <pre class="line-numbers" data-start="18"><code class="language-python">    if player.y <= 350-player.height/2:
         player.y += 3
   </code></pre>
-  <p>Afprøv.</p>
+    <p>Afprøv.</p>
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Deacceleration</h3>
     <p>Når man bevæger sig vil man måske gerne have bevægelsen til at minde om at løb.<br>
-    så når man holder op med at trykke til siden skal farten gradvist aftage.<br>
-  vi kan op nå den effekt hvis vi indføre et par nye variabler til at styre vores ændring i player.x<br>
-i stedet for at ændre player.x med en fast værdi<br><br>
-start med at tilføje to nye variabler</p>
+      så når man holder op med at trykke til siden skal farten gradvist aftage.<br>
+      vi kan op nå den effekt hvis vi indføre et par nye variabler til at styre vores ændring i player.x<br>
+      i stedet for at ændre player.x med en fast værdi<br><br>
+      start med at tilføje to nye variabler</p>
     <pre class="line-numbers" data-start="7"><code class="language-python">player.vx = 0
 player.vy = 0
   </code></pre>
-  <p>Ændre nu første del af update()</p>
-  <pre class="line-numbers" data-start="10"><code class="language-python">def update():
+    <p>Ændre nu første del af update()</p>
+    <pre class="line-numbers" data-start="10"><code class="language-python">def update():
     if keyboard.left:
         player.vx -= 1
 
@@ -108,31 +113,31 @@ player.vy = 0
         player.vx += 1
     </code></pre>
     <p>I den næste kode tilskriver vi ændring vx til player.x<br>
-    så længe man holder knappen nede vil vx blive ved med at være 1<br>
-  men når vi slipper knappen vil vx blive mindre hvergang update() køre.</p>
-  <pre class="line-numbers" data-start="23"><code class="language-python">    player.x += player.vx
+      så længe man holder knappen nede vil vx blive ved med at være 1<br>
+      men når vi slipper knappen vil vx blive mindre hvergang update() køre.</p>
+    <pre class="line-numbers" data-start="23"><code class="language-python">    player.x += player.vx
     player.vx *= 0.8
     </code></pre>
     <p>Afprøv og prøv med andre værdier end 0.8</p>
   </div>
 
   <details>
-  <summary>Kig nærmere på vx</summary>
-  <h2>Stopper actor i det hele taget?</h2>
-  <p>Selv om det ser ud som om actor stopper.<br>Så prøve at tilføj denne linje til draw() funktionen.<br>
-  så kan vi se den aktuelle værdi er vx</p>
+    <summary>Kig nærmere på vx</summary>
+    <h2>Stopper actor i det hele taget?</h2>
+    <p>Selv om det ser ud som om actor stopper.<br>Så prøve at tilføj denne linje til draw() funktionen.<br>
+      så kan vi se den aktuelle værdi er vx</p>
 
-      <pre class="line-numbers" data-start="31"><code class="language-python">    screen.draw.text(str(player.vx),(10,10))
+    <pre class="line-numbers" data-start="31"><code class="language-python">    screen.draw.text(str(player.vx),(10,10))
     </code></pre>
 
-<p>Vi kan se at vx tager meget lang tid om at blive 0<br>
-Det kan vi ændre på ved at tilføje et lille tjek om vx er mellem et bestemt interval.<br>
-Hvis den er, så sætter vi vx til 0</p>
-<pre class="line-numbers" data-start="24"><code class="language-python">    if player.vx <= -0.01 or player.vx > 0.01:
+    <p>Vi kan se at vx tager meget lang tid om at blive 0<br>
+      Det kan vi ændre på ved at tilføje et lille tjek om vx er mellem et bestemt interval.<br>
+      Hvis den er, så sætter vi vx til 0</p>
+    <pre class="line-numbers" data-start="24"><code class="language-python">    if player.vx <= -0.01 or player.vx > 0.01:
         player.vx *= 0.8
     else:
         player.vx = 0</code></pre>
-</details>
+  </details>
 
 
 
@@ -159,9 +164,12 @@ Hvis den er, så sætter vi vx til 0</p>
 
 
   <!-- Prism.js Plugins -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 </body>
+
 </html>

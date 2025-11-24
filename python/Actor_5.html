@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Actor - Afstand til, Retning til</title>
@@ -9,23 +10,26 @@
 
   <!-- Prism.js CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css"
+    rel="stylesheet" />
 </head>
+
 <body>
   <h1>Actor - Afstand til, Retning til</h1>
   <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objektet.<br>
-  Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
+    Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
 
-   <div class="asset-block">
-  <h3>Actor sprites</h3>
-  
-  <p>Planet</p>
-  <img src="./code/actor/images/astroid.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/astroid.png" download class="download-link"> Download</a></p>
-</div>
+  <div class="asset-block">
+    <h3>Actor sprites</h3>
+
+    <p>Planet</p>
+    <img src="./code/assets/sprites/asteroid.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/asteroid.png" download class="download-link"> Download</a></p>
+  </div>
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Basis program</h3>
     <p>Vi bruger dette lille program som en start</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">import math
@@ -34,7 +38,7 @@ WIDTH = 500
 HEIGHT = 300
 TITLE = 'Afstand og vinkle'
 
-planet = Actor('astroid')
+planet = Actor('asteroid')
 planet.pos = WIDTH/2,HEIGHT/2
 
 star_pos = 0,0
@@ -58,39 +62,40 @@ def draw():
   </code></pre>
   </div>
 
-    <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Afstand fra actor objekt til punkt</h3>
-    <p>En actor har en indbygget metode til at beregne den directe afstand fra sit center punkt til .pos til et andet punkt.<br>
-    Eksempel</p>
+    <p>En actor har en indbygget metode til at beregne den directe afstand fra sit center punkt til .pos til et andet
+      punkt.<br>
+      Eksempel</p>
     <pre class="line-numbers"><code class="language-python">planet.distance_to(100,100)</code></pre>
     <p>Afstanden kommer ud i datatypen float. Det vil sige med en masse decimaler</p>
   </div>
 
-      <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Vinkel actor objekt til punkt</h3>
     <p>En actor har en indbygget metode til at beregne vinklen fra sit center punkt til .pos til et andet punkt.<br>
-    Eksempel:</p>
+      Eksempel:</p>
     <pre class="line-numbers"><code class="language-python">planet.angle_to(100,100)</code></pre>
     <p>Afstanden kommer ud i datatypen float. Det vil sige med en masse decimaler</p>
   </div>
 
-    <h2>Opgave 1</h2>
+  <h2>Opgave 1</h2>
   <p class="left">Du skal nu tilpasse basis programmet, så der vises tekst på skærmen som viser afstand og vinkle<br>
-  mellem planet.pos og star_pos<br><br>
-Det færdige resultat skal gerne se ud lige som her</p>
+    mellem planet.pos og star_pos<br><br>
+    Det færdige resultat skal gerne se ud lige som her</p>
   <img src="./images/Actor_distance_and_angle.png" alt="Opgave 1 løsning">
 
-      <h2>Opgave 2</h2>
+  <h2>Opgave 2</h2>
   <p class="left">Indtegn en streg mellem de to punkter som måles mellem<br><br>
-Det færdige resultat skal gerne se ud lige som her</p>
+    Det færdige resultat skal gerne se ud lige som her</p>
   <img src="./images/Actor_distance_and_angle2.png" alt="Opgave 2 løsning">
 
 
-      <h2>Opgave 3</h2>
+  <h2>Opgave 3</h2>
   <p class="left">Betyder det noget for de to måling om et eller begge objekter (planet og star) roter?<br>
-  Begrund dit svar.</p>
+    Begrund dit svar.</p>
 
 
 
@@ -112,9 +117,12 @@ Det færdige resultat skal gerne se ud lige som her</p>
 
 
   <!-- Prism.js Plugins -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 </body>
+
 </html>

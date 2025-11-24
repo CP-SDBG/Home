@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Actor - Roter</title>
@@ -9,33 +10,36 @@
 
   <!-- Prism.js CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css"
+    rel="stylesheet" />
 </head>
+
 <body>
   <h1>Actor - Roter</h1>
   <p class="left">Vi vil i det følgende lave forskellige ting med Pygame Zeros Actor objektet.<br>
-  Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
+    Gennem kode eksempler får vi en bedre forståelse af mulighederne med en Actor.</p>
 
 
- <div class="asset-block">
-  <h3>Actor sprites</h3>
-  <p>90 grader roteret rumskib</p>
-  <img src="./code/actor/images/spaceship.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/spaceship.png" download class="download-link"> Download</a></p>
-  <p>0 grader roteret rumskib</p>
-  <img src="./code/actor/images/spaceship0.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/spaceship0.png" download class="download-link"> Download</a></p>
-  <p>90 grader roteret missil</p>
-  <img src="./code/actor/images/bullet.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/bullet.png" download class="download-link"> Download</a></p>
-  <p>0 grader roteret missil</p>
-  <img src="./code/actor/images/bullet0.png" alt="Actor sprite">
-  <p><a href="./code/actor/images/bullet0.png" download class="download-link"> Download</a></p>
-</div>
+  <div class="asset-block">
+    <h3>Actor sprites</h3>
+    <p>90 grader roteret rumskib</p>
+    <img src="./code/assets/sprites/spaceship.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/spaceship.png" download class="download-link"> Download</a></p>
+    <p>0 grader roteret rumskib</p>
+    <img src="./code/assets/sprites/spaceship0.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/spaceship0.png" download class="download-link"> Download</a></p>
+    <p>90 grader roteret missil</p>
+    <img src="./code/assets/sprites/bullet.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/bullet.png" download class="download-link"> Download</a></p>
+    <p>0 grader roteret missil</p>
+    <img src="./code/assets/sprites/bullet0.png" alt="Actor sprite">
+    <p><a href="./code/assets/sprites/bullet0.png" download class="download-link"> Download</a></p>
+  </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Basis program</h3>
     <p>Vi bruger dette lille program som en start</p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
@@ -61,32 +65,37 @@ def draw():
   <p class="left">Vores program skal gerne se sådan her ud</p>
   <img src="./images/Actor_default.png" alt="Start program">
   <p class="left">ved at trykke piltast venstre og højer kan man roter skibet</p>
-  
+
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Rotations udgangspunkt</h3>
     <img src="./images/actor_angle.png" alt="0-rotation">
     <p>I pygame zero er et actor object en indbygget angle egenskab.<br>
-    vi kan se den i koden ovenfor hvor vi ændre ship.angle i vores update() og vi udlæserne den som tekst draw()<br><br>
-    Så det vil være mest korrekt/hensigtsmæssigt at vores actor spite har samme rotation.<br><br>
-  udskift derfor spriten til spaceship0.png</p>
+      vi kan se den i koden ovenfor hvor vi ændre ship.angle i vores update() og vi udlæserne den som tekst
+      draw()<br><br>
+      Så det vil være mest korrekt/hensigtsmæssigt at vores actor spite har samme rotation.<br><br>
+      udskift derfor spriten til spaceship0.png</p>
 
-    <pre class="line-numbers" data-start="5"><code class="language-python">ship = Actor('spaceship0',center=(200, 200))</code></pre>
+    <pre class="line-numbers"
+      data-start="5"><code class="language-python">ship = Actor('spaceship0',center=(200, 200))</code></pre>
   </div>
-  
-  <details>
-  <summary>En ting at være opmærksom på med .angle</summary>
-  <h2>Angle looping</h2>
-  <p>Prøv i programmet at roter mere end en omgang til højre eller venstre<br><br>
-  Du vil se at angle værdien fortsætter med at stige udover 360 grader. <br>
-<br>Det er ikke altid det man ønsker. I sådan tilfælde kan man lave en normalisering.</p>
 
-  <div class="code-block">
-          <!-- <span class="lang-label">Pygame Zero</span> -->
+  <details>
+    <summary>En ting at være opmærksom på med .angle</summary>
+    <h2>Angle looping</h2>
+    <p>Prøv i programmet at roter mere end en omgang til højre eller venstre<br><br>
+      Du vil se at angle værdien fortsætter med at stige udover 360 grader. <br>
+      <br>Det er ikke altid det man ønsker. I sådan tilfælde kan man lave en normalisering.
+    </p>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
       <h3>normalize funktion</h3>
-      <p>I dette tilpasset eksempel er der lavet en normalize funktion og funktionen er benyttet i visning af "Angle normal"<br><br>
-      I normalize funktionen tages modus 360 af den aktuelle vinkel.<br>Modulo % sikre at den værdi som kommer ud er indenfor 0 - 360 grader.<br>
-      Prøv at roter til 45 grader og -45 grader så skal du gerne få henholdsvis 45 og 315 grader. </p>
+      <p>I dette tilpasset eksempel er der lavet en normalize funktion og funktionen er benyttet i visning af "Angle
+        normal"<br><br>
+        I normalize funktionen tages modus 360 af den aktuelle vinkel.<br>Modulo % sikre at den værdi som kommer ud er
+        indenfor 0 - 360 grader.<br>
+        Prøv at roter til 45 grader og -45 grader så skal du gerne få henholdsvis 45 og 315 grader. </p>
       <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
 HEIGHT = 400
 TITLE = 'Rotation'
@@ -110,12 +119,13 @@ def normalize(angle):
     return angle % 360</code></pre>
     </div>
 
-</details>
+  </details>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Actor i relation til andre actor</h3>
-    <p>Lad os se på et eksempel hvor vi vil have vores spaceship til at skyde missiler når man trykker på space tasten.<br>
+    <p>Lad os se på et eksempel hvor vi vil have vores spaceship til at skyde missiler når man trykker på space
+      tasten.<br>
       Tag denne kode og overskrive hele dit tidligere program.<br>
     </p>
     <pre class="line-numbers" data-start="1"><code class="language-python">WIDTH = 400
@@ -144,25 +154,27 @@ def draw():
     for b in bullets:
         b.draw()
 </code></pre>
-  <p>Når der trykkes space kommer bullet actor frem men vi kan se at dens grafik ikke passer</p>
-  <img src="./images/actor_bullet_wrong.png" alt="Bullet forkert sprite">
-  <p>Det ændres ved at bruge en sprite med roteret grafik.</p>
-  <pre class="line-numbers" data-start="16"><code class="language-python">        bullet = Actor('bullet0')</code></pre>
+    <p>Når der trykkes space kommer bullet actor frem men vi kan se at dens grafik ikke passer</p>
+    <img src="./images/actor_bullet_wrong.png" alt="Bullet forkert sprite">
+    <p>Det ændres ved at bruge en sprite med roteret grafik.</p>
+    <pre class="line-numbers"
+      data-start="16"><code class="language-python">        bullet = Actor('bullet0')</code></pre>
 
   </div>
-    <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Flyt missiler</h3>
     <p>Nu hvor vi har et missil på skærmen skal vi havde det til at bevæge sig.<br>
-    Tilføj disse linjer til update()  </p>
+      Tilføj disse linjer til update() </p>
     <pre class="line-numbers" data-start="8"><code class="language-python">    for b in bullets:
         b.x += 1
         b.y += 1
 </code></pre>
-<p>Prøv det af. Virker det efter hensigten? Nej ikke rigtigt vel!<br><br>
-Når vores rumskib kan have en vilkårlig retning bliver vi nødtil at sætte denne retning i det øjeblik vi opretter vores missil actor.<br><br>
-Ændre on_key_down event så den ser sådan her ud.</p>
-<pre class="line-numbers" data-start="18"><code class="language-python">def on_key_down():
+    <p>Prøv det af. Virker det efter hensigten? Nej ikke rigtigt vel!<br><br>
+      Når vores rumskib kan have en vilkårlig retning bliver vi nødtil at sætte denne retning i det øjeblik vi opretter
+      vores missil actor.<br><br>
+      Ændre on_key_down event så den ser sådan her ud.</p>
+    <pre class="line-numbers" data-start="18"><code class="language-python">def on_key_down():
     if keyboard.space:
         bullet = Actor('bullet0')
         bullet.angle = ship.angle
@@ -172,22 +184,23 @@ Når vores rumskib kan have en vilkårlig retning bliver vi nødtil at sætte de
         bullet.pos = ship.pos
         bullets.append(bullet)
         </code></pre>
-<p>for at beregne vx og vy bruger vi noget trigonometri.<br>
-Det behøver vi ikke bekymre os om lige nu. Men husk at importer math biblioteket</p>
-<pre class="line-numbers" data-start="1"><code class="language-python">import math
+    <p>for at beregne vx og vy bruger vi noget trigonometri.<br>
+      Det behøver vi ikke bekymre os om lige nu. Men husk at importer math biblioteket</p>
+    <pre class="line-numbers" data-start="1"><code class="language-python">import math
   </code></pre>
-  <p>Og nu skal vi tilpasse update() så vi flytter missilet med .vx og .vy</p>
-  <pre class="line-numbers" data-start="11"><code class="language-python">        b.x += b.vx
+    <p>Og nu skal vi tilpasse update() så vi flytter missilet med .vx og .vy</p>
+    <pre class="line-numbers" data-start="11"><code class="language-python">        b.x += b.vx
         b.y += b.vy
  </code></pre>
- <p>Prøv nu den nye kode og se om det virker<br></p>
+    <p>Prøv nu den nye kode og se om det virker<br></p>
   </div>
 
-    <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+  <div class="code-block">
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Husk at fjern missilerne</h3>
     <p>Selvom vi ikke kan se missiler som er udenfor skærmbilledet. Så er de der stadig!<br>
-    tilføj denne kode linje og se hvordan længden af vores bullets[] bliver større og større jo flere gange vi trykker space</p>
+      tilføj denne kode linje og se hvordan længden af vores bullets[] bliver større og større jo flere gange vi trykker
+      space</p>
     <pre class="line-numbers" data-start="37"><code class="language-python">screen.draw.text('Bullets: ' + str(len(bullets)), pos=(10,10), color = 'white')
           </code></pre>
     <p>Det er ikke godt. Så lad os få fjernet dem som er udenfor skærmen.<br>
@@ -200,11 +213,11 @@ Det behøver vi ikke bekymre os om lige nu. Men husk at importer math biblioteke
   </div>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Flyv med rumskibet</h3>
     <p>Ligesom missilet skal flytte sig i retningen som rumskibet har,<br>
-    så skal rumskibet selvfølgelig også flytte sig i rigtig retning når vi trykker piltast op.<br><br>
-  Det heldigvis rigtig nemt, da vi stort set kan kopier alt koden fra det vi har lavet tidliger.</p>
+      så skal rumskibet selvfølgelig også flytte sig i rigtig retning når vi trykker piltast op.<br><br>
+      Det heldigvis rigtig nemt, da vi stort set kan kopier alt koden fra det vi har lavet tidliger.</p>
     <pre class="line-numbers" data-start="24"><code class="language-python">    if keyboard.up:
         angle_rad = math.radians(ship.angle)
         ship.vx = math.cos(angle_rad) * 4 
@@ -212,17 +225,17 @@ Det behøver vi ikke bekymre os om lige nu. Men husk at importer math biblioteke
         ship.x += vx
         ship.y += vy
       </code></pre>
-      <p> Vi ser dog at vi meget nemt flyver ud uden for vinduet.<br>Det er ikke så heldigt.<br><br>
+    <p> Vi ser dog at vi meget nemt flyver ud uden for vinduet.<br>Det er ikke så heldigt.<br><br>
       Kan du lave en kode som flytter skibet ind fra modsatte side af vinduet når det flyver ud over kanten</p>
   </div>
   <details>
-  <summary>Løsning</summary>
-  <h2>Hold rumskibet på skærmen</h2>
-  <p>Vi kan holde rumskibet på skærmen ved at tjekke om det er kommet over skærmkanterne.<br>
-  hvis det er, så flytter vi dets koordinat til modsatte skærmkant</p>
+    <summary>Løsning</summary>
+    <h2>Hold rumskibet på skærmen</h2>
+    <p>Vi kan holde rumskibet på skærmen ved at tjekke om det er kommet over skærmkanterne.<br>
+      hvis det er, så flytter vi dets koordinat til modsatte skærmkant</p>
 
-  <div class="code-block">
-          <!-- <span class="lang-label">Pygame Zero</span> -->
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
       <pre class="line-numbers" data-start="10"><code class="language-python">    if ship.x < 0:
         ship.x = WIDTH
     if ship.x > WIDTH:
@@ -234,18 +247,18 @@ Det behøver vi ikke bekymre os om lige nu. Men husk at importer math biblioteke
         
 </code></pre>
     </div>
-</details>
+  </details>
 
   <div class="code-block">
-      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Friktions bremse</h3>
     <p>Da det nu er et rumskib, så stopper det nok ikke lige når vi slipper piletasten<br>
-    Lad os ændre koden en smule så farten aftager stille og roligt</p>
+      Lad os ændre koden en smule så farten aftager stille og roligt</p>
     <pre class="line-numbers" data-start="8"><code class="language-python">ship.vx = 0
 ship.vy = 0
 
 </code></pre>
-<pre class="line-numbers" data-start="36"><code class="language-python">
+    <pre class="line-numbers" data-start="36"><code class="language-python">
     if keyboard.up:
         angle_rad = math.radians(ship.angle)
         ship.vx = math.cos(angle_rad) * 4 
@@ -256,38 +269,40 @@ ship.vy = 0
     ship.vx *= 0.98
     ship.vy *= 0.98
 </code></pre>
-<p>Prøv det nu og prøv derefter at se om du kan ændre rumskibets fart og nedbremsnings hastighed</p>
+    <p>Prøv det nu og prøv derefter at se om du kan ændre rumskibets fart og nedbremsnings hastighed</p>
   </div>
 
 
 
 
-<details>
-  <summary>Man behøver ikke ændre sine actor sprites!</summary>
-  <h2>Ændret retningsberening </h2>
-  <p>Hvis vi nu ikke ændrede vores actor sprites til spaceship0.png og bullet0.png<br>Men blev ved med at bruge spaceship.png og bullet.png<br>
-  så skal vi ændre lidt på beregningen af .vx og vy</p>
+  <details>
+    <summary>Man behøver ikke ændre sine actor sprites!</summary>
+    <h2>Ændret retningsberening </h2>
+    <p>Hvis vi nu ikke ændrede vores actor sprites til spaceship0.png og bullet0.png<br>Men blev ved med at bruge
+      spaceship.png og bullet.png<br>
+      så skal vi ændre lidt på beregningen af .vx og vy</p>
 
-  <div class="code-block">
-          <!-- <span class="lang-label">Pygame Zero</span> -->
-      <pre class="line-numbers" data-start="7"><code class="language-python" >ship = Actor('spaceship',center=(200, 200))</code></pre>
-      <pre class="line-numbers" data-start="48"><code class="language-python" >        bullet = Actor('bullet')</code></pre>
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+      <pre class="line-numbers"
+        data-start="7"><code class="language-python" >ship = Actor('spaceship',center=(200, 200))</code></pre>
+      <pre class="line-numbers"
+        data-start="48"><code class="language-python" >        bullet = Actor('bullet')</code></pre>
       <pre class="line-numbers" data-start="38"><code class="language-python" >        ship.vx = -math.sin(angle_rad) * 4 
         ship.vy = -math.cos(angle_rad) * 4</code></pre>
       <pre class="line-numbers" data-start="51"><code class="language-python" >        bullet.vx = -math.sin(angle_rad) * 8 
         bullet.vy = -math.cos(angle_rad) * 8</code></pre>
     </div>
-</details>
+  </details>
 
   <h2>Missil oven på rumskib</h2>
   <p class="left">Du har måske lagt mærke til missilet kommer frem oven på rumskibet.<br>
-  Det er nok ikke det vi vil. Hvordan får vi missilet til at starte bag rumskibet?<br><br>
-Måske er du hardcore og kan lave dobbelt skud?</p>
+    Det er nok ikke det vi vil. Hvordan får vi missilet til at starte bag rumskibet?<br><br>
+    Måske er du hardcore og kan lave dobbelt skud?</p>
   <img src="./images/actor_rotate_final.png" alt="Dobbel skud">
 
 
 
-  
 
 
 
@@ -295,7 +310,8 @@ Måske er du hardcore og kan lave dobbelt skud?</p>
 
 
 
-  
+
+
 
 
 
@@ -321,9 +337,12 @@ Måske er du hardcore og kan lave dobbelt skud?</p>
 
 
   <!-- Prism.js Plugins -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
 
 </body>
+
 </html>

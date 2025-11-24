@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Spawn Manager</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Prism.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <h1>Spawn Manager - En rigtig spawn manager</h1>
+    <p class="left">Vi vil i det følgende lave en rigtig spawn manager så vi kan spawne med forskellig tids interval</p>
+
+    <div class="asset-block">
+        <h3>Actor sprites</h3>
+
+        <p>Asteroid</p>
+        <img src="./code/assets/sprites/asteroid.png" alt="Actor sprite">
+        <p><a href="./code/assets/sprites/asteroid.png" download class="download-link"> Download</a></p>
+        <p>Meteor</p>
+        <img src="./code/assets/sprites/meteor.png" alt="Actor sprite">
+        <p><a href="./code/assets/sprites/meteor.png" download class="download-link"> Download</a></p>
+        <p>Ship Missile</p>
+        <img src="./code/assets/sprites/bullet0.png" alt="Actor sprite">
+        <p><a href="./code/assets/sprites/bullet0.png" download class="download-link"> Download</a></p>
+        <p>Ship</p>
+        <img src="./code/assets/sprites/spaceship0.png" alt="Actor sprite">
+        <p><a href="./code/assets/sprites/spaceship0.png" download class="download-link"> Download</a></p>
+
+
+    </div>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Basis program</h3>
+        <p>Vi bruger dette program som en start</p>
+        <pre class="line-numbers" data-start="1"><code class="language-python">import math
+from random import randint
+
+WIDTH = 800
+HEIGHT = 800
+TITLE = 'Spawn Manager'
+
+ship = Actor('spaceship0',center=(WIDTH//2, HEIGHT//2))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+asteroids =[]
+spawn_timer = 2
+def update(dt):
+    global spawn_timer
+    spawn_timer -= dt
+    if spawn_timer < 0:
+        spawn()
+        spawn_timer = 2
+
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+
+        b.x += b.vx
+        b.y += b.vy
+
+        for a in asteroids[:]:
+            if b.colliderect(a):
+                if b.distance_to(a) <= a.width/4:
+                    bullets.remove(b)
+                    asteroids.remove(a)
+                break
+
+    if keyboard.right:
+        ship.angle -= 1
+
+    if keyboard.left:
+        ship.angle += 1
+
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+
+def draw():
+    screen.clear()
+
+    for b in bullets:
+        b.draw()
+
+    for a in asteroids:
+        a.draw()
+
+    ship.draw()
+    
+def spawn():
+    asteroid = Actor('asteroid')
+    asteroid.x = randint(10, WIDTH-10)
+    asteroid.y = randint(10, HEIGHT-10)
+    asteroids.append(asteroid)
+
+  </code></pre>
+    </div>
+    <!-- <pre class="line-numbers" data-start=""><code class="language-python"></code></pre><br> -->
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Hvordan spawner vi i basis programmet</h3>
+        <p>Vi har en variable som styre tiden mellem hver spawn</p>
+        <pre class="line-numbers" data-start="14"><code class="language-python">spawn_timer = 2</code></pre><br>
+
+        <p>I vores update tjekker vi om tiden er gået, så spawner vi og nulstiller timeren</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">def update(dt):
+    global spawn_timer
+    spawn_timer -= dt
+    if spawn_timer < 0:
+        spawn()
+        spawn_timer = 2</code></pre><br>
+
+        <p>og koden for at spawne</p>
+        <pre class="line-numbers" data-start="82"><code class="language-python">def spawn():
+    asteroid = Actor('asteroid')
+    asteroid.x = randint(10, WIDTH-10)
+    asteroid.y = randint(10, HEIGHT-10)
+    asteroids.append(asteroid)</code></pre><br>
+    </div>
+
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Tilpas basis program</h3>
+        <p>Vi starter med at fjerne det spawn koden fra basis programmet.<br> Programmet ser nu sådan her ud</p>
+        <pre class="line-numbers" data-start="1"><code class="language-python">import math
+from random import randint
+
+WIDTH = 800
+HEIGHT = 800
+TITLE = 'Spawn Manager'
+
+ship = Actor('spaceship0',center=(WIDTH//2, HEIGHT//2))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+asteroids =[]
+
+def update(dt):
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+
+        b.x += b.vx
+        b.y += b.vy
+
+        for a in asteroids[:]:
+            if b.colliderect(a):
+                if b.distance_to(a) <= a.width/4:
+                    bullets.remove(b)
+                    asteroids.remove(a)
+                break
+
+    if keyboard.right:
+        ship.angle -= 1
+
+    if keyboard.left:
+        ship.angle += 1
+
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+
+def draw():
+    screen.clear()
+
+    for b in bullets:
+        b.draw()
+
+    for a in asteroids:
+        a.draw()
+
+    ship.draw()
+    
+</code></pre>
+        <p>Afprøv. Du skal have et rumskib som kan skyde missiler</p>
+    </div>
+
+    <h2>Tilføj Spawn Manager Klasse</h2>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>En Klasse/Class</h3>
+        <p>En klasse er en slags skabelon eller en opskrift for at lave en bestemt type "ting" i koden.<br>
+            Forestil dig, at du vil lave en software, der handler om biler.<br>
+            I stedet for at beskrive hver enkelt bil hver gang, laver du én opskrift (en klasse) som hedder "Bil".<br>
+            I denne opskrift står der, hvad alle biler skal vide og hvad de skal kunne. For eksempel:<br>
+            Egenskaber (Data): Hver bil har en farve, et mærke og et antal døre.<br>
+            Handlinger (Metoder): Hver bil skal kunne starte motoren, køre og bremse.<br>
+            Når du så skal lave en specifik bil (f.eks. din egen bil), laver du et objekt ud fra klassen. <br>
+            Det svarer til at bage en kage efter opskriften. Objektet er den faktiske bil i koden.</p>
+        <p>Vi gør det samme nu her bare med en spawn manager</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self, interval=2):
+        self.interval = interval
+        self.timer = interval
+        
+    def update(self, dt):
+        self.timer -= dt
+        if self.timer <= 0:
+            self.spawn_asteroid()
+            self.timer = self.interval
+            
+    def spawn_asteroid(self):
+        asteroid = Actor('asteroid')
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)</code></pre>
+        <p>I koden har vi forskellige elementer. Lad os gå dem igennem.</p>
+        <pre><code class="language-python"> def __init__(self, interval=2):
+        self.interval = interval
+        self.timer = interval
+        </code></pre>
+        <p>En klasse har alid en __init__() funktion. Det er dens konstruktør.<br>
+            Det kode som bliver udført når man opretter et objekt baseret på klassen.<br><br>
+            Det hedder at instantier klassen<br><br>
+            Vi kan se at klassen har en parameter interval og hvis ikke andet bliver angivet har den værdien 2.<br><br>
+            klassen har også to variabler. interval og timer. Det skrives som self.interval og self.timer.<br><br>
+            Til start får de begge en værdi tildelt fra parameteren interval</p>
+
+
+        <pre><code class="language-python">    def update(self, dt):
+        self.timer -= dt
+        if self.timer <= 0:
+            self.spawn_asteroid()
+            self.timer = self.interval</code></pre><br>
+        <p>Klassen har sin egen update funktion<br>
+            update() tager en parameter dt. Det står for delta tid. Dvs tiden siden sidste kald.<br>
+            Den indbygget timer bliver nedskrevet med dt og når timer værdien er under eller lig med 0 kaldes
+            spawn_asteroid() funktioinen.<br>
+            derefter sættes timeren til det angivede interval.</p><br>
+
+        <pre><code class="language-python">    def spawn_asteroid(self):
+        asteroid = Actor('asteroid')
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)</code></pre>
+        <p>spawn_asteroid() funktion er samme kode som tidligere i vores spawn()</p>
+    </div>
+    <details>
+        <summary>Mere om klasser</summary>
+        <h2>Metoder</h2>
+        <p>I en klasse kalder vi det faktisk ikke for funktioner.<br>
+            update() og spawn_asteroid() betegnes som metoder når de er en del af en klasse.<br><br>
+
+            Du har måske også lagt mærke til at metode kaldet altid indeholder en parameter self.<br>
+            eks. update(self, dt) <br><br>Det betyder ikke at du skal angive noget i din kode for 'self' når du bruger
+            denne metode.<br>
+            Det betyder bare at metoden har adgang til sig selv. eks. self.timer.</p>
+    </details>
+
+    <h2>Instantier Spawn Manager Klassen</h2>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Opret et objekt baseret på en klasse </h3>
+        <p>Som fortalt tidligere så er en klasse som en opskrift.<br>
+            man siger man instantier en klasse og man får der ved et objekt eller man kan også sige en instans.<br><br>
+            Det gøre således</p>
+        <pre><code class="language-python"> spawn_manager = SpawnManager()</code></pre>
+        <p>Der er nogle ting som lige skal tages højde for.<br>
+            man kan ikke benytte et objekt/instance før det er oprettet.<br><br>
+            Så vi skal altå oprette det før vi kalder det i vores kode.<br>
+            Vi kan derfor regne ud at ovennævnte kode linje skal ligges ind i toppen af vores program.</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">spawn_manager = SpawnManager()
+    </code></pre>
+        <p>men vi kan heller ikke oprette et objekt baseret på klassen, før klassen er defineret.<br>Så vi må gøre sådan
+            her:</p>
+        <pre class="line-numbers" data-start="32"><code class="language-python">spawn_manager = SpawnManager()
+    </code></pre>
+        <p>Da vi ikke giver noget argument for interval vil standard værdien på 2 sekunder blive benyttet<br><br>
+            Alternativt kan vi sætte den til en anden værdi</p>
+        <pre class="line-numbers" data-start="32"><code class="language-python">spawn_manager = SpawnManager(interval=5)
+    </code></pre>
+        <p>eller</p>
+        <pre class="line-numbers" data-start="32"><code class="language-python">spawn_manager = SpawnManager(5)
+    </code></pre>
+    </div>
+
+
+    <h2>Benyt Spawn Manager objektet</h2>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Kald spawn manager update()</h3>
+        <p>Vi har nu defineret vores klasse og vi har instantieret klassen.<br>
+            vi har et objekt spawn_manager som blev oprettet baseret på klassen.<br>
+            Det objekt har nu timer og et interval sat til 2 sekunder (hvis du ikke har ændret det)<br><br>
+            Nu skal vi have kald update metoden som tjekker hvor lang tid der er gået og hvis vores timer tid er
+            gået,<br>
+            så skal der spawnes<br><br>
+            indsæt denne linje kode som det første i update()</p>
+        <pre class="line-numbers" data-start="35"><code class="language-python">    spawn_manager.update(dt)
+
+</code></pre>
+        <p>Vi kalder update inde i spawn_manager ved først at angive objektet et punktum og så metode navnet.<br><br>
+            Metoden tog, som vi kiggede på tidligere, et parameter for delta tid (dt).<br>
+            vi kan se at vores update(dt) også tog dette parameter.<br>så vi sender det bare direkte videre til spawn
+            metoden.<br><br>Afprøv nu hvordan det hele virker. <br>Prøv at ændre på interval tiden ved metode kald.<br>
+            Se hvordan metodens self.timer og self.interval virker ved at ændre lidt på dens værdier.
+        </p>
+    </div>
+
+    <details>
+        <summary>Pygame Zero - dt i update(dt)</summary>
+        <h2>Hvad er dt?</h2>
+        <p>dt er den tid (i sekunder) der er gået siden sidste gang update() blev kaldt.<br>Det er en float-værdi der
+            typisk er et lille decimaltal.</p>
+        <h2>Hvorfor er dt vigtig?</h2>
+        <p>dt gør din animation og bevægelse uafhængig af framerate. <br>Uden dt ville dit spil køre forskelligt hurtigt
+            på computere med forskellig hastighed.</p>
+        <pre><code class="language-python">def update():
+    # Bevæg 5 pixels per frame - vil køre hurtigere på hurtige computere
+    rect.x += 5</code></pre>
+        <pre><code class="language-python">def update(dt):
+    # Bevæg 100 pixels per SEKUND - kører ens på alle computere
+    rect.x += 100 * dt</code></pre>
+        <h2>Typiske dt-værdier:</h2>
+        <p>Ved 60 FPS: dt ≈ 0.0167 sekunder<br>
+            Ved 30 FPS: dt ≈ 0.0333 sekunder<br>
+            Så dt er essentiel for at skabe jævn og konsistent bevægelse uanset hvilken computer spillet kører på!</p>
+        <h2>Skal man altid bruge dt</h2>
+        <p>Så længe man laver små spil vil man nok ikke mærke den store forskel. <br>
+            men efterhånden som spillet bliver større og større kan det være nødvendigt.</p>
+    </details>
+
+    <details>
+        <summary>Program koden</summary>
+        <h2></h2>
+        <p>Sådan skal din kode se ud nu.</p>
+
+        <div class="code-block">
+            <!-- <span class="lang-label">Pygame Zero</span> -->
+
+            <pre class="line-numbers"><code class="language-python">import math
+from random import randint
+
+WIDTH = 800
+HEIGHT = 800
+TITLE = 'Spawn Manager'
+
+ship = Actor('spaceship0',center=(WIDTH//2, HEIGHT//2))
+ship.vx = 0
+ship.vy = 0
+
+bullets = []
+asteroids =[]
+
+class SpawnManager:
+    def __init__(self, interval=2):
+        self.interval = interval
+        self.timer = interval
+        
+    def update(self, dt):
+        self.timer -= dt
+        if self.timer <= 0:
+            self.spawn_asteroid()
+            self.timer = self.interval
+            
+    def spawn_asteroid(self):
+        asteroid = Actor('asteroid')
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)
+        
+spawn_manager = SpawnManager()
+
+def update(dt):
+    spawn_manager.update(dt)
+    
+    if ship.x < 0:
+        ship.x = WIDTH
+    if ship.x > WIDTH:
+        ship.x = 0
+    if ship.y < 0:
+        ship.y = HEIGHT
+    if ship.y > HEIGHT:
+        ship.y = 0
+
+    for b in bullets:
+        if not (0 <= b.x <= WIDTH and 0 <= b.y <=HEIGHT):
+            bullets.remove(b)
+
+        b.x += b.vx
+        b.y += b.vy
+
+        for a in asteroids[:]:
+            if b.colliderect(a):
+                if b.distance_to(a) <= a.width/4:
+                    bullets.remove(b)
+                    asteroids.remove(a)
+                break
+
+    if keyboard.right:
+        ship.angle -= 1
+
+    if keyboard.left:
+        ship.angle += 1
+
+    if keyboard.up:
+        angle_rad = math.radians(ship.angle)
+        ship.vx = math.cos(angle_rad) * 4
+        ship.vy = -math.sin(angle_rad) * 4
+
+    ship.x += ship.vx
+    ship.y += ship.vy
+    ship.vx *= 0.98
+    ship.vy *= 0.98
+
+def on_key_down():
+    if keyboard.space:
+        bullet = Actor('bullet0')
+        bullet.angle = ship.angle
+        angle_rad = math.radians(bullet.angle)
+        bullet.vx = math.cos(angle_rad) * 8
+        bullet.vy = -math.sin(angle_rad) * 8
+        bullet.pos = ship.pos
+        bullets.append(bullet)
+
+def draw():
+    screen.clear()
+
+    for b in bullets:
+        b.draw()
+
+    for a in asteroids:
+        a.draw()
+
+    ship.draw()
+    
+</code></pre>
+        </div>
+
+        <img src="./images/" alt="Another test image">
+    </details>
+
+
+    <h2>Spawn forskellige elementer</h2>
+    <div class="code-block">
+        <!-- <span class="lang-label">Pygame Zero</span> -->
+        <h3>Kald både asteroid og meteor</h3>
+        <p>Lad os se på hvordan vi kan kalde forskellige elementer med vores nuværende spawn manager.<br><br>
+
+            Jeg vil gerne have oprettet to elementer<br>
+        <ul>
+            <li>asteroid hvert 2 sekunder</li>
+            <li>meteor hvert 5 sekund</li>
+        </ul><br></p>
+    </div>
+
+    <div class="code-block">
+        <h3>Første mulighed - Oprette to spawn managers</h3>
+        <p>Tilpas følgende linjer i SpawnManager klassen:</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self, interval=2):
+        self.interval = interval
+        self.timer = interval
+
+    def update(self, dt):
+        self.timer -= dt
+        if self.timer <= 0:
+            self.spawn_asteroid()
+            self.timer = self.interval
+
+    def spawn_asteroid(self):
+        asteroid = Actor('asteroid')
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)
+</code></pre>
+        <p>til</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self, sprite, interval=2):
+        self.interval = interval
+        self.timer = interval
+        self.sprite = sprite
+
+    def update(self, dt):
+        self.timer -= dt
+        if self.timer <= 0:
+            self.spawn_asteroid()
+            self.timer = self.interval
+
+    def spawn_asteroid(self):
+        asteroid = Actor(self.sprite)
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)
+
+</code></pre>
+        <p>Ændre nu</p>
+        <pre class="line-numbers"
+            data-start="33"><code class="language-python">spawn_manager = SpawnManager()</code></pre>
+        <p>til</p>
+        <pre class="line-numbers" data-start="33"><code class="language-python">asteroid_spawn_manager = SpawnManager('asteroid')
+meteor_spawn_manager = SpawnManager('meteor', interval=5)
+</code></pre>
+        <p>og til sidst ændre</p>
+        <pre class="line-numbers" data-start="36"><code class="language-python">def update(dt):
+    spawn_manager.update(dt)</code></pre>
+        <p>til</p>
+        <pre class="line-numbers" data-start="36"><code class="language-python">def update(dt):
+    asteroid_spawn_manager.update(dt)
+    meteor_spawn_manager.update(dt)</code></pre>
+        <p>Afprøv nu</p>
+    </div>
+
+
+    <div class="code-block">
+        <h3>Anden mulighed - Tilpas spawn manager klassen til at håndter flere elementer</h3>
+        <p>Rul første mulighed tilbage i koden.<br><br>Tilpas følgende linjer i SpawnManager klassen:</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self, interval=2):
+        self.interval = interval
+        self.timer = interval
+        
+    def update(self, dt):
+        self.timer -= dt
+        if self.timer <= 0:
+            self.spawn_asteroid()
+            self.timer = self.interval
+            
+    def spawn_asteroid(self):
+        asteroid = Actor('asteroid')
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)</code></pre>
+        <p>til</p>
+        <pre class="line-numbers" data-start="15"><code class="language-python">class SpawnManager:
+    def __init__(self):
+        self.spawn_rules = [            
+            {'sprite': 'asteroid', 'interval': 2, 'timer': 2},
+            {'sprite': 'meteor', 'interval': 5, 'timer': 5}
+        ]
+
+    def update(self, dt):
+        for rule in self.spawn_rules:
+            rule['timer'] -= dt
+            if rule['timer'] <= 0:
+                self.spawn_asteroid(rule['sprite'])
+                rule['timer'] = rule['interval']
+
+
+    def spawn_asteroid(self, asteroid_sprite):
+        asteroid = Actor(asteroid_sprite)
+        asteroid.x = randint(10, WIDTH-10)
+        asteroid.y = randint(10, HEIGHT-10)
+        asteroids.append(asteroid)
+ </code></pre>
+        <p>Afrøv</p>
+        <p>Vi kan se med anden løsning lave en lidt mere snedig løsning.<br>Vi ændre kun i spawn klassen.<br><br>
+            I vores konstruktør laver vi et array med vores forskellige elementer.<br><br>
+            i vores update() gennemløber vi arrayed og kalder spawn_astroid med sprite for elementet som parameter. </p>
+    </div>
+
+
+    <div class="code-block">
+        <h3>Afslutning</h3>
+        <p>Sikre nu at alt virker som det skal.<br>
+            Rumskibet kan flyve rundt og skyde missiler.<br>
+            Asteroids og meteors spawner med forskellig tidsinterval.<br>
+            Når et Missile rammer en asteroid eller meteor forsvinderer de begge.<br><br>
+
+            Er alt det på plads. Så er der kun en ting tilbage.
+            Da vores spawn manager spawner både asteroids og meteor så bør vi gennemløbe vores kode og tilpasse så der
+            ikke står asteroid, asteroids mv.<br>
+            <br>
+            Lav om så det er enemy og enemies. Og sikre alt stadig virker bagefter.
+            /p>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- Prism.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <!-- Prism.js Components (multi-language support) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+
+    <!-- Prism.js Plugins -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+
+</html>
