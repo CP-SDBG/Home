@@ -1,10 +1,11 @@
 import random
 import time
+import os
 
 class Player:
     def __init__(self):
         self.health = 100
-        self.max_health = 1001
+        self.max_health = 100
         self.attack_power = 15
         self.gold = 0
         self.potions = 1
@@ -30,6 +31,7 @@ def create_enemy(level):
 
 def print_section(title, content):
     """Print a clearly separated section"""
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(f"\n{'='*50}")
     print(f"🎯 {title}")
     print(f"{'='*50}")
