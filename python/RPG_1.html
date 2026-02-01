@@ -17,36 +17,270 @@
 </head>
 
 <body>
-  <h1>RPG</h1>
-  
-
-  <details>
-  <summary>Hvad er spillets del elementer</summary>
-  <h2></h2>
-  <p><ul>Modellering af indersiden af et hus/kort</ul>
-<ul>Modtagelse af input fra en bruger for at få genstande/tage til steder 
-– håndtering af ugyldigt input</ul>
-<ul>Sporing af spillerens placering</ul>
-<ul>Spillerens inventar</ul>
-<ul>Sejrs-/nederlagsbetingelser</ul></p>
-
-</details>
+  <h1>RPG - Tekst baseret rollespil</h1>
+  <p class="left">Et tekstbaseret rollespil er et computerspil, hvor handlingen beskrives gennem tekst frem for grafik.<br>
+    Spilleren navigerer i en fiktiv verden ved at læse beskrivelser og give kommandoer som f.eks. "gå nordpå" eller "tal med vagten".<br>
+    <br>
+    Interactionen sker typisk via en kommandolinje. <br>
+    <br>
+    Spillets kerne ligger i historiefortælling, problemløsning og udvikling af din rolle (karakter) gennem valg og udforskning.</p>
 
   <details>
   <summary>Eksempler</summary>
-  <h2></h2>
+  <h2>Prøv disse tekstbaseret RPG spil</h2>
   <p><a href="https://lightningjay.itch.io/alien-invasion-cleveland-rpg" target="_blank">Alien Invasion</a></p>
+  <p><a href="https://textadventures.co.uk/games/view/5zyoqrsugeopel3ffhz_vq/zork" target="_blank">Zork</a></p>
+  </details>
 
+
+  <h2>Spillets vigtige element</h2>
+  <p>
+  <ul>En verden some brugeren skal udforske. Eks et hus eller en by</ul>
+  <ul>Input fra spilleren. eks. for at tag genstande op, eller gå til et andet rum</ul> 
+  <ul>Sporing af spillerens placering eks. er i stuen, er på rådhuspladsen</ul>
+  <ul>Spillerens inventar/rygsæg eks. lommelygte, energidrik</ul>
+  <ul>Sejrs-/nederlagsbetingelser</ul>
+  </p>
+
+
+  <p>Der ud over er der selvfølgelig de typiske elementer fra game design at tage med i sin betragtning.<br>Når man skal lave sit spil.</p>
+
+  <details>
+  <summary>Game Design</summary>
+  <h2></h2>
+  <p>Kan du ikke huske hvad game design er. Tag et kig på vores intro.</p>
+  <p><a href="../game_design/pdf/Spil design intro guide.pdf" target="_blank">Game Design Intro</a></p>
+  <p><a href="../game_design/doc/A4 Storyboard Template - 3-Panel - Landskab.docx" target="_blank">Storyboard Template</a></p>
 </details>
 
+<h2>Lad os skrive noget kode</h2>
+<p>I det følgende vil der være en kort forklaring sammen med nogle eksempler på kode.<br>
+Formålet er at lære de forskellige kode dele at kende inden vi sætter dem sammen til selve spillet.<br><br>
+Der vil i hvert afsnit være et par øvelser. Og du er velkommen til selv at eksperimentere videre.</p>
 
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Giv information til spilleren</h3>
+    <p>Da der ikke er noget grafik i spillet er det vigtigt at man hele tiden informerer spilleren om hvad der sker i spillet. <br>
+      Dette gøres ved at bruge print() funktionen i Python.<br><br>
+    print() er en funktion i Python, der bruges til at skrive tekst til konsollen. <br>
+    Eksempel:</p>
 
+    <pre><code class="language-python">print("Hej Verden!")</code></pre>
 
+    <p>Øvelse 1: Skriv en linje kode der fortæller spilleren at de er i et mørkt rum.</p>
+    <p>Øvelse 2: Skriv en linje kode der fortæller spilleren at de har fundet en lommelygte.</p>
 
+    <p>Nogen gange vil vi også gerne generere tekst dynamisk, f.eks. baseret på spillerens valg eller status.<br>
+    Det kan eksempelvis gøres ved at bruge variabler og sammenkæde tekst med værdier fra spillerens status.</p>
+    Eksempel:
+    <pre><code class="language-python">player_name = "Anders"
+print("Hej, " + player_name + ", velkommen til mit spil!")
 
+#Vi kan også skrive vores print instruktion på denne måde:
+print(f"Hej, {player_name}, velkommen til mit spil!")</code></pre>
 
+    <p>Øvelse 3: Opret en variabel kaldet player_health med værdien 100. Skriv derefter en linje kode der fortæller spilleren deres nuværende helbred.</p>
+    <p>Øvelse 4: Opret en variabel kaldet player_location med værdien "mørkt rum". Skriv derefter en linje kode der fortæller spilleren deres nuværende placering.</p>
 
+<p>Nogen gange vil man også lave en form for separation. Her kan det være praktisk at printe en linje med +,- eller # tegn.
+  Det kan gøre med:
+    <pre><code class="language-python">print("###########################")</code></pre>
+    <p>Eller med:</p>
+    <pre><code class="language-python">print("+" * 27)</code></pre>
+    og hvis vi kombiner dem:
+    <pre><code class="language-python">print("+" * 27)
+print(f"+{' '*10}Hejsa{' '*10}+")
+print("+" * 27)
+'''Resultat:
++++++++++++++++++++++++++++
++          Hejsa          +
++++++++++++++++++++++++++++
+'''
+</code></pre>
+</p>
+<p>Øvelse 5: Lave koden til en Velkomst brugeren får når spillet startes. (Du bestemmer hvad spillet handler om. Det er bare en øvelse) </p>
+      
+  </div>
 
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Kommentar i koden</h3>
+    <p>Det er en god ide at skrive kommentarer i koden for at gøre den mere forståelig og tilgængelig for andre udviklere<br>og sig selv på et senere tidspunt.<br>
+       Linje Kommentar starter med # i Python. Og multi linje kommentarer starter med #* og slutter med *#</p>
+       Eksempel:
+    <pre><code class="language-python"># Dette er en enkelt linje kommentar
+print("Denne tekst kan du se") #men ikke denne kommentar
+'''Denne kommentar kan omfatte flere linjer
+og bliver vist i koden som en kommentar
+og ikke eksekveret som kode'''</code></pre>
+
+    <p>Øvelse 6: Skriv en enkelt linje kommentar der forklarer at koden nedenfor fortæller spilleren deres nuværende placering.</p>
+    <p>Øvelse 7: Skriv en multi linje kommentar der forklarer at koden nedenfor opretter en variabel til spillerens helbred og derefter fortæller spilleren deres nuværende helbred.</p>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Input fra brugeren</h3>
+    <p>Vi kan også få input fra brugeren i Python ved hjælp af input() funktionen. <br>
+      Denne funktion viser en prompt og venter på, at brugeren skriver noget og trykker enter.</p>
+    <pre><code class="language-python">name = input("Hvad hedder du? ")
+print(f"Hej {name}!")</code></pre>
+
+<p>Man skal huske at bruge input() funktionen med en prompt, og at gemme brugerens input i en variabel.<br>
+  Og at konvertere input til den rigtige datatype, hvis det er nødvendigt. For eksempel:</p>
+  <pre><code class="language-python">age = int(input("Hvor gammel er du? "))</code></pre>
+  <p>Øvelse 8: Skriv kode der spørger brugeren om deres navn og gemmer det i en variabel kaldet player_name. <br>Derefter skal du printe en velkomstbesked til spilleren ved hjælp af deres navn.</p>
+  <p>Øvelse 9: Skriv kode der spørger brugeren om deres nuværende placering i spillet og gemmer det i en variabel kaldet player_location. <br>Derefter skal du printe en besked der fortæller spilleren deres nuværende placering.</p>
+
+  </div>
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Validering af input</h3>
+    <p>Det er vigtigt at validere input fra brugeren for at undgå fejl og sikre, at programmet fungerer som det skal. <br>
+      For eksempel kan man tjekke om en alder er et tal og ikke en tekst.<br>
+    Det kan gøres ved at bruge en try-except blok:</p>
+    <pre><code class="language-python">try:
+    age = int(input("Hvor gammel er du? "))
+except ValueError:
+    print("Du skal skrive et tal.")
+</code></pre>
+<p>vi skal også huske at tekst input kan være med både store og små bogstaver. <br><br>
+  Derfor kan vi bruge .lower() eller .upper() metoderne på inputtet. <br>så vi kan sammenligne inputtet uafhængigt af bogstavstørrelse.</p>
+  <pre><code class="language-python">command = input("Skriv en kommando (gå nordpå/gå sydpå): ").lower()
+if command == "gå nordpå":
+    print("Du går nordpå.") </code></pre>
+    <p>Øvelse 10: Tilføj en else blok til koden ovenfor, så den printer en besked hvis brugeren skriver en kommando der ikke er gyldig.</p>
+    <p>Øvelse 11: Indkapsel koden i en While loop, så den køre indtil brugeren skriver "quit"</p>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Game loop</h3>
+    <p>I øvelse 11 har vi indkapslet koden i en while loop, så den køre indtil brugeren skriver "quit".<br>
+    Det er rent faktisk en essential del af spiludvikling, at have en game loop som kører så længe spillet er aktivt.<br>
+    En game loop er en løkke der kontinuerligt opdaterer spillets tilstand, håndterer bruger input, og renderer grafik.<br>
+    I et tekstbaseret spil kan game loopen håndtere brugerens kommandoer og opdatere spillets tilstand baseret på disse kommandoer.<br><br>
+    Her er et simpelt eksempel på en game loop i et tekstbaseret RPG spil:</p>
+    <pre><code class="language-python">while True:
+    command = input("Skriv en kommando (gå nordpå/gå sydpå/quit): ").lower()
+    if command == "quit":
+        break
+    elif command == "gå nordpå":
+        print("Du går nordpå.")
+    elif command == "gå sydpå":
+        print("Du går sydpå.")
+    else:
+        print("Ugyldig kommando.")</code></pre>
+  <p>Vi bruger break keyword til at afslutte game loop'en, når brugeren skriver "quit".<br>
+  While True betingelse kan også skiftes ud med vores betingelse for at vinde eller tabe spillet.</p>
+  <p>Øvelse 12: Ændr koden så den bruger en variabel kaldet game_active, som er True indtil spillet er vundet eller tabt. <br>
+    Brug denne variabel i while betingelsen.</p>
+    <p>Øvelse 13: Tilpas koden så spilleren vinder når han gå nordpå og taber når han går sydpå.</p>
+    <p>Øvelse 14: Tilføj velkomst inden spillet starter.</p>
+    <p>Øvelse 15: Tilføj en besked når spillet er vundet eller tabt.</p>
+    
+  </div>
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Funktioner</h3>
+    <p>Vi kan med fordel bruge funktioner i vores spil.<br>Funktioner er en måde at gruppere kode, så den kan genbruges flere gange uden at skulle skrive den samme kode igen.</p>
+    <pre><code class="language-python">def print_welcome():
+    print("Velkommen til spillet!")
+def print_location(location):
+    print(f"Du er nu i {location}.")</code></pre>
+    <p>Vi kan så nemt bruge funktionerne i spillet ved at kalde dem sådan her:
+    <pre><code class="language-python">print_welcome()
+location = "et mørkt rum"
+print_location(location)</code></pre>
+    <p>Det er vigtigt at give funktionerne beskrivende navne, så det er nemt at forstå hvad de gør.<br>
+      og at funktionerene er defineret inden de kaldes.
+    </p>
+    eksempelvis vil denne kode ikke virke:
+    <pre><code class="language-python">location = "et mørkt rum"
+print_location(location)  # Dette vil give en fejl, fordi funktionen ikke er defineret endnu
+def print_location(location):
+    print(f"Du er nu i {location}.")</code></pre>
+
+    <p>Øvelse 16: Tilret ovenstående eksempel så det virker korrekt.</p>
+
+    <p>Funktioner bruges ofte til at behandle data og returnere værdier efterfølgende.</p>
+    <pre><code class="language-python">def calculate_damage(attack, defense):
+    damage = attack - defense
+    return max(damage, 0)  # Sørger for at skaden ikke er negativ</code></pre>
+
+    <p>Lad os kigge lidt på denne funktion:<br>
+    Når vi bruger Return fortæller vi programmet hvad det skal returnere tilbage til det sted hvor funktionen blev kaldt.<br>
+  I det her tilfælde returnerer funktionen værdien af damage, som er resultatet af at trække defense fra attack. <br>
+  Hvis damage er negativt, returneres 0 i stedet.<br><br>
+Vi kan udtrykke det anderledes. Hvis vores defence styrke er større end attack styrken vil vi ikke få skade, og funktionen returnerer 0.<br>
+Hvis vores defence styrke er mindre end attack styrken vil vi få skade, og funktionen returnerer forskellen mellem attack og defence.<br>
+
+    <p>Øvelse 17: Skriv en funktion der tager to parametre: player_health og damage_taken.<br>
+      Funktionen skal returnere den nye værdi af player_health efter at have trukket damage_taken fra.<br>
+      Sørg for at player_health ikke bliver negativ.<br>
+      Funktionen skal hedde "calculate_new_health"</p>
+    <p>Øvelse 18: Brug funktionen i en simpel game loop hvor spilleren tager skade indtil deres helbred er 0 eller mindre.</p>
+  <br>
+  <p><b>Tip: Hvis du opdager at du skriver den samme kode flere gange, så kan du bruge funktioner til at gøre det mere elegant.</b><br>
+  Så skal du kun skrive koden én gang og kalde funktionen hvor du har brug for den. <br>Og der er kun et sted du skal rette fejl eller lave tilpasninger.></p>
+
+  </div>
+<div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Del koden ud på flere filer</h3>
+    <p>Man kan med fordel splitte sin kode op så den er fordelt på flere filer.<br>
+      Det kan gør koden mere overskuelig og lettere at vedligeholde.<br><br>
+    Eksempelvis kan man have en fil med funktioner, en fil med spillogik og en fil for hver klasse.<br>
+  Klasser har vi ikke kigget på endnu. Vi har allerede en fil med vores spil logik.<br>
+  Så lad os flytte vores nye funktioner til en separat fil.</p>
+
+    1. Opret en ny fil kaldet rpg_functions.py i samme mappe som din hovedspil fil.<br>
+    2. Flyt dine funktioner calculate_damage og calculate_new_health til rpg_functions.py filen.<br>
+    3. I din hovedspil fil (Øvelse 18), importér funktionerne ved at tilføje følgende linje øverst i filen:<br>
+    <pre><code class="language-python">from rpg_functions import calculate_damage, calculate_new_health</code></pre>
+    4. Brug funktionerne som du gjorde før i din hovedspil fil. (Øvelse 18)<br>
+    <p>Øvelse 19: Finpudse din kode og gør den så elegant som muligt. <br>
+      Lav gerne nogle kommentarer og navngivning af variabler og funktioner.</p>
+  </div>
+
+    <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Lister</h3>
+    <p>Lister er en måde at gemme flere værdier på i en enkelt variabel. <br>
+      Lister kan indeholde forskellige typer af data, og de kan ændres efter oprettelsen.</p>
+    <pre><code class="language-python">my_list = [1, 2, 3, 4, 5]
+print(my_list[0])  # Udskriver første element i listen (1)
+my_list.append(6)  # Tilføjer et nyt element til listen
+print(my_list)     # Udskriver hele listen</code></pre>
+<p>Man kan også fjerne elementer fra en liste ved at bruge pop() eller remove().<br>
+man kan slette en fra en liste med del my_list[0] eller del my_list<br>
+man kan også tømme en liste med my_list.clear()<br>
+eksempel:</p>
+    <pre><code class="language-python">my_list = [1, 2, 3, 4, 5]
+my_list.pop()        # Fjerner det sidste element (5) fra listen
+my_list.remove(2)   # Fjerner elementet med værdien 2 fra listen
+del my_list[0]      # Fjerner det første element (1) fra listen
+print(my_list)      # Udskriver resten af listen</code></pre>
+    <p>Øvelse 20: Opret en liste kaldet inventory der indeholder tre genstande: "lommelygte", "nøgle", "kort".<br>
+      Tilføj en genstand kaldet "madpakke" til listen.<br>
+      Fjern genstanden "nøgle" fra listen.<br>
+      Udskriv det første element i listen.</p>
+    
+      <p>Man kan tjekke om en list indeholder et element med "in" operatoren:</p>
+      <pre><code class="language-python">inventory = ["lommelygte", "nøgle", "kort"]
+if "nøgle" in inventory:
+    print("Du har en nøgle i dit inventar.")</code></pre>
+    <p>Øvelse 21: Skriv kode der tjekker om "madpakke" er i inventory listen.<br>
+      Hvis den er der, print "Du kan spise madpakken".<br>
+      Hvis den ikke er der, print "Du har ingen madpakke".</p><br>
+      <p>Du kan gennemløbe en list med en løkke</p>
+      <pre><code class="language-python">inventory = ["lommelygte", "nøgle", "kort"]
+for item in inventory:
+    print(f"Du har en {item} i dit inventar.")</code></pre>
+    <p>Øvelse 22: Skriv kode hvor spilleren kan putte ting i eller tage ting ud af inventory listen.<br>
+    Brugeren skal også have mulighed for at få vist en liste over alle genstande i inventory.</p>
+    <p>Øvelse 23: Hvis du ikke har gjort det endnu, så skriv løsningen til 22 ved brug af funktioner.</p>  </div>
 
 
 
