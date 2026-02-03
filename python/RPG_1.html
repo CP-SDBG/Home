@@ -181,6 +181,67 @@ if command == "gå nordpå":
     <p>Øvelse 15: Tilføj en besked når spillet er vundet eller tabt.</p>
     
   </div>
+   <details>
+  <summary>Brug af Enum</summary>
+  <h2>Hvad er en Enum</h2>
+  <p>Vi kan se på enum som en måde at definere en række konstante værdier,<br> 
+    som kan bruges til at repræsentere forskellige tilstande i et spil.<br>
+  <br>
+  Ved at bruge en enum til eksempelvis at definere spiltilstande, <br>
+  kan vi gøre vores kode mere læsbar og mindre risiko for at vi laver fejl i vores kode.<br>
+
+ bruger vi en normal string variable datatype vil vores compiler ikke fange om vi skriver<br>
+"Play" eller "Playing" hvor i mod hvis vores enum er defineret med "Play" så vil den brokke sig hvis vi i koden bruger "Playing".<br>
+<br>
+Prøv denne kode af: </p>
+  <pre><code class="language-python">from enum import Enum
+
+class GameState(Enum):
+    Quit = 1
+    Play = 2
+    Looser = 3
+    Winner = 4
+
+game_state = GameState.Play
+
+while game_state == GameState.Play:
+    command = input("Skriv en kommando (gå nordpå/gå sydpå/quit): ").lower()
+    if command == "quit":
+        game_state = GameState.Quit
+        
+    elif command == "gå nordpå":
+        game_state = GameState.Winner
+        
+    elif command == "gå sydpå":
+        game_state = GameState.Looser
+    else:
+        print("Ugyldig kommando.")
+        
+if game_state == GameState.Quit:
+    print("Spil afsluttet")
+elif game_state == GameState.Winner:
+    print("Du har vundet")
+elif game_state == GameState.Looser:
+    print("Du har tabt")</code></pre>
+    <p>Prøv nu at rette linjen</p>
+      <pre><code class="language-python">while game_state == GameState.Play:</code></pre>
+    <p>Til:</p>
+  <pre><code class="language-python">while game_state == GameState.Playing:</code></pre>
+    <p>Hvad sker der?</p><br><br><br>
+    <p>Prøv også denne kode og se hvordan du får adgang til name og value på din enum.</p>
+  <pre><code class="language-python">from enum import Enum
+
+class GameState(Enum):
+    Quit = 1
+    Play = 2
+    Looser = 3
+    Winner = 4
+
+game_state = GameState.Play
+print(game_state)
+print(game_state.name)
+print(game_state.value)</code></pre>
+</details>
   <div class="code-block">
       <!-- <span class="lang-label">Pygame Zero</span> -->
     <h3>Funktioner</h3>
