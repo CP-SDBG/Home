@@ -1,0 +1,12 @@
+Dagens opgave:
+
+Lav et spil "Gæt et tal"
+
+fremgangsmåde:
+
+-Spørg spiller om maks tal
+-fortæl spilleren at tallet er mellem 0 og hans valgte maks tal
+-start spillet og bed om tal gæt
+-svar om tallet er større eller mindre
+-hvis det er det rigtige tal give bruger besked
+-Tæl antal forsøg brugeren har brugt

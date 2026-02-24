@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hurtig Start på Python Zero</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+<body>
+
+# Hurtig Start på Python - Gæt Nummer Spil
+
+<p class="left">I dette projekt laver vi et simpelt spil hvor computeren tænker på et tal og spilleren skal gætte hvad det er.<br>
+Spillet giver hints om gættet er for højt eller for lavt.<br>
+Når spilleren gætter rigtigt, viser spillet hvor mange forsøg det tog.</p>
+
+## Hvad er et gæt spil?
+
+Et gæt spil er et klassisk programmeringsprojekt hvor:
+- Computeren vælger et hemmeligt tal
+- Spilleren gætter på hvad tallet er
+- Computeren siger om gættet er for højt, for lavt eller rigtigt
+- Spillet fortsætter indtil spilleren gætter rigtigt
+
+## Komplet programkode
+
+<div class="code-block">
+  <h3>Import og opsætning</h3>
+  <p>Først importerer vi de nødvendige moduler og viser en velkomstbesked</p>
+  <pre class="line-numbers" data-start="1"><code class="language-python">import random
+
+print("🎯 Velkommen til Gæt Nummer Spillet!")
+print("Jeg tænker på et tal mellem 1 og 100.")</code></pre>
+</div>
+
+<div class="code-block">
+  <h3>Opret det hemmelige tal</h3>
+  <p>Vi bruger random modulet til at generere et tilfældigt tal mellem 1 og 100</p>
+  <pre class="line-numbers" data-start="4"><code class="language-python">hemmeligt_tal = random.randint(1, 100)
+forsøg = 0</code></pre>
+</div>
+
+<div class="code-block">
+  <h3>Hovedspilsløkken</h3>
+  <p>Vi bruger en while-løkke til at fortsætte spillet indtil spilleren gætter rigtigt</p>
+  <pre class="line-numbers" data-start="7"><code class="language-python">while True:
+    try:
+        gæt = int(input("Indtast dit gæt: "))
+        forsøg += 1
+        
+        if gæt < hemmeligt_tal:
+            print("⬆️ For lavt! Prøv et højere tal.")
+        elif gæt > hemmeligt_tal:
+            print("⬇️ For højt! Prøv et lavere tal.")
+        else:
+            print(f"🎉 Tillykke! Du gættede det på {forsøg} forsøg!")
+            break
+    except ValueError:
+        print("❌ Indtast venligst et gyldigt tal!")</code></pre>
+</div>
+
+<div class="code-block">
+  <h3>Hele programmet samlet</h3>
+  <pre class="line-numbers" data-start="1"><code class="language-python">import random
+
+print("🎯 Velkommen til Gæt Nummer Spillet!")
+print("Jeg tænker på et tal mellem 1 og 100.")
+
+hemmeligt_tal = random.randint(1, 100)
+forsøg = 0
+
+while True:
+    try:
+        gæt = int(input("Indtast dit gæt: "))
+        forsøg += 1
+        
+        if gæt < hemmeligt_tal:
+            print("⬆️ For lavt! Prøv et højere tal.")
+        elif gæt > hemmeligt_tal:
+            print("⬇️ For højt! Prøv et lavere tal.")
+        else:
+            print(f"🎉 Tillykke! Du gættede det på {forsøg} forsøg!")
+            break
+    except ValueError:
+        print("❌ Indtast venligst et gyldigt tal!")
+
+print("Tak for spillet!")</code></pre>
+</div>
+
+## Trin-for-trin gennemgang
+
+<details>
+  <summary>Trin 1: Import og velkomst</summary>
+  <h2>Opsætning af spillet</h2>
+  <p>I denne del importerer vi random-modulet og viser en besked til spilleren.</p>
+  
+  <div class="code-block">
+    <pre class="line-numbers" data-start="1"><code class="language-python">import random
+
+print("🎯 Velkommen til Gæt Nummer Spillet!")
+print("Jeg tænker på et tal mellem 1 og 100.")</code></pre>
+  </div>
+  
+  <p><strong>Forklaring:</strong></p>
+  <ul>
+    <li>`import random` giver os adgang til funktioner til at generere tilfældige tal</li>
+    <li>`print()` viser beskeder til brugeren</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Trin 2: Opret det hemmelige tal</summary>
+  <h2>Generér et tilfældigt tal</h2>
+  <p>Vi bruger random.randint() til at vælge et tal mellem 1 og 100.</p>
+  
+  <div class="code-block">
+    <pre class="line-numbers" data-start="4"><code class="language-python">hemmeligt_tal = random.randint(1, 100)
+forsøg = 0</code></pre>
+  </div>
+  
+  <p><strong>Forklaring:</strong></p>
+  <ul>
+    <li>`random.randint(1, 100)` vælger et tilfældigt heltal mellem 1 og 100 (begge inklusive)</li>
+    <li>`forsøg` holder styr på hvor mange gange spilleren har gættet</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Trin 3: Hent spillerens gæt</summary>
+  <h2>Få input fra brugeren</h2>
+  <p>Vi beder spilleren om at indtaste sit gæt og konverterer det til et tal.</p>
+  
+  <div class="code-block">
+    <pre class="line-numbers" data-start="7"><code class="language-python">gæt = int(input("Indtast dit gæt: "))
+forsøg += 1</code></pre>
+  </div>
+  
+  <p><strong>Forklaring:</strong></p>
+  <ul>
+    <li>`input()` henter tekst fra brugeren</li>
+    <li>`int()` konverterer teksten til et heltal</li>
+    <li>`forsøg += 1` tæller antallet af forsøg op med én</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Trin 4: Giv hints</summary>
+  <h2>Sammenlign gættet med det hemmelige tal</h2>
+  <p>Vi tjekker om gættet er for højt, for lavt eller korrekt.</p>
+  
+  <div class="code-block">
+    <pre class="line-numbers" data-start="9"><code class="language-python">if gæt < hemmeligt_tal:
+    print("⬆️ For lavt! Prøv et højere tal.")
+elif gæt > hemmeligt_tal:
+    print("⬇️ For højt! Prøv et lavere tal.")
+else:
+    print(f"🎉 Tillykke! Du gættede det på {forsøg} forsøg!")
+    break</code></pre>
+  </div>
+  
+  <p><strong>Forklaring:</strong></p>
+  <ul>
+    <li>`if`, `elif`, og `else` tjekker betingelser</li>
+    <li>`<` betyder "mindre end"</li>
+    <li>`>` betyder "større end"</li>
+    <li>`==` (ikke vist her) betyder "lig med"</li>
+    <li>`break` stopper løkken når spilleren gætter rigtigt</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Trin 5: Fejlhåndtering</summary>
+  <h2>Hvad hvis spilleren ikke indtaster et tal?</h2>
+  <p>Vi bruger try/except til at håndtere fejl når spilleren indtaster ugyldige data.</p>
+  
+  <div class="code-block">
+    <pre class="line-numbers" data-start="7"><code class="language-python">while True:
+    try:
+        gæt = int(input("Indtast dit gæt: "))
+        # ... resten af koden ...
+    except ValueError:
+        print("❌ Indtast venligst et gyldigt tal!")</code></pre>
+  </div>
+  
+  <p><strong>Forklaring:</strong></p>
+  <ul>
+    <li>`try:` forsøger at udføre koden</li>
+    <li>`except ValueError:` håndterer fejl når input ikke kan konverteres til tal</li>
+    <li>Dette forhindrer at programmet crasher hvis brugeren indtaster bogstaver</li>
+  </ul>
+</details>
+
+## Sådan kører du spillet
+
+1. Åbn Mu Editor eller en anden Python-editor
+2. Kopiér hele programkoden ind
+3. Gem filen som `gaet_spil.py`
+4. Klik på "Run" for at starte spillet
+5. Følg instruktionerne i terminalen
+
+## Hvad lærer du af dette projekt?
+
+<ul>
+  <li><strong>Import af moduler:</strong> Hvordan man bruger eksterne biblioteker</li>
+  <li><strong>Variabler:</strong> Til at gemme information (tal, tekst, etc.)</li>
+  <li><strong>Betingede udsagn:</strong> Brug af if/elif/else til beslutninger</li>
+  <li><strong>Løkker:</strong> While-løkker til gentagne handlinger</li>
+  <li><strong>Fejlhåndtering:</strong> Try/except til at håndtere problemer</li>
+  <li><strong>Brugerinput:</strong> Hvordan man interagerer med brugeren</li>
+</details>
+
+## Forslag til forbedringer
+
+<details>
+  <summary>Kreative ideer til udvidelse</summary>
+  <h2>Gør spillet sjovere</h2>
+  <p>Her er nogle idéer til at gøre spillet mere spændende:</p>
+  
+  <h3>1. Tilføj sværhedsgrader</h3>
+  <pre><code class="language-python">sværhedsgrad = input("Vælg sværhedsgrad (nem, medium, svær): ")
+if sværhedsgrad == "nem":
+    max_tal = 50
+elif sværhedsgrad == "medium":
+    max_tal = 100
+else:
+    max_tal = 200
+    
+hemmeligt_tal = random.randint(1, max_tal)</code></pre>
+  
+  <h3>2. Begræns antallet af forsøg</h3>
+  <pre><code class="language-python">max_forsøg = 7
+forsøg = 0
+
+while forsøg < max_forsøg:
+    # ... spil logik ...
+    if gæt == hemmeligt_tal:
+        print("Du vandt!")
+        break
+    forsøg += 1
+else:
+    print(f"Desværre! Det hemmelige tal var {hemmeligt_tal}")</code></pre>
+  
+  <h3>3. Tilføj score system</h3>
+  <pre><code class="language-python"># Beregn point baseret på antal forsøg
+point = max(100 - (forsøg * 10), 10)
+print(f"Du fik {point} point!")</code></pre>
+</details>
+
+## Problemer og løsninger
+
+<details>
+  <summary>Almindelige fejl og hvordan man løser dem</summary>
+  <h2>Ofte stillede spørgsmål</h2>
+  
+  <h3>"Jeg får en SyntaxError"</h3>
+  <p>Tjek at du har alle kolon (:) efter if, elif, else og while sætninger.<br>
+  Kontrollér også at du har ens indrykning (spacing) i hele din kode.</p>
+  
+  <h3>"Programmet crasher når jeg indtaster bogstaver"</h3>
+  <p>Sørg for at du har try/except blokken til at håndtere ValueError fejl.</p>
+  
+  <h3>"Spillet stopper ikke når jeg gætter rigtigt"</h3>
+  <p>Tjek at du har `break` kommandoen i else-blokken.</p>
+  
+  <h3>"Det hemmelige tal ændrer sig hele tiden"</h3>
+  <p>Sørg for at `hemmeligt_tal = random.randint(1, 100)` kun køres én gang - ikke inde i løkken.</p>
+</details>
+
+<h2>Tillykke! 🎉</h2>
+<p>Du har nu lavet dit første Python-spil! Dette simple gæt spil introducerer dig til mange grundlæggende programmeringskoncepter som du kan bruge i mere avancerede projekter senere.</p>
+
+<p>Husk at det vigtigste i programmering er at eksperimentere og lege med koden. Prøv at ændre tallene, tilføje flere hints eller gøre spillet mere udfordrende!</p>
+
+
+
+
+
+
+
+  <!-- Prism.js Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+  <!-- Prism.js Components (multi-language support) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+
+  <!-- Prism.js Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+</html>
