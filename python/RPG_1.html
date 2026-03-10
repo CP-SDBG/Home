@@ -346,7 +346,126 @@ for item in inventory:
     Brugeren skal også have mulighed for at få vist en liste over alle genstande i inventory.</p>
     <p>Øvelse 23: Hvis du ikke har gjort det endnu, så skriv løsningen til 22 ved brug af funktioner.</p>  </div>
 
+  <div class="code-block">
+      <!-- <span class="lang-label">Pygame Zero</span> -->
+    <h3>Klasse</h3>
+    <p>Man bruger klasse til at oprette objekter med egenskaber og metoder.<br>
+      Det er en måde at organisere og strukturere sin kode på, især når man har mange objekter med lignende egenskaber og funktioner.<br>
+      En klasse er som en skabelon for et objekt, og objekter er instanser af en klasse. <br><br>
+      Det lyder måske lidt forvirrende, så lad os se på et eksempel:</p>
+    <pre><code class="language-python">class Player:
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+    def take_damage(self, damage):
+        self.health -= damage
 
+player1 = Player("Anders", 100)
+print(player1.name)   # Udskriver "Anders"
+print(player1.health) # Udskriver 100
+player1.take_damage(20)
+print(player1.health) # Udskriver 80</code></pre>
+<p>Lad os se nærmere på eksemplet. <br>
+Først defineres klassen "class Player:" Det fortæller at alt her under med indryk høre til klasssen.<br>
+<br>
+Første linje er definering af en metode med navn __init__, navnet er lidt underligt men den skal altid være der.<br>
+metoden tager i dette tilfælde to parametre (name og health). "self" skal altid være den første parameter i metoderne. <br>
+"self" bruges til at referere til det objekt der bliver oprettet fra klassen.<br>
+Det er vigtigt da man kan oprette flere objekter fra samme klasse, og self hjælper med at holde styr på hvilken objekt der bliver refereret til.<br>
+<br>I de følgende to linjer i __init__ metoden, bliver de to parametre name og health tildelt til objektets egenskaber self.name og self.health.<br>
+<br>
+Derefter defineres metoden take_damage, som reducerer helbredet. <br><br>
+Til sidst oprettes en instans af Player klassen ved at kalde Player("Anders", 100). <br>
+Denne instans gemmes i variablen player1, og vi kan få adgang til dens egenskaber og metoder ved at bruge dot notation (player1.name, player1.health, player1.take_damage(20)).<br>
+<br>
+Vi kan som nævnt oprette flere instanser af Player klassen, og hver instans vil have sine egne egenskaber og metoder. <br>
+Tilføj følgende eksempel til den eksisterende kode:<br>
+<pre><code class="language-python">player2 = Player("Maria", 150)
+print(player2.name)   # Udskriver "Maria"
+print(player2.health) # Udskriver 150
+player2.take_damage(30)
+print(player2.health) # Udskriver 120</code></pre>
+
+    <p>Øvelse 24: Opret en klasse kaldet Enemy med egenskaberne name og health, og en metode kaldet attack der tager en Player som parameter og forårsager skade på spilleren.</p>
+    <p>Øvelse 25: Opret en instans af Enemy klassen og brug attack metoden til at forårsage skade på en Player instans.</p>
+
+    <details>
+  <summary>Mere om Klasser</summary>
+  <h2>Nedarvning</h2>
+  <p>Nedarvning er en måde at oprette nye klasser baseret på eksisterende klasser. Den nye klasse arver egenskaber og metoder fra den eksisterende klasse.<br>
+  Lad os tage et kig på Klasserne som de kunne have set ud i opgave 24</p>
+  <div class="code-block">
+      
+      <pre class="line-numbers"><code class="language-python">class Player:
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+
+    def take_damage(self, damage):
+        self.health -= damage
+
+class Enemy:
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+
+    def attack(self, target, damage):
+        target.take_damage(damage)</code></pre>
+    </div>
+    <p>Begge klasser deler fælles egenskaber som name og health, samt adfærd som take_damage. <br>
+      Det kan derfor give mening at tage dem ud i en fælles baseklasse og lade Player og Enemy nedarve fra denne.</p>
+
+      <p>Vi opretter en baseklasse kaldet Character, som indeholder de fælles dele:</p>
+      <div class="code-block">
+      <pre class="line-numbers"><code class="language-python">class Character:
+    def __init__(self, name, health):
+        self.name = name
+        self.health = health
+
+    def take_damage(self, damage):
+        self.health -= damage
+        print(f"{self.name} tog {damage} skade. Tilbage: {self.health}")</code></pre>
+        </div>
+ <p>Nu kan vi lade Player og Enemy klasserne nedarve fra Character:</p>
+ <div class="code-block">
+      
+      <pre class="line-numbers"><code class="language-python">class Player(Character):  # Player nedarver fra Character
+    def __init__(self, name, health):
+        super().__init__(name, health)  # Kalder forælderens __init__
+
+class Enemy(Character):
+    def __init__(self, name, health):
+        super().__init__(name, health)
+
+    def attack(self, target, damage):
+        print(f"{self.name} angriber {target.name} med {damage} skade!")
+        target.take_damage(damage)</code></pre>
+    </div>
+<p>Nu har både Player og Enemy adgang til name, health og take_damage metoden fra Character klassen.<br>
+nu kan vi afprøve det ved at oprette en Player og en Enemy og få Enemy til at angribe Player:</p>
+<div class="code-block">
+      
+      <pre class="line-numbers"><code class="language-python">player1 = Player("Anders", 100)
+enemy1 = Enemy("Goblin", 50)
+enemy1.attack(player1, 20)
+</code></pre></p>
+<p>Øvelse: Udvid ovenståen så både Player og Enemy har en level egenskab.<br>
+Øvelse: lave en metode til at øge level for både Player og Enemy.<br>
+Øvelse: Hvis der er forskel på level for Player og Enemy, så ændre angrebsskaden så det x level forskellen.<br>(eks. level forskel 2, damage 20 bliver så til damage 40)</p>
+</details>
+
+<!-- <p>Vi kan ændre vores eksempel lidt og ikke sætte healt i __init__ metoden, men i stedet have en metode der sætter det til 100 når vi opretter en spiller. Det kan gøres sådan her:</p>
+    <pre><code class="language-python">class Player:
+    def __init__(self, name):
+        self.name = name
+        self.health = 100
+    def take_damage(self, damage):
+        self.health -= damage
+player1 = Player("Anders")
+print(player1.name)   # Udskriver "Anders"
+print(player1.health) # Udskriver 100
+player1.take_damage(20)
+print(player1.health) # Udskriver 80</code></pre> -->
 
   <!-- Prism.js Core -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
