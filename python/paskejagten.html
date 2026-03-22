@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Påskejagten i Sønderborg</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #1a1a2e;
+    --panel:     #16213e;
+    --border:    #0f3460;
+    --accent:    #f5c518;
+    --green:     #4ade80;
+    --blue:      #60a5fa;
+    --pink:      #f472b6;
+    --orange:    #fb923c;
+    --red:       #f87171;
+    --teal:      #2dd4bf;
+    --muted:     #64748b;
+    --text:      #e2e8f0;
+    --input-bg:  #0f172a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(245,197,24,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(45,212,191,0.06) 0%, transparent 50%);
+  }
+
+  #game-container {
+    width: 100%;
+    max-width: 860px;
+    height: calc(100vh - 24px);
+    max-height: 700px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr 220px;
+    grid-template-areas:
+      "header header"
+      "output sidebar"
+      "input  sidebar";
+    gap: 10px;
+  }
+
+  /* HEADER */
+  #header {
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+  }
+
+  #title {
+    font-family: 'VT323', monospace;
+    font-size: 26px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(245,197,24,0.4);
+  }
+
+  #title span { color: var(--teal); }
+
+  #progress-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .egg-pip {
+    width: 22px;
+    height: 28px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    border: 2px solid var(--muted);
+    background: transparent;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .egg-pip.found { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .egg-pip.decorated { border-color: var(--green); background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .egg-pip.egg-blue.decorated   { background: var(--blue);   border-color: var(--blue);   box-shadow: 0 0 8px var(--blue); }
+  .egg-pip.egg-yellow.decorated { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .egg-pip.egg-green.decorated  { background: var(--green);  border-color: var(--green);  box-shadow: 0 0 8px var(--green); }
+  .egg-pip.egg-red.decorated    { background: var(--pink);   border-color: var(--pink);   box-shadow: 0 0 8px var(--pink); }
+
+  /* OUTPUT */
+  #output {
+    grid-area: output;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  #output::-webkit-scrollbar { width: 6px; }
+  #output::-webkit-scrollbar-track { background: transparent; }
+  #output::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .msg { margin-bottom: 10px; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .msg-location .loc-header {
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+  }
+
+  .msg-location .loc-body { color: var(--text); }
+  .msg-location .loc-exits { color: var(--teal); margin-top: 6px; font-size: 13px; }
+
+  .msg-npc .npc-name { color: var(--pink); font-weight: 700; }
+  .msg-npc .npc-text { color: #cbd5e1; }
+
+  .msg-find  { color: var(--green); font-weight: 700; }
+  .msg-decor { color: var(--blue); font-weight: 700; }
+  .msg-win   { color: var(--accent); font-weight: 800; font-family: 'VT323', monospace; font-size: 22px; text-align: center; }
+  .msg-error { color: var(--red); }
+  .msg-info  { color: var(--muted); font-style: italic; }
+  .msg-cmd   { color: var(--muted); font-size: 13px; }
+  .msg-cmd::before { content: '> '; color: var(--accent); }
+  .msg-system { color: var(--teal); }
+
+  /* INPUT */
+  #input-area {
+    grid-area: input;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  #input-area::before {
+    content: '>';
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--accent);
+  }
+
+  #cmd-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    padding: 12px 0;
+    caret-color: var(--accent);
+  }
+
+  #cmd-input::placeholder { color: var(--muted); }
+
+  #send-btn {
+    background: var(--accent);
+    border: none;
+    color: var(--bg);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #send-btn:hover { opacity: 0.85; }
+
+  /* SIDEBAR */
+  #sidebar {
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .side-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .side-title {
+    font-family: 'VT323', monospace;
+    font-size: 16px;
+    color: var(--teal);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 4px;
+  }
+
+  /* Inventory */
+  #inventory-list { font-size: 13px; line-height: 1.8; min-height: 40px; }
+  #inventory-list .item-egg   { color: var(--accent); }
+  #inventory-list .item-deco  { color: var(--blue); }
+  #inventory-list .empty      { color: var(--muted); font-style: italic; }
+
+  /* Map */
+  #map-display {
+    font-family: 'VT323', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre;
+    color: var(--muted);
+  }
+
+  #map-display .here { color: var(--accent); }
+  #map-display .visited { color: var(--text); }
+
+  /* Commands hint */
+  .cmd-hint {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .cmd-hint span { color: var(--teal); }
+
+  /* Name screen */
+  #name-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    gap: 20px;
+    background-image:
+      radial-gradient(ellipse at 30% 30%, rgba(245,197,24,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 70%, rgba(45,212,191,0.08) 0%, transparent 50%);
+  }
+
+  #name-screen h1 {
+    font-family: 'VT323', monospace;
+    font-size: 52px;
+    color: var(--accent);
+    text-shadow: 0 0 30px rgba(245,197,24,0.5);
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  #name-screen h1 span { color: var(--teal); }
+  #name-screen p { color: var(--muted); text-align: center; max-width: 400px; font-size: 15px; }
+
+  #name-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 6px 14px;
+    width: 340px;
+  }
+
+  #name-form::before { content: '>'; font-family: 'VT323', monospace; font-size: 22px; color: var(--accent); }
+
+  #name-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
+  #name-input::placeholder { color: var(--muted); }
+
+  #name-btn {
+    background: var(--accent);
+    border: none;
+    color: var(--bg);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  #name-btn:hover { opacity: 0.85; }
+
+  .egg-row { display: flex; gap: 10px; font-size: 28px; }
+
+  /* Win overlay */
+  #win-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 20px;
+  }
+
+  #win-screen h2 {
+    font-family: 'VT323', monospace;
+    font-size: 56px;
+    color: var(--accent);
+    text-shadow: 0 0 40px rgba(245,197,24,0.7);
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.7} }
+
+  #win-screen p { color: var(--text); font-size: 16px; max-width: 400px; line-height: 1.7; }
+
+  #play-again {
+    background: var(--teal);
+    border: none;
+    color: var(--bg);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.2s;
+  }
+  #play-again:hover { opacity: 0.85; }
+
+  @media (max-width: 600px) {
+    #game-container {
+      grid-template-columns: 1fr;
+      grid-template-areas: "header" "output" "input";
+    }
+    #sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Name screen -->
+<div id="name-screen">
+  <div class="egg-row">🥚🐣🌸</div>
+  <h1>PÅSKEJAGTEN<br><span>I SØNDERBORG</span></h1>
+  <p>Find 4 påskeæg, dekorer dem og aflever dem på Sønderborg Slot for at vinde påskekonkurrencen!</p>
+  <div id="name-form">
+    <input id="name-input" type="text" placeholder="Hvad hedder du?" maxlength="20" autocomplete="off">
+    <button id="name-btn">Start 🐣</button>
+  </div>
+</div>
+
+<!-- Win screen -->
+<div id="win-screen">
+  <div style="font-size:48px">🏆🥚🎉</div>
+  <h2>TILLYKKE!</h2>
+  <p id="win-text"></p>
+  <button id="play-again">Spil igen 🐣</button>
+</div>
+
+<!-- Game -->
+<div id="game-container">
+
+  <div id="header">
+    <div id="title">PÅSKEJAGTEN <span>SBY</span></div>
+    <div id="progress-bar">
+      <div class="egg-pip egg-green"  id="pip-green"  title="Grønt æg"></div>
+      <div class="egg-pip egg-blue"   id="pip-blue"   title="Blåt æg"></div>
+      <div class="egg-pip egg-yellow" id="pip-yellow" title="Gult æg"></div>
+      <div class="egg-pip egg-red"    id="pip-red"    title="Rødt æg"></div>
+    </div>
+  </div>
+
+  <div id="output"></div>
+
+  <div id="input-area">
+    <input id="cmd-input" type="text" placeholder="Skriv en kommando... (fx 'gå havn' eller 'hjælp')" autocomplete="off">
+    <button id="send-btn">Send</button>
+  </div>
+
+  <div id="sidebar">
+    <div class="side-panel">
+      <div class="side-title">🧺 KURV</div>
+      <div id="inventory-list"><span class="empty">(tom)</span></div>
+    </div>
+
+    <div class="side-panel">
+      <div class="side-title">🗺 KORT</div>
+      <div id="map-display"></div>
+    </div>
+
+    <div class="side-panel">
+      <div class="side-title">📋 KOMMANDOER</div>
+      <div class="cmd-hint">
+        <span>gå [sted]</span> – flyt dig<br>
+        <span>søg</span> – led efter æg<br>
+        <span>tal</span> – tal med npc<br>
+        <span>dekorér</span> – pynt æg<br>
+        <span>aflever</span> – aflevér på slot<br>
+        <span>kurv</span> – vis indhold<br>
+        <span>kig</span> – se stedet igen<br>
+        <span>hjælp</span> – alle kommandoer
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// SPILLETS DATA
+// ============================================================
+
+const locations = {
+  kasernen: {
+    navn: "Kasernen – Coding Pirates",
+    beskrivelse: "Du befinder dig i Coding Pirates' lokale på Kasernen.\nComputere og farvede ledninger fylder bordene.\nEn Coding Pirate sidder klar og smiler til dig.",
+    udgange: ["havn", "gågaden"],
+    npc: "coding pirate",
+    æg: "grønt æg",
+    genstand: null,
+  },
+  havn: {
+    navn: "Sønderborg Havn",
+    beskrivelse: "Du ankommer til den smukke havn. Bådene gynger stille i vandet.\nDer lugter af salt og frisk luft.\nEn fisker sidder på kajen og ordner sine net.",
+    udgange: ["kasernen", "gågaden", "rønhaveplads"],
+    npc: "fisker",
+    æg: "blåt æg",
+    genstand: null,
+  },
+  gågaden: {
+    navn: "Gågaden",
+    beskrivelse: "Du går ind i den travle gågade. Butikkerne har påskepynt i vinduerne.\nEn blomsterhandler smiler og vinker fra sin bod.",
+    udgange: ["kasernen", "havn", "rådhuspladsen", "rønhaveplads"],
+    npc: "blomsterhandler",
+    æg: "gult æg",
+    genstand: "gul sløjfe",
+  },
+  rønhaveplads: {
+    navn: "Rønhaveplads",
+    beskrivelse: "Du ankommer til den hyggelige Rønhaveplads.\nForårsblomster springer ud i bedene. Der er stille og fredeligt.\nIngen andre mennesker at se.",
+    udgange: ["havn", "gågaden"],
+    npc: null,
+    æg: null,
+    genstand: "blå farve",
+  },
+  rådhuspladsen: {
+    navn: "Rådhuspladsen",
+    beskrivelse: "Du når frem til Rådhuspladsen. Rådhuset rejser sig smukt i baggrunden.\nEt lille springvand plasker midt på pladsen.\nEn gammel dame sælger påskeliljer fra en lille stand.",
+    udgange: ["gågaden", "strandpromenaden", "slot"],
+    npc: "gammel dame",
+    æg: null,
+    genstand: "grønt mønster",
+  },
+  strandpromenaden: {
+    navn: "Strandpromenaden",
+    beskrivelse: "Du spadserer ud på Strandpromenaden langs fjorden.\nDet blæser let, og udsigten til vandet er fantastisk.\nEn venlig dame lufter sin hund og vinker til dig.",
+    udgange: ["rådhuspladsen", "slot"],
+    npc: "stranddame",
+    æg: null,
+    genstand: "rød sløjfe",
+  },
+  slot: {
+    navn: "Sønderborg Slot",
+    beskrivelse: "Foran dig rejser Sønderborg Slot sig majestætisk ved fjorden.\nVed indgangen står en slotsvagt med en stor kurv til påskekonkurrencen.\nDer er allerede mange smukt dekorerede æg i kurven!",
+    udgange: ["rådhuspladsen", "strandpromenaden"],
+    npc: "slotsvagt",
+    æg: null,
+    genstand: null,
+  },
+};
+
+const npcDialog = {
+  "coding pirate": "Coding Piraten siger: 'Ahøj! Velkommen til Coding Pirates! 🏴‍☠️\nBrug gå [sted] til at bevæge dig rundt.\nBrug søg for at lede efter æg og genstande.\nBrug tal for at snakke med folk – de ved måske noget nyttigt!\nBrug dekorér når du har et æg og en dekoration.\nFind alle 4 æg, dekorer dem og aflever på Sønderborg Slot! 🐣'",
+  "fisker": "Fiskeren siger: 'Hej! Ja, jeg fandt et blåt æg her ved ankeret.\nDet lå gemt der – det er nok stadig der, hvis du leder godt.\nOg hørte du om Rønhaveplads? Der skulle ligge noget blå farve.' 🎨",
+  "blomsterhandler": "Blomsterhandleren siger: 'Et æg? Det trillede ind i min butik i morges!\nDet ligger bag blomsterkasserne – tag det!\nOg her er en gul sløjfe med, den pynter på et æg!' 🎀",
+  "gammel dame": "Den gamle dame hvisker: 'Pssst... det røde æg?\nEn dame nede på Strandpromenaden har det – gå derned og tal med hende!\nHer er et grønt mønster du kan bruge til pynt.' 🌿",
+  "stranddame": "Stranddamen smiler: 'Sikke en fin dag til en påskejagt!\nJeg fandt faktisk dette røde æg her på promenaden i morges.\nJeg gemte det til nogen kom forbi – tag det endelig med! 🥚'",
+  "slotsvagt": "Slotsvagten siger: 'Velkommen til påskekonkurrencen på Sønderborg Slot!\nFor at deltage skal du have 4 dekorerede æg.\nBrug kommandoen: aflever'",
+};
+
+const dekorationMap = {
+  "blå farve":     "blåt æg",
+  "gul sløjfe":    "gult æg",
+  "grønt mønster": "grønt æg",
+  "rød sløjfe":    "rødt æg",
+};
+
+const eggPipMap = {
+  "grønt æg": "pip-green",
+  "blåt æg":  "pip-blue",
+  "gult æg":  "pip-yellow",
+  "rødt æg":  "pip-red",
+};
+
+const mapLines = [
+  " [KASERNEN]★",
+  "  /       \\",
+  "[HAVN] [GÅGADEN]",
+  "  |\\     /|\\",
+  "  |[RØNH] |[RÅDHUS]",
+  "  |       |   \\",
+  "  +-------+[STRAND]",
+  "          \\   /",
+  "          [SLOT]🏆",
+];
+
+const mapLocationRows = {
+  kasernen:        0,
+  havn:            2,
+  gågaden:         2,
+  rønhaveplads:    4,
+  rådhuspladsen:   4,
+  strandpromenaden:6,
+  slot:            8,
+};
+
+// ============================================================
+// SPILTILSTAND
+// ============================================================
+
+let state = {
+  playerName: "",
+  location: "kasernen",
+  inventory: [],
+  eggsFound: [],
+  eggsDecorated: [],
+  visited: new Set(),
+  npcSpokenTo: new Set(),
+};
+
+// ============================================================
+// UI HELPERS
+// ============================================================
+
+const output  = document.getElementById("output");
+const cmdInput = document.getElementById("cmd-input");
+
+function print(html, cls = "") {
+  const div = document.createElement("div");
+  div.className = "msg " + cls;
+  div.innerHTML = html;
+  output.appendChild(div);
+  output.scrollTop = output.scrollHeight;
+}
+
+function printSep() {
+  print('<hr style="border:none;border-top:1px solid #1e293b;margin:4px 0;">', "");
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function nl2br(s) {
+  return escHtml(s).replace(/\n/g, "<br>");
+}
+
+function updateInventory() {
+  const el = document.getElementById("inventory-list");
+  if (state.inventory.length === 0) {
+    el.innerHTML = '<span class="empty">(tom)</span>';
+    return;
+  }
+  const eggs = ["grønt æg","blåt æg","gult æg","rødt æg"];
+  el.innerHTML = state.inventory.map(item => {
+    const cls = eggs.includes(item) ? "item-egg" : "item-deco";
+    const icon = eggs.includes(item) ? "🥚 " : "🎨 ";
+    return `<span class="${cls}">${icon}${item}</span>`;
+  }).join("<br>");
+}
+
+function updateMap() {
+  const el = document.getElementById("map-display");
+  const locRow = mapLocationRows[state.location];
+  el.innerHTML = mapLines.map((line, i) => {
+    if (i === locRow) return `<span class="here">${line} ◀</span>`;
+    return `<span class="visited">${line}</span>`;
+  }).join("\n");
+}
+
+function updatePips() {
+  Object.entries(eggPipMap).forEach(([egg, pipId]) => {
+    const pip = document.getElementById(pipId);
+    pip.classList.remove("found","decorated");
+    if (state.eggsDecorated.includes(egg)) pip.classList.add("decorated");
+    else if (state.eggsFound.includes(egg)) pip.classList.add("found");
+  });
+}
+
+function showLocation() {
+  const loc = locations[state.location];
+  const exitStr = loc.udgange.join(", ");
+  print(
+    `<div class="loc-header">📍 ${escHtml(loc.navn)}</div>` +
+    `<div class="loc-body">${nl2br(loc.beskrivelse)}</div>` +
+    `<div class="loc-exits">🚶 Udgange: ${escHtml(exitStr)}</div>`,
+    "msg-location"
+  );
+  if (!state.visited.has(state.location)) state.visited.add(state.location);
+  updateMap();
+}
+
+// ============================================================
+// KOMMANDOER
+// ============================================================
+
+function cmdGå(destination) {
+  const loc = locations[state.location];
+  if (!destination) { print("Gå hvor? Fx: <em>gå havn</em>", "msg-error"); return; }
+  if (loc.udgange.includes(destination)) {
+    state.location = destination;
+    showLocation();
+  } else {
+    print(`Du kan ikke gå til '${escHtml(destination)}' herfra. Mulige udgange: ${loc.udgange.join(", ")}`, "msg-error");
+  }
+}
+
+function cmdSøg() {
+  const loc = locations[state.location];
+  let fandt = false;
+
+  if (loc.æg && !state.eggsFound.includes(loc.æg)) {
+    print(`🥚 Du leder grundigt... og finder et <strong>${loc.æg}</strong>!`, "msg-find");
+    state.inventory.push(loc.æg);
+    state.eggsFound.push(loc.æg);
+    fandt = true;
+    updatePips();
+    updateInventory();
+  } else if (loc.æg && state.eggsFound.includes(loc.æg)) {
+    print("Du leder, men har allerede fundet ægget her.", "msg-info");
+    fandt = true;
+  }
+
+  if (loc.genstand && !state.inventory.includes(loc.genstand)) {
+    print(`🎨 Du finder også: <strong>${loc.genstand}</strong>! Den lægger du i kurven.`, "msg-find");
+    state.inventory.push(loc.genstand);
+    fandt = true;
+    updateInventory();
+  } else if (loc.genstand && state.inventory.includes(loc.genstand)) {
+    print(`Du har allerede samlet ${loc.genstand} herfra.`, "msg-info");
+    fandt = true;
+  }
+
+  if (!fandt) print("Du leder overalt, men finder ikke noget her.", "msg-info");
+}
+
+function cmdTal() {
+  const loc = locations[state.location];
+  if (!loc.npc) { print("Der er ingen at tale med her.", "msg-info"); return; }
+
+  const npc = loc.npc;
+  print(
+    `<span class="npc-name">💬 ${npc.charAt(0).toUpperCase() + npc.slice(1)}:</span><br>` +
+    `<span class="npc-text">${nl2br(npcDialog[npc])}</span>`,
+    "msg-npc"
+  );
+
+  // Stranddamen giver det røde æg
+  if (npc === "stranddame" && !state.eggsFound.includes("rødt æg")) {
+    print("🥚 Stranddamen rækker dig det <strong>røde æg</strong>. Det lægger du forsigtigt i kurven!", "msg-find");
+    state.inventory.push("rødt æg");
+    state.eggsFound.push("rødt æg");
+    updatePips();
+    updateInventory();
+  }
+
+  state.npcSpokenTo.add(npc);
+}
+
+function cmdDekorér() {
+  let dekorerede = 0;
+  for (const [genstand, æg] of Object.entries(dekorationMap)) {
+    if (state.inventory.includes(genstand) && state.inventory.includes(æg) && !state.eggsDecorated.includes(æg)) {
+      print(`🎨 Du bruger <strong>${genstand}</strong> til at dekorere dit <strong>${æg}</strong>. Det ser fantastisk ud!`, "msg-decor");
+      state.eggsDecorated.push(æg);
+      state.inventory.splice(state.inventory.indexOf(genstand), 1);
+      dekorerede++;
+      updatePips();
+      updateInventory();
+    }
+  }
+  if (dekorerede === 0) {
+    print("Du har ikke det nødvendige til at dekorere et æg endnu.<br>Find æg og dekorationsgenstande rundt i byen.", "msg-info");
+  }
+}
+
+function cmdAflever() {
+  if (state.location !== "slot") {
+    print("Du kan kun aflevere æggene på Sønderborg Slot.", "msg-error");
+    return;
+  }
+  if (state.eggsDecorated.length < 4) {
+    const mangler = 4 - state.eggsDecorated.length;
+    print(`Du mangler stadig ${mangler} dekorerede æg. Fortsæt jagten! 🥚`, "msg-error");
+    return;
+  }
+  // SEJR!
+  triggerWin();
+}
+
+function cmdKurv() {
+  if (state.inventory.length === 0) {
+    print("Din kurv er tom.", "msg-info");
+    return;
+  }
+  const eggs = ["grønt æg","blåt æg","gult æg","rødt æg"];
+  const lines = state.inventory.map(i => eggs.includes(i) ? `🥚 ${i}` : `🎨 ${i}`).join("<br>");
+  print(
+    `<strong>🧺 Din kurv:</strong><br>${lines}<br>` +
+    `<br>🥚 Fundet: ${state.eggsFound.length}/4 &nbsp; 🎨 Dekoreret: ${state.eggsDecorated.length}/4`,
+    "msg-system"
+  );
+}
+
+function cmdHjælp() {
+  print(
+    `<strong>📋 Kommandoer:</strong><br>` +
+    `<span style="color:var(--teal)">gå [sted]</span> – Gå til en lokation (fx <em>gå havn</em>)<br>` +
+    `<span style="color:var(--teal)">søg</span> – Led efter påskeæg og genstande<br>` +
+    `<span style="color:var(--teal)">tal</span> – Tal med en person på stedet<br>` +
+    `<span style="color:var(--teal)">dekorér</span> – Dekorer æg med fundne genstande<br>` +
+    `<span style="color:var(--teal)">aflever</span> – Aflever æg på Sønderborg Slot<br>` +
+    `<span style="color:var(--teal)">kurv</span> – Se hvad du har i kurven<br>` +
+    `<span style="color:var(--teal)">kig</span> – Se beskrivelse af stedet igen<br>` +
+    `<br><strong>📍 Lokationer:</strong><br>` +
+    `kasernen, havn, gågaden, rønhaveplads, rådhuspladsen, strandpromenaden, slot`,
+    "msg-system"
+  );
+}
+
+function triggerWin() {
+  document.getElementById("win-text").innerHTML =
+    `Du afleverede 4 smukt dekorerede påskeæg på Sønderborg Slot, ${escHtml(state.playerName)}!<br><br>` +
+    `Dommerne er vilde med dine æg – du vinder <strong>FØRSTEPRÆMIEN</strong>! 🥇<br><br>` +
+    `En stor chokoladeæg og æresbevisning fra borgmesteren venter dig. 🍫<br><br>` +
+    `God påske! 🌸`;
+  document.getElementById("win-screen").style.display = "flex";
+}
+
+// ============================================================
+// KOMMANDO PARSER
+// ============================================================
+
+function handleCommand(raw) {
+  const cmd = raw.toLowerCase().trim();
+  if (!cmd) return;
+
+  print(`${escHtml(raw)}`, "msg-cmd");
+  printSep();
+
+  if (cmd.startsWith("gå "))        cmdGå(cmd.slice(3).trim());
+  else if (cmd === "søg")           cmdSøg();
+  else if (cmd === "tal")           cmdTal();
+  else if (cmd === "dekorér" || cmd === "dekorer") cmdDekorér();
+  else if (cmd === "aflever")       cmdAflever();
+  else if (cmd === "kurv")          cmdKurv();
+  else if (cmd === "kig")           showLocation();
+  else if (cmd === "hjælp" || cmd === "help") cmdHjælp();
+  else print(`Kommandoen '<em>${escHtml(cmd)}</em>' kendes ikke. Skriv <strong>hjælp</strong> for en liste.`, "msg-error");
+}
+
+// ============================================================
+// START SPILLET
+// ============================================================
+
+function startGame(name) {
+  state.playerName = name || "Eventyrer";
+  document.getElementById("name-screen").style.display = "none";
+
+  print(
+    `<div style="text-align:center; padding:8px 0;">` +
+    `<div style="font-family:'VT323',monospace; font-size:32px; color:var(--accent); text-shadow:0 0 20px rgba(245,197,24,0.4)">🐣 PÅSKEJAGTEN I SØNDERBORG 🐣</div>` +
+    `<div style="color:var(--muted); margin-top:6px">Hej <strong style="color:var(--teal)">${escHtml(state.playerName)}</strong>! Find 4 påskeæg, dekorer dem og aflever dem på Sønderborg Slot!</div>` +
+    `<div style="color:var(--muted); font-size:13px; margin-top:4px">Tip: Tal med Coding Piraten – hun kan hjælpe dig i gang 🏴‍☠️</div>` +
+    `</div>`,
+    ""
+  );
+  printSep();
+  showLocation();
+  updateInventory();
+  updateMap();
+  cmdInput.focus();
+}
+
+function resetGame() {
+  state = {
+    playerName: "",
+    location: "kasernen",
+    inventory: [],
+    eggsFound: [],
+    eggsDecorated: [],
+    visited: new Set(),
+    npcSpokenTo: new Set(),
+  };
+  output.innerHTML = "";
+  updatePips();
+  updateInventory();
+  updateMap();
+  document.getElementById("win-screen").style.display = "none";
+  document.getElementById("name-screen").style.display = "flex";
+  document.getElementById("name-input").value = "";
+  document.getElementById("name-input").focus();
+}
+
+// ============================================================
+// EVENT LISTENERS
+// ============================================================
+
+document.getElementById("name-btn").addEventListener("click", () => {
+  const name = document.getElementById("name-input").value.trim();
+  startGame(name);
+});
+
+document.getElementById("name-input").addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    const name = document.getElementById("name-input").value.trim();
+    startGame(name);
+  }
+});
+
+document.getElementById("send-btn").addEventListener("click", () => {
+  handleCommand(cmdInput.value);
+  cmdInput.value = "";
+  cmdInput.focus();
+});
+
+cmdInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    handleCommand(cmdInput.value);
+    cmdInput.value = "";
+  }
+});
+
+document.getElementById("play-again").addEventListener("click", resetGame);
+
+// Init map
+updateMap();
+</script>
+</body>
+</html>
