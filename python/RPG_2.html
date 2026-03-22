@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8">
+  <title>RPG 2 - Påskejagten i Sønderborg</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Prism.js CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <h1>RPG 2 - Påskejagten i Sønderborg</h1>
+  <p class="left">
+    Nu skal vi bygge et rigtigt tekst-baseret RPG spil fra bunden!<br>
+    Spillet foregår i Sønderborg by, hvor spilleren skal finde tre påskeæg, dekorere dem og aflevere dem på Sønderborg Slot.<br>
+    <br>
+    Vi bruger de Python-elementer vi lærte i RPG 1 - <code>print()</code>, <code>input()</code>, funktioner, lister, klasser og game loops.<br>
+    Nu sætter vi dem sammen til et sammenhængende spil.
+  </p>
+
+  <!-- ======================== -->
+  <!-- 1. INTRO: SPILLETS VERDEN -->
+  <!-- ======================== -->
+  <h2>1. Spillets verden - kortet</h2>
+  <p class="left">
+    Inden vi koder, er det vigtigt at kende spillets verden.<br>
+    Her er et kort over Sønderborg med alle lokationer, forbindelser og hvad der gemmer sig hvert sted.
+  </p>
+
+  <img src="./images/rpg_kort.svg" alt="Kort over Sønderborg - Påskejagten" style="max-width:100%; border:2px solid #ccc; border-radius:6px; margin: 20px 0;">
+
+  <p class="left">
+    Spilleren starter på <strong>Kasernen</strong> (Coding Pirates lokalet) og skal finde vej rundt i byen.<br>
+    Der er 7 lokationer i alt. Hver lokation har udgange til andre steder, og nogle steder gemmer sig æg eller dekorationsgenstande.<br>
+    NPC'er (Non-Player Characters) er personer man kan tale med - de giver hints og hjælp.
+  </p>
+
+  <details>
+    <summary>Oversigt: Lokationer, æg og NPC'er</summary>
+    <table style="width:100%; border-collapse:collapse; margin-top:10px; font-size:14px;">
+      <tr style="background:#f0f0f0;">
+        <th style="padding:8px; border:1px solid #ddd; text-align:left;">Lokation</th>
+        <th style="padding:8px; border:1px solid #ddd; text-align:left;">Udgange til</th>
+        <th style="padding:8px; border:1px solid #ddd; text-align:left;">Æg / Genstand</th>
+        <th style="padding:8px; border:1px solid #ddd; text-align:left;">NPC</th>
+      </tr>
+      <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><strong>kasernen</strong> ⭐ START</td>
+        <td style="padding:8px; border:1px solid #ddd;">havn, gågaden</td>
+        <td style="padding:8px; border:1px solid #ddd;">🥚 Grønt æg</td>
+        <td style="padding:8px; border:1px solid #ddd;">Coding Pirate (hjælp)</td>
+      </tr>
+      <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><strong>havn</strong></td>
+        <td style="padding:8px; border:1px solid #ddd;">kasernen, gågaden, rønhaveplads</td>
+        <td style="padding:8px; border:1px solid #ddd;">🥚 Blåt æg</td>
+        <td style="padding:8px; border:1px solid #ddd;">Fisker</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><strong>gågaden</strong></td>
+        <td style="padding:8px; border:1px solid #ddd;">kasernen, havn, rådhuspladsen, rønhaveplads</td>
+        <td style="padding:8px; border:1px solid #ddd;">🥚 Gult æg, 🎀 Gul sløjfe</td>
+        <td style="padding:8px; border:1px solid #ddd;">Blomsterhandler</td>
+      </tr>
+      <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><strong>rønhaveplads</strong></td>
+        <td style="padding:8px; border:1px solid #ddd;">havn, gågaden</td>
+        <td style="padding:8px; border:1px solid #ddd;">🎨 Blå farve</td>
+        <td style="padding:8px; border:1px solid #ddd;">–</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><strong>rådhuspladsen</strong></td>
+        <td style="padding:8px; border:1px solid #ddd;">gågaden, strandpromenaden, slot</td>
+        <td style="padding:8px; border:1px solid #ddd;">🌿 Grønt mønster (til grønt æg)</td>
+        <td style="padding:8px; border:1px solid #ddd;">Gammel dame</td>
+      </tr>
+      <tr style="background:#f9f9f9;">
+        <td style="padding:8px; border:1px solid #ddd;"><strong>strandpromenaden</strong></td>
+        <td style="padding:8px; border:1px solid #ddd;">rådhuspladsen, slot</td>
+        <td style="padding:8px; border:1px solid #ddd;">🥚 Rødt æg (via NPC), 🎀 Rød sløjfe</td>
+        <td style="padding:8px; border:1px solid #ddd;">Stranddame</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; border:1px solid #ddd;"><strong>slot</strong> 🏆 MÅL</td>
+        <td style="padding:8px; border:1px solid #ddd;">rådhuspladsen, strandpromenaden</td>
+        <td style="padding:8px; border:1px solid #ddd;">–</td>
+        <td style="padding:8px; border:1px solid #ddd;">Slotsvagt</td>
+      </tr>
+    </table>
+  </details>
+
+
+  <!-- ======================== -->
+  <!-- 2. LOKATIONER            -->
+  <!-- ======================== -->
+  <h2>2. Lokationer - en ordbog med ordbøger</h2>
+  <p class="left">
+    Alle spillets lokationer gemmes i én stor variabel kaldet <code>locations</code>.<br>
+    Det er en <strong>ordbog</strong> (dictionary), hvor hver nøgle er lokationens navn, og værdien er endnu en ordbog med lokationens data.
+  </p>
+
+  <div class="code-block">
+    <h3>Hvad er en ordbog (dictionary)?</h3>
+    <p>En ordbog gemmer data som nøgle-værdi par. Man tilgår data ved hjælp af nøglen:</p>
+    <pre><code class="language-python">person = {
+    "navn": "Anders",
+    "alder": 14,
+    "by": "Sønderborg"
+}
+print(person["navn"])   # Udskriver: Anders
+print(person["by"])     # Udskriver: Sønderborg</code></pre>
+
+    <p>I vores spil bruger vi en ordbog til at beskrive hver lokation:</p>
+    <pre class="line-numbers"><code class="language-python">locations = {
+    "kasernen": {
+        "navn": "Kasernen - Coding Pirates lokalet",
+        "beskrivelse": (
+            "Du befinder dig i Coding Pirates' lokale på Kasernen.\n"
+            "Computere og farvede ledninger fylder bordene.\n"
+            "En Coding Pirate sidder klar og smiler til dig."
+        ),
+        "udgange": ["havn", "gågaden"],
+        "npc": "coding pirate",
+        "æg": "grønt æg",
+        "genstand": None,
+    },
+    "havn": {
+        "navn": "Sønderborg Havn",
+        "beskrivelse": (
+            "Du ankommer til den smukke havn. Bådene gynger stille i vandet.\n"
+            "En fisker sidder på kajen og ordner sine net."
+        ),
+        "udgange": ["kasernen", "gågaden", "rønhaveplads"],
+        "npc": "fisker",
+        "æg": "blåt æg",
+        "genstand": None,
+    },
+    # ... flere lokationer fortsætter her
+}</code></pre>
+
+    <p>Læg mærke til at <code>udgange</code> er en liste - der kan godt være flere udgange fra samme sted.<br>
+    <code>None</code> bruges når der ikke er noget æg eller genstand på lokationen.</p>
+
+    <p><strong>Øvelse 1:</strong> Hvilke nøgler har hver lokation? Skriv dem ned - hvad bruges de til?</p>
+    <p><strong>Øvelse 2:</strong> Tilføj lokationen <code>"rønhaveplads"</code> til <code>locations</code> ordbogen.<br>
+    Den skal have: beskrivelse, udgange til <code>"havn"</code> og <code>"gågaden"</code>, ingen NPC, ingen æg, og genstanden <code>"blå farve"</code>.</p>
+    <p><strong>Øvelse 3:</strong> Hvordan henter man beskrivelsen for havnen? Skriv koden.</p>
+  </div>
+
+
+  <!-- ======================== -->
+  <!-- 3. NPC'ER                -->
+  <!-- ======================== -->
+  <h2>3. NPC'er - dialog med ordbøger</h2>
+  <p class="left">
+    NPC'er (Non-Player Characters) er de personer spilleren kan tale med i spillet.<br>
+    Vi gemmer al dialog i en separat ordbog, hvor nøglen er NPC'ens navn og værdien er det de siger.
+  </p>
+
+  <div class="code-block">
+    <h3>NPC dialog-ordbogen</h3>
+    <p>Vi holder dialogen adskilt fra lokationerne for at holde koden overskuelig:</p>
+    <pre class="line-numbers"><code class="language-python">npc_dialog = {
+    "coding pirate": (
+        "Coding Piraten siger: 'Ahøj! Velkommen til Coding Pirates! 🏴‍☠️\n"
+        "Brug 'gå [sted]' til at bevæge dig rundt.\n"
+        "Brug 'søg' for at lede efter æg og genstande.\n"
+        "Brug 'tal' for at snakke med folk - de ved måske noget nyttigt!\n"
+        "Find alle 3 æg, dekorer dem og aflever på Sønderborg Slot! 🐣'"
+    ),
+    "fisker": (
+        "Fiskeren siger: 'Hej! Ja, jeg fandt et blåt æg her ved ankeret.\n"
+        "Og hørte du om Rønhaveplads? Der skulle ligge noget blå farve.' 🎨"
+    ),
+    "blomsterhandler": (
+        "Blomsterhandleren siger: 'Et æg? Det trillede ind i min butik!\n"
+        "Det ligger bag blomsterkasserne. Tag også den gule sløjfe med!' 🎀"
+    ),
+}</code></pre>
+
+    <p>Når spilleren bruger kommandoen <code>tal</code>, slår vi NPC-navnet op i ordbogen og udskriver dialogen:</p>
+    <pre><code class="language-python">npc = locations[location]["npc"]   # Find NPC-navnet for lokationen
+print(npc_dialog[npc])             # Slå dialogen op og udskriv</code></pre>
+
+    <p><strong>Øvelse 4:</strong> Tilføj en NPC kaldet <code>"gammel dame"</code> til <code>npc_dialog</code>.<br>
+    Hun skal fortælle spilleren at det røde æg er på Strandpromenaden, og give dem et grønt mønster.</p>
+    <p><strong>Øvelse 5:</strong> Hvad sker der hvis man prøver at slå en NPC op der ikke findes i ordbogen?<br>
+    Prøv det af og skriv kode der håndterer fejlen.</p>
+    <p><strong>Øvelse 6:</strong> Skriv en NPC til en lokation du selv finder på. Giv dem et navn, en beskrivelse og noget at sige.</p>
+  </div>
+
+
+  <!-- ======================== -->
+  <!-- 4. INVENTORY             -->
+  <!-- ======================== -->
+  <h2>4. Inventory - spillerens kurv</h2>
+  <p class="left">
+    Spillerens kurv (inventory) er en simpel liste i Python.<br>
+    Æg og dekorationsgenstande lægges i listen når spilleren finder dem, og fjernes igen når de bruges.
+  </p>
+
+  <div class="code-block">
+    <h3>Inventory som liste</h3>
+    <p>Vi bruger tre lister til at holde styr på spillerens fremskridt:</p>
+    <pre><code class="language-python">inventory = []       # Kurv med æg og genstande
+eggs_found = []      # Hvilke æg er fundet
+eggs_decorated = []  # Hvilke æg er dekoreret</code></pre>
+
+    <p>Når spilleren finder et æg, tilføjer vi det til begge relevante lister:</p>
+    <pre><code class="language-python">æg = "blåt æg"
+inventory.append(æg)
+eggs_found.append(æg)
+print(f"Du fandt et {æg}! 🥚")</code></pre>
+
+    <p>Vi kan tjekke hvad der er i kurven med en for-løkke:</p>
+    <pre><code class="language-python">print("Din kurv indeholder:")
+for item in inventory:
+    print(f"  - {item}")
+print(f"Æg fundet: {len(eggs_found)}/4")</code></pre>
+
+    <p>Når et æg dekoreres, fjerner vi dekorationsgenstanden fra kurven:</p>
+    <pre><code class="language-python">if "blå farve" in inventory and "blåt æg" in inventory:
+    print("Du dekorerer dit blåt æg med blå farve! 🎨")
+    eggs_decorated.append("blåt æg")
+    inventory.remove("blå farve")</code></pre>
+
+    <p><strong>Øvelse 7:</strong> Skriv kode der tjekker om spilleren har alle 3 dekorationsgenstande i kurven på én gang.</p>
+    <p><strong>Øvelse 8:</strong> Skriv en funktion <code>print_inventory()</code> der udskriver hele kurven pænt, samt hvor mange æg der er fundet og dekoreret.</p>
+    <p><strong>Øvelse 9:</strong> Hvad sker der hvis spilleren prøver at dekorere et æg de ikke har? Skriv kode der håndterer det.</p>
+  </div>
+
+
+  <!-- ======================== -->
+  <!-- 5. FUNKTIONER            -->
+  <!-- ======================== -->
+  <h2>5. Funktioner - spillets byggeklodser</h2>
+  <p class="left">
+    Vi opdeler spillet i funktioner - én funktion per handling.<br>
+    Det gør koden nem at læse, teste og ændre.
+  </p>
+
+  <div class="code-block">
+    <h3>print_location() - vis det nuværende sted</h3>
+    <p>Denne funktion udskriver beskrivelsen af det sted spilleren er, samt mulige udgange:</p>
+    <pre class="line-numbers"><code class="language-python">def print_location():
+    loc = locations[location]       # Hent lokations-data
+    print("\n" + "=" * 50)
+    print(f"📍 {loc['navn']}")
+    print("=" * 50)
+    print(loc["beskrivelse"])
+    udgange = ", ".join(loc["udgange"])
+    print(f"\nMulige veje: {udgange}")</code></pre>
+    <p><strong>Øvelse 10:</strong> Hvad gør <code>", ".join(loc["udgange"])</code>? Prøv det af med en liste og forklar hvad der sker.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>gå_til() - bevæg dig til en ny lokation</h3>
+    <p>Denne funktion tjekker om destinationen er en gyldig udgang, og flytter spilleren:</p>
+    <pre class="line-numbers"><code class="language-python">def gå_til(destination):
+    global location
+    loc = locations[location]
+
+    if destination in loc["udgange"]:
+        location = destination
+        print_location()
+    else:
+        print(f"Du kan ikke gå til '{destination}' herfra.")
+        print(f"Mulige veje: {', '.join(loc['udgange'])}")</code></pre>
+    <p>Bemærk <code>global location</code> - vi bruger det fordi vi ændrer variablen <code>location</code> som er defineret udenfor funktionen.</p>
+    <p><strong>Øvelse 11:</strong> Hvad sker der hvis spilleren skriver <code>gå baghaven</code> og der ikke er en udgang der hedder "baghaven"?</p>
+    <p><strong>Øvelse 12:</strong> Tilføj kode så spilleren får en besked når de ankommer til et sted for første gang.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>søg_efter_æg() - led efter æg og genstande</h3>
+    <p>Denne funktion leder på den nuværende lokation efter æg og dekorationsgenstande:</p>
+    <pre class="line-numbers"><code class="language-python">def søg_efter_æg():
+    loc = locations[location]
+    æg = loc["æg"]
+    genstand = loc["genstand"]
+    fandt_noget = False
+
+    if æg and æg not in eggs_found:
+        print(f"Du finder et {æg}! 🥚")
+        inventory.append(æg)
+        eggs_found.append(æg)
+        fandt_noget = True
+    elif æg and æg in eggs_found:
+        print("Du har allerede fundet ægget her.")
+        fandt_noget = True
+
+    if genstand and genstand not in inventory:
+        print(f"Du finder: {genstand}! 🎨")
+        inventory.append(genstand)
+        fandt_noget = True
+
+    if not fandt_noget:
+        print("Du leder overalt, men finder ikke noget her.")</code></pre>
+    <p><strong>Øvelse 13:</strong> Hvorfor tjekker vi <code>æg not in eggs_found</code>? Hvad ville ske hvis vi ikke gjorde det?</p>
+    <p><strong>Øvelse 14:</strong> Det røde æg fås ikke ved at søge - det gives af en NPC. Kig på <code>tal_med_npc()</code> nedenfor og forklar hvordan det fungerer.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>tal_med_npc() - tal med en person</h3>
+    <p>Funktionen finder NPC'en på lokationen og udskriver dialogen.<br>
+    For stranddamen er der en særlig handling - hun giver spilleren det røde æg:</p>
+    <pre class="line-numbers"><code class="language-python">def tal_med_npc():
+    loc = locations[location]
+    npc = loc["npc"]
+
+    if not npc:
+        print("Der er ingen at tale med her.")
+        return
+
+    print(f"\n💬 Du taler med {npc}:")
+    print(npc_dialog[npc])
+
+    # Stranddamen giver det røde æg når man taler med hende
+    if npc == "stranddame" and "rødt æg" not in eggs_found:
+        print("Stranddamen rækker dig det røde æg! 🥚")
+        inventory.append("rødt æg")
+        eggs_found.append("rødt æg")</code></pre>
+    <p><strong>Øvelse 15:</strong> Hvad gør <code>return</code> i funktionen? Hvornår aktiveres den linje?</p>
+    <p><strong>Øvelse 16:</strong> Ændr koden så blomsterhandleren kun giver den gule sløjfe første gang man taler med hende.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>dekorér_æg() - pynt æggene</h3>
+    <p>For hvert dekorations-par (genstand + æg) tjekker vi om spilleren har begge dele i kurven:</p>
+    <pre class="line-numbers"><code class="language-python">def dekorér_æg():
+    dekorationsgenstande = {
+        "blå farve":    "blåt æg",
+        "gul sløjfe":   "gult æg",
+        "grønt mønster": "grønt æg",
+        "rød sløjfe":    "rødt æg",
+    }
+
+    kan_dekorere = False
+    for genstand, æg in dekorationsgenstande.items():
+        if genstand in inventory and æg in inventory and æg not in eggs_decorated:
+            print(f"Du dekorerer dit {æg} med {genstand}! 🎨")
+            eggs_decorated.append(æg)
+            inventory.remove(genstand)
+            kan_dekorere = True
+
+    if not kan_dekorere:
+        print("Du har ikke det nødvendige til at dekorere et æg endnu.")</code></pre>
+    <p><strong>Øvelse 17:</strong> Hvorfor bruger vi <code>.items()</code> på ordbogen? Hvad returnerer den?</p>
+    <p><strong>Øvelse 18:</strong> Tilføj et 4. æg til spillet - vælg selv farve, genstand og lokation.</p>
+  </div>
+
+
+  <div class="code-block">
+    <h3>aflever_æg() – afslut spillet med sejr</h3>
+    <p>Denne funktion tjekker om spilleren er på slottet og har alle 4 æg dekoreret.<br>
+    Hvis betingelserne er opfyldt sættes spiltilstanden til <code>GameState.Won</code>:</p>
+    <pre class="line-numbers"><code class="language-python">def aflever_æg():
+    global game_state
+
+    if location != "slot":
+        print("Du kan kun aflevere æggene på Sønderborg Slot.")
+        return
+
+    if len(eggs_decorated) < 4:
+        print(f"Du mangler stadig {4 - len(eggs_decorated)} dekorerede æg.")
+        return
+
+    # Alle betingelser opfyldt – spillet vindes!
+    game_state = GameState.Won</code></pre>
+    <p>Bemærk at funktionen bruger <code>global game_state</code> fordi den ændrer variablen udenfor funktionen – ligesom <code>gå_til()</code> gør med <code>location</code>.</p>
+    <p><strong>Øvelse 23:</strong> Hvad sker der hvis spilleren skriver <code>aflever</code> mens de er på havnen? Gennemgå koden trin for trin.</p>
+    <p><strong>Øvelse 24:</strong> Tilføj en ekstra betingelse: spilleren skal også have talt med slotsvagten for at måtte aflevere.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>print_inventory() – vis spillerens kurv</h3>
+    <p>En simpel funktion der udskriver hvad spilleren har i kurven, og hvor langt de er i spillet:</p>
+    <pre class="line-numbers"><code class="language-python">def print_inventory():
+    print("\n" + "=" * 50)
+    print("🧺 Din kurv indeholder:")
+    if not inventory:
+        print("  (kurven er tom)")
+    else:
+        for item in inventory:
+            print(f"  - {item}")
+    print(f"\n🥚 Æg fundet:    {len(eggs_found)}/4")
+    print(f"🎨 Æg dekoreret: {len(eggs_decorated)}/4")</code></pre>
+    <p><strong>Øvelse 25:</strong> Tilpas funktionen så den også viser hvilke æg der mangler at blive dekoreret.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>print_hjælp() – vis kommandoliste</h3>
+    <p>Udskriver en oversigt over alle tilgængelige kommandoer. Nyttig for spillere der sidder fast:</p>
+    <pre class="line-numbers"><code class="language-python">def print_hjælp():
+    print("\n" + "=" * 50)
+    print("📋 KOMMANDOER:")
+    print("  gå [sted]  - Gå til en lokation (fx 'gå havn')")
+    print("  kig        - Se beskrivelse af stedet")
+    print("  søg        - Led efter påskeæg og genstande")
+    print("  tal        - Tal med en person på stedet")
+    print("  dekorér    - Dekorer æg med fundne genstande")
+    print("  aflever    - Aflever æg på slottet")
+    print("  kurv       - Se hvad du har i kurven")
+    print("  hjælp      - Vis denne liste")
+    print("  quit       - Afslut spillet")
+    print("=" * 50)
+    print("📍 LOKATIONER:")
+    print("  kasernen, havn, gågaden, rønhaveplads,")
+    print("  rådhuspladsen, strandpromenaden, slot")</code></pre>
+    <p><strong>Øvelse 26:</strong> Tilføj en linje der viser spillerens nuværende lokation nederst i hjælpe-teksten.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>print_separator() – visuel adskillelse</h3>
+    <p>En lille hjælpefunktion der udskriver en linje af <code>=</code> tegn.<br>
+    Det gør outputtet lettere at læse ved at adskille de forskellige beskeder visuelt:</p>
+    <pre><code class="language-python">def print_separator():
+    print("\n" + "=" * 50)
+
+# Resultat:
+# ==================================================</code></pre>
+    <p>Vi bruger den i starten af mange andre funktioner som <code>print_location()</code> og <code>print_inventory()</code>.<br>
+    Fordelen er at vi kun skal ændre ét sted hvis vi vil have en anden separator.</p>
+    <p><strong>Øvelse 27:</strong> Ændr <code>print_separator()</code> så den tager en valgfri tekst som parameter og udskriver den centreret mellem to linjer, fx:</p>
+    <pre><code class="language-python">print_separator("Sønderborg Havn")
+# ==================================================
+# =============== Sønderborg Havn ================
+# ==================================================</code></pre>
+  </div>
+
+  <div class="code-block">
+    <h3>velkomst() og sejrs_skærm() – start og slut</h3>
+    <p>To funktioner der sørger for at spillet har en ordentlig åbning og afslutning.</p>
+    <p><code>velkomst()</code> vises én gang allerede inden game loopen starter:</p>
+    <pre class="line-numbers"><code class="language-python">def velkomst():
+    print("=" * 50)
+    print("+                                                +")
+    print("+       🐣  PÅSKEJAGTEN I SØNDERBORG  🐣        +")
+    print("+                                                +")
+    print("=" * 50)
+    print("\nVelkommen til Sønderborg!")
+    print("Find 4 påskeæg, dekorer dem, og aflever dem på Sønderborg Slot!\n")</code></pre>
+
+    <p><code>sejrs_skærm()</code> kaldes inde i game loopen når <code>game_state == GameState.Won</code>:</p>
+    <pre class="line-numbers"><code class="language-python">def sejrs_skærm():
+    print("\n" + "=" * 50)
+    print(f"🏆  TILLYKKE, {player_name}!")
+    print("=" * 50)
+    print(
+        "Du afleverede 4 smukt dekorerede påskeæg på Sønderborg Slot.\n"
+        "Dommerne er vilde med dine æg - du vinder FØRSTEPRÆMIEN! 🥇\n\n"
+        "En stor chokolade-æg og æresbevisning fra borgmesteren venter dig. 🍫\n\n"
+        "Tak fordi du spillede Påskejagten i Sønderborg! God påske! 🌸"
+    )
+    print("=" * 50)</code></pre>
+    <p><strong>Øvelse 28:</strong> Tilføj en <code>taber_skærm()</code> funktion til brug hvis du implementerer skridt-tæller fra udvidelsesopgave B.</p>
+  </div>
+
+
+  <!-- ======================== -->
+  <!-- 6. GAME LOOP             -->
+  <!-- ======================== -->
+  <h2>6. Game loop - samle det hele</h2>
+  <p class="left">
+    Game loopen er hjerne i spillet. Den kører så længe spillet er aktivt, læser spillerens kommando og kalder den rigtige funktion.
+  </p>
+
+  <div class="code-block">
+    <h3>GameState med Enum</h3>
+    <p>Vi bruger en <code>Enum</code> til at holde styr på spiltilstanden - det gør koden mere sikker og læsbar:</p>
+    <pre><code class="language-python">from enum import Enum
+
+class GameState(Enum):
+    Play = 1
+    Won  = 2
+    Quit = 3
+
+game_state = GameState.Play</code></pre>
+    <p><strong>Øvelse 19:</strong> Hvad ville der ske hvis vi brugte en string i stedet for Enum - fx <code>game_state = "Play"</code>?<br>
+    Hvad er fordelen ved Enum?</p>
+  </div>
+
+  <div class="code-block">
+    <h3>Kommando-håndtering i game loopen</h3>
+    <p>Game loopen læser spillerens input og kalder den rigtige funktion:</p>
+    <pre class="line-numbers"><code class="language-python">while game_state == GameState.Play:
+    command = input("\n👉 Hvad vil du gøre? ").lower().strip()
+
+    if command == "quit":
+        game_state = GameState.Quit
+
+    elif command.startswith("gå "):
+        destination = command[3:].strip()
+        gå_til(destination)
+
+    elif command == "kig":
+        print_location()
+
+    elif command == "søg":
+        søg_efter_æg()
+
+    elif command == "tal":
+        tal_med_npc()
+
+    elif command == "dekorér" or command == "dekorer":
+        dekorér_æg()
+
+    elif command == "aflever":
+        aflever_æg()
+
+    elif command == "kurv":
+        print_inventory()
+
+    elif command == "hjælp":
+        print_hjælp()
+
+    else:
+        print(f"Kommandoen '{command}' kendes ikke. Skriv 'hjælp'.")</code></pre>
+
+    <p><strong>Øvelse 20:</strong> Hvorfor bruger vi <code>.lower().strip()</code> på input? Prøv at fjerne dem og se hvad der sker.</p>
+    <p><strong>Øvelse 21:</strong> Tilføj en kommando <code>kort</code> der viser en simpel tekstversion af kortet over lokationerne.</p>
+    <p><strong>Øvelse 22:</strong> Tilføj en kommando <code>status</code> der viser spillerens navn, nuværende lokation og antal fundne æg.</p>
+  </div>
+
+  <div class="code-block">
+    <h3>Spillets opstart – før game loopen</h3>
+    <p>Inden game loopen starter sker der tre ting: spilleren bydes velkommen, indtaster sit navn, og ser startlokationen.<br>
+    Disse tre linjer kører kun én gang og er ikke en del af løkken:</p>
+    <pre class="line-numbers"><code class="language-python"># 1. Velkomstskærm
+velkomst()
+
+# 2. Spiller-introduktion – hent navn og sæt en standard hvis feltet er tomt
+player_name = input("Hvad hedder du? ").strip()
+if not player_name:
+    player_name = "Eventyrer"
+print(f"\nHej {player_name}! God fornøjelse med påskejagten! 🐣")
+print("(Tip: Tal med Coding Piraten - hun kan hjælpe dig i gang!)")
+
+# 3. Vis startlokationen så spilleren ved hvor de er
+print_location()
+
+# Nu er spillet klar – sæt starttilstanden og start løkken
+game_state = GameState.Play</code></pre>
+    <p><strong>Øvelse 29:</strong> Hvad ville der ske hvis vi kaldte <code>print_location()</code> inde i <code>velkomst()</code> i stedet for her? Er der forskel?</p>
+  </div>
+
+  <div class="code-block">
+    <h3>Efter game loopen – sejr og afslutning</h3>
+    <p>Når game loopen stopper er der to mulige udfald: spilleren har vundet, eller spilleren har skrevet <code>quit</code>.<br>
+    Vi tjekker spiltilstanden og viser den rigtige besked:</p>
+    <pre class="line-numbers"><code class="language-python">    # Inde i game loopen – tjek for sejr efter hver kommando:
+    if game_state == GameState.Won:
+        sejrs_skærm()
+
+# Efter game loopen – tjek for quit:
+if game_state == GameState.Quit:
+    print(f"\nFarvel {player_name}! Håber vi ses igen til næste påske. 👋")</code></pre>
+    <p>Bemærk at <code>sejrs_skærm()</code> kaldes <em>inde</em> i løkken (så den vises med det samme), mens quit-beskeden tjekkes <em>efter</em> løkken er afsluttet.</p>
+    <p><strong>Øvelse 30:</strong> Hvorfor stopper game loopen af sig selv når <code>game_state</code> sættes til <code>GameState.Won</code> eller <code>GameState.Quit</code>?<br>
+    Kig på <code>while</code>-betingelsen og forklar det.</p>
+  </div>
+
+
+  <!-- ======================== -->
+  <!-- 6b. SPILLETS FRAMEWORK   -->
+  <!-- ======================== -->
+  <h2>6b. Spillets framework – den store sammenhæng</h2>
+  <p class="left">
+    Nu har vi gennemgået alle dele af spillet. Lad os zoome ud og se helheden.<br>
+    Et godt trick er at skrive spillets struktur som kommentarer øverst i filen – et slags kort over koden selv.<br>
+    Så er det nemt at finde rundt, og andre udviklere (eller dig selv om 3 måneder) kan hurtigt forstå opbygningen.
+  </p>
+
+  <div class="code-block">
+    <h3>Spillets overordnede struktur</h3>
+    <p>Her er hele spillet beskrevet som et framework – fra top til bund:</p>
+    <pre class="line-numbers"><code class="language-python"># ============================================================
+# PÅSKEJAGTEN I SØNDERBORG
+# ============================================================
+
+# --- Spiltilstande ---
+# GameState Enum: Play, Won, Quit
+# Styrer hvornår game loopen kører og stopper
+
+# --- Spillerens data ---
+# player_name, location, inventory, eggs_found, eggs_decorated
+# Globale variabler der holder styr på spillerens fremskridt
+
+# --- Lokationer ---
+# locations ordbogen: alle 7 steder i Sønderborg
+# Hvert sted har: navn, beskrivelse, udgange, npc, æg, genstand
+
+# --- NPC dialoger ---
+# npc_dialog ordbogen: hvad hver person siger
+# Slås op med NPC-navn som nøgle
+
+# --- Hjælpefunktioner ---
+# print_separator()   – visuel adskillelse i output
+# print_location()    – vis nuværende sted
+# print_inventory()   – vis kurv og fremskridt
+# søg_efter_æg()      – led efter æg og genstande
+# tal_med_npc()       – tal med person på stedet
+# dekorér_æg()        – pynt æg med fundne genstande
+# aflever_æg()        – afslut spillet med sejr
+# gå_til()            – flyt spilleren til nyt sted
+# print_hjælp()       – vis kommandoliste
+# velkomst()          – velkomstskærm ved opstart
+# sejrs_skærm()       – sejrsskærm ved victory
+
+# ============================================================
+# HOVED SPIL LOOP
+# ============================================================
+
+# --- Velkomst ---
+# velkomst() kaldes én gang ved opstart
+
+# --- Spiller-introduktion ---
+# Spilleren indtaster navn
+# Standardnavn sættes hvis feltet er tomt
+
+# --- Startlokation ---
+# print_location() viser hvor spilleren begynder
+
+# --- Spil loop ---
+# while game_state == GameState.Play:
+#     Læs kommando fra spilleren
+#     Kald den rigtige funktion
+#     Tjek om spillet er vundet
+
+# --- Spil vindes ---
+# sejrs_skærm() kaldes når game_state == GameState.Won
+
+# --- Spil afslutning ---
+# Farvel-besked hvis spilleren skrev quit</code></pre>
+
+    <p>Læg mærke til at strukturen afspejler rækkefølgen i koden – fra data øverst til game loop nederst.<br>
+    Funktionerne er defineret <em>før</em> de bruges, fordi Python læser koden fra top til bund.</p>
+
+    <p><strong>Øvelse 31:</strong> Åbn din <code>paskejagten.py</code> fil og tilføj dette framework som kommentarer øverst.<br>
+    Tjek at alle funktioner og sektioner faktisk er til stede i koden.</p>
+    <p><strong>Øvelse 32:</strong> Hvad ville der ske hvis vi placerede game loopen øverst i filen – inden funktionerne er defineret?<br>
+    Prøv det af og forklar fejlen du får.</p>
+  </div>
+  <h2>7. Din tur! - udvid spillet</h2>
+  <p class="left">
+    Nu kender du alle spillets byggeklodser. Her er nogle større opgaver du kan kaste dig over:
+  </p>
+
+  <div class="code-block">
+    <h3>Udvidelsesopgaver</h3>
+    <p><strong>Opgave A:</strong> Tilføj en ny lokation til spillet - fx <em>Dybbøl Mølle</em> eller <em>Sønderborg Bibliotek</em>.<br>
+    Husk: ny lokation i <code>locations</code>, udgange begge veje, eventuelt en NPC i <code>npc_dialog</code>.</p>
+
+    <p><strong>Opgave B:</strong> Lav et tæller-system - spilleren har kun 20 skridt til at finde alle æg.<br>
+    Hver gang spilleren bruger en kommando tæller vi et skridt ned. Hvis tælleren rammer 0 taber spilleren.</p>
+
+    <p><strong>Opgave C:</strong> Lav en <code>Player</code>-klasse der samler spillerens data:<br>
+    navn, nuværende lokation, inventory, antal fundne æg.<br>
+    Tilpas resten af koden til at bruge klassen.</p>
+
+    <p><strong>Opgave D:</strong> Lav dit eget spil fra bunden med en helt anden by eller verden.<br>
+    Brug strukturen fra Påskejagten som skabelon - lokationer, NPC'er, inventory og game loop.</p>
+  </div>
+
+
+  <!-- ======================== -->
+  <!-- FÆRDIG KODE (LUKKET)     -->
+  <!-- ======================== -->
+  <details>
+    <summary>📄 Den færdige spilkode (klik for at se)</summary>
+    <p style="margin-top:10px;">Her er den komplette kode for Påskejagten i Sønderborg.<br>
+    Prøv at løse øvelserne selv først - brug kun denne som reference!</p>
+    <div class="code-block">
+      <pre class="line-numbers"><code class="language-python"># ============================================================
+# PÅSKEJAGTEN I SØNDERBORG
+# Et tekst-baseret RPG spil
+# ============================================================
+
+from enum import Enum
+
+# --- Spiltilstande ---
+class GameState(Enum):
+    Play = 1
+    Won  = 2
+    Quit = 3
+
+# --- Spillerens data ---
+player_name  = ""
+location     = "kasernen"
+inventory    = []
+eggs_found   = []
+eggs_decorated = []
+
+# --- Lokationer ---
+locations = {
+    "kasernen": {
+        "navn": "Kasernen - Coding Pirates lokalet",
+        "beskrivelse": (
+            "Du befinder dig i Coding Pirates' lokale på Kasernen i Sønderborg.\n"
+            "Computere og farvede ledninger fylder bordene. Det summer af kreativitet!\n"
+            "En Coding Pirate sidder klar ved sit skrivebord og smiler til dig."
+        ),
+        "udgange": ["havn", "gågaden"],
+        "npc": "coding pirate",
+        "æg": "grønt æg",
+        "genstand": None,
+    },
+    "havn": {
+        "navn": "Sønderborg Havn",
+        "beskrivelse": (
+            "Du ankommer til den smukke havn. Bådene gynger stille i vandet.\n"
+            "Der lugter af salt og frisk luft.\n"
+            "En fisker sidder på kajen og ordner sine net."
+        ),
+        "udgange": ["kasernen", "gågaden", "rønhaveplads"],
+        "npc": "fisker",
+        "æg": "blåt æg",
+        "genstand": None,
+    },
+    "gågaden": {
+        "navn": "Gågaden",
+        "beskrivelse": (
+            "Du går ind i den travle gågade. Butikkerne har påskepynt i vinduerne.\n"
+            "En blomsterhandler smiler og vinker fra sin bod."
+        ),
+        "udgange": ["kasernen", "havn", "rådhuspladsen", "rønhaveplads"],
+        "npc": "blomsterhandler",
+        "æg": "gult æg",
+        "genstand": "gul sløjfe",
+    },
+    "rønhaveplads": {
+        "navn": "Rønhaveplads",
+        "beskrivelse": (
+            "Du ankommer til den hyggelige Rønhaveplads.\n"
+            "Forårsblomster springer ud i bedene. Der er stille og fredeligt."
+        ),
+        "udgange": ["havn", "gågaden"],
+        "npc": None,
+        "æg": None,
+        "genstand": "blå farve",
+    },
+    "rådhuspladsen": {
+        "navn": "Rådhuspladsen",
+        "beskrivelse": (
+            "Du når frem til Rådhuspladsen. Rådhuset rejser sig smukt i baggrunden.\n"
+            "En gammel dame sælger påskeliljer fra en lille stand."
+        ),
+        "udgange": ["gågaden", "strandpromenaden", "slot"],
+        "npc": "gammel dame",
+        "æg": None,
+        "genstand": "grønt mønster",
+    },
+    "strandpromenaden": {
+        "navn": "Strandpromenaden",
+        "beskrivelse": (
+            "Du spadserer ud på Strandpromenaden langs fjorden.\n"
+            "Det blæser let, og udsigten til vandet er fantastisk.\n"
+            "En venlig dame lufter sin hund og vinker til dig."
+        ),
+        "udgange": ["rådhuspladsen", "slot"],
+        "npc": "stranddame",
+        "æg": None,
+        "genstand": "rød sløjfe",
+    },
+    "slot": {
+        "navn": "Sønderborg Slot",
+        "beskrivelse": (
+            "Foran dig rejser Sønderborg Slot sig majestætisk ved fjorden.\n"
+            "Ved indgangen står en slotsvagt med en stor kurv til påskekonkurrencen."
+        ),
+        "udgange": ["rådhuspladsen", "strandpromenaden"],
+        "npc": "slotsvagt",
+        "æg": None,
+        "genstand": None,
+    },
+}
+
+# --- NPC dialoger ---
+npc_dialog = {
+    "coding pirate": (
+        "Coding Piraten siger: 'Ahøj! Velkommen til Coding Pirates! 🏴‍☠️\n"
+        "Brug 'gå [sted]' til at bevæge dig rundt i byen.\n"
+        "Brug 'søg' for at lede efter æg og genstande.\n"
+        "Brug 'tal' for at snakke med folk - de ved måske noget nyttigt!\n"
+        "Brug 'dekorér' når du har et æg og en dekoration i kurven.\n"
+        "Find alle 3 æg, dekorer dem og aflever på Sønderborg Slot! 🐣'"
+    ),
+    "fisker": (
+        "Fiskeren siger: 'Hej! Ja, jeg fandt et blåt æg her ved ankeret.\n"
+        "Og hørte du om Rønhaveplads? Der skulle ligge noget blå farve.' 🎨"
+    ),
+    "blomsterhandler": (
+        "Blomsterhandleren siger: 'Et æg? Det trillede ind i min butik!\n"
+        "Det ligger bag blomsterkasserne. Tag også den gule sløjfe med!' 🎀"
+    ),
+    "gammel dame": (
+        "Den gamle dame hvisker: 'Det røde æg? En dame på Strandpromenaden har det.\n"
+        "Gå derned og tal med hende! Her er et grønt mønster til pynt.' 🌿"
+    ),
+    "stranddame": (
+        "Stranddamen siger: 'Jeg fandt dette røde æg her i morges.\n"
+        "Jeg gemte det til nogen kom forbi - tag det endelig med! 🥚\n"
+        "Sønderborg Slot er ikke langt herfra.'"
+    ),
+    "slotsvagt": (
+        "Slotsvagten siger: 'Velkommen til påskekonkurrencen!\n"
+        "For at deltage skal du have 4 dekorerede æg i din kurv.\n"
+        "Brug kommandoen: aflever'"
+    ),
+}
+
+# --- Hjælpefunktioner ---
+
+def print_separator():
+    print("\n" + "=" * 50)
+
+def print_location():
+    loc = locations[location]
+    print_separator()
+    print(f"📍 {loc['navn']}")
+    print_separator()
+    print(loc["beskrivelse"])
+    print(f"\nMulige veje: {', '.join(loc['udgange'])}")
+    print("(Skriv 'hjælp' for kommandoer)")
+
+def print_inventory():
+    print_separator()
+    print("🧺 Din kurv indeholder:")
+    if not inventory:
+        print("  (tom)")
+    else:
+        for item in inventory:
+            print(f"  - {item}")
+    print(f"\n🥚 Æg fundet:    {len(eggs_found)}/4")
+    print(f"🎨 Æg dekoreret: {len(eggs_decorated)}/4")
+
+def søg_efter_æg():
+    loc = locations[location]
+    æg = loc["æg"]
+    genstand = loc["genstand"]
+    fandt_noget = False
+
+    if æg and æg not in eggs_found:
+        print(f"\n🥚 Du finder et {æg}!")
+        inventory.append(æg)
+        eggs_found.append(æg)
+        fandt_noget = True
+    elif æg and æg in eggs_found:
+        print("\nDu har allerede fundet ægget her.")
+        fandt_noget = True
+
+    if genstand and genstand not in inventory:
+        print(f"🎨 Du finder: {genstand}!")
+        inventory.append(genstand)
+        fandt_noget = True
+    elif genstand and genstand in inventory:
+        print(f"\nDu har allerede samlet {genstand} herfra.")
+        fandt_noget = True
+
+    if not fandt_noget:
+        print("\nDu leder overalt, men finder ikke noget her.")
+
+def tal_med_npc():
+    loc = locations[location]
+    npc = loc["npc"]
+
+    if not npc:
+        print("\nDer er ingen at tale med her.")
+        return
+
+    print(f"\n💬 Du taler med {npc}:")
+    print(npc_dialog[npc])
+
+    if npc == "stranddame" and "rødt æg" not in eggs_found:
+        print("\n🥚 Stranddamen rækker dig det røde æg!")
+        inventory.append("rødt æg")
+        eggs_found.append("rødt æg")
+
+def dekorér_æg():
+    dekorationsgenstande = {
+        "blå farve":     "blåt æg",
+        "gul sløjfe":    "gult æg",
+        "grønt mønster": "grønt æg",
+        "rød sløjfe":    "rødt æg",
+    }
+    kan_dekorere = False
+    for genstand, æg in dekorationsgenstande.items():
+        if genstand in inventory and æg in inventory and æg not in eggs_decorated:
+            print(f"\n🎨 Du dekorerer dit {æg} med {genstand}. Fantastisk!")
+            eggs_decorated.append(æg)
+            inventory.remove(genstand)
+            kan_dekorere = True
+
+    if not kan_dekorere:
+        print("\nDu har ikke det nødvendige til at dekorere et æg endnu.")
+
+def aflever_æg():
+    global game_state
+    if location != "slot":
+        print("\nDu kan kun aflevere æggene på Sønderborg Slot.")
+        return
+    if len(eggs_decorated) < 4:
+        print(f"\nDu mangler stadig {4 - len(eggs_decorated)} dekorerede æg.")
+        return
+    game_state = GameState.Won
+
+def gå_til(destination):
+    global location
+    loc = locations[location]
+    if destination in loc["udgange"]:
+        location = destination
+        print_location()
+    else:
+        print(f"\nDu kan ikke gå til '{destination}' herfra.")
+        print(f"Mulige veje: {', '.join(loc['udgange'])}")
+
+def print_hjælp():
+    print_separator()
+    print("📋 KOMMANDOER:")
+    print("  gå [sted]  - Gå til en lokation (fx 'gå havn')")
+    print("  kig        -  Se beskrivelse af stedet")
+    print("  søg        - Led efter påskeæg og genstande")
+    print("  tal        - Tal med en person på stedet")
+    print("  dekorér    - Dekorer æg med fundne genstande")
+    print("  aflever    - Aflever æg på slottet")
+    print("  kurv       - Se hvad du har i kurven")
+    print("  hjælp      - Vis denne liste")
+    print("  quit       - Afslut spillet")
+    print_separator()
+    print("📍 LOKATIONER:")
+    print("  kasernen, havn, gågaden, rønhaveplads,")
+    print("  rådhuspladsen, strandpromenaden, slot")
+
+def velkomst():
+    print("=" * 50)
+    print("+                                                +")
+    print("+       🐣  PÅSKEJAGTEN I SØNDERBORG  🐣        +")
+    print("+                                                +")
+    print("=" * 50)
+    print("\nVelkommen til Sønderborg!")
+    print("Find 3 påskeæg, dekorer dem, og aflever dem på Sønderborg Slot!\n")
+
+def sejrs_skærm():
+    print_separator()
+    print(f"🏆  TILLYKKE, {player_name}!")
+    print_separator()
+    print(
+        "Du afleverede 4 smukt dekorerede påskeæg på Sønderborg Slot.\n"
+        "Dommerne er vilde med dine æg - du vinder FØRSTEPRÆMIEN! 🥇\n\n"
+        "En stor chokolade-æg og æresbevisning fra borgmesteren venter dig. 🍫\n\n"
+        "Tak fordi du spillede Påskejagten i Sønderborg! God påske! 🌸"
+    )
+    print_separator()
+
+# ============================================================
+# HOVED SPIL LOOP
+# ============================================================
+
+velkomst()
+
+player_name = input("Hvad hedder du? ").strip()
+if not player_name:
+    player_name = "Eventyrer"
+print(f"\nHej {player_name}! God fornøjelse med påskejagten! 🐣")
+print("(Tip: Tal med Coding Piraten - hun kan hjælpe dig i gang!)")
+
+print_location()
+game_state = GameState.Play
+
+while game_state == GameState.Play:
+    command = input("\n👉 Hvad vil du gøre? ").lower().strip()
+
+    if command == "quit":
+        game_state = GameState.Quit
+    elif command.startswith("gå "):
+        gå_til(command[3:].strip())
+    elif command == "kig":
+        print_location()
+    elif command == "søg":
+        søg_efter_æg()
+    elif command == "tal":
+        tal_med_npc()
+    elif command == "dekorér" or command == "dekorer":
+        dekorér_æg()
+    elif command == "aflever":
+        aflever_æg()
+    elif command == "kurv":
+        print_inventory()
+    elif command == "hjælp":
+        print_hjælp()
+    else:
+        print(f"❓ Kommandoen '{command}' kendes ikke. Skriv 'hjælp'.")
+
+    if game_state == GameState.Won:
+        sejrs_skærm()
+
+if game_state == GameState.Quit:
+    print(f"\nFarvel {player_name}! Håber vi ses igen til næste påske. 👋")</code></pre>
+    </div>
+  </details>
+  <details>
+      <summary>Løsningsforslag</summary>
+      <pre><p><a href="RPG_2_losninger.html" target="_blank">Øvelses løsninger</a></p></pre>
+    </details>
+
+
+  <!-- Prism.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+</html>
