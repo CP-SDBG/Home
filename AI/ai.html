@@ -1248,7 +1248,7 @@ opencode</code></pre>
       <div class="mc-inner">
 
         <h2>Hvad er Pi Agent?</h2>
-        <p><strong>Pi Agent</strong> er det samme program du bruger til at læse og arbejde med dette site. Det er en open source AI coding agent der kører i terminalen og kan læse filer, skrive kode og udføre kommandoer — styret af dine instruktioner på naturligt sprog.</p>
+        <p><strong>Pi Agent</strong> er programmet som er brugt til at udarbejde dette site. Det er en open source AI coding agent der kører i terminalen og kan læse filer, skrive kode og udføre kommandoer — styret af dine instruktioner på naturligt sprog.</p>
         <p>Ligesom OpenCode ser Pi Agent på hele dit projekt. Forskellen er at Pi Agent er designet til at være <strong>letvægts og hurtig</strong> — færre afhængigheder, enklere opsætning, og godt egnet til lokale modeller.</p>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
@@ -1400,60 +1400,137 @@ pi</code></pre>
 
         <h2>Hvad er vibe coding?</h2>
         <p>I januar 2025 opfandt AI-forskeren <strong>Andrej Karpathy</strong> begrebet <em>vibe coding</em> — og det beskriver en ny måde at bygge software på der er fundamentalt anderledes end klassisk programmering.</p>
-        <p><strong>Klassisk programmering:</strong> du tænker på <em>hvordan</em> koden skal virke, skriver den linje for linje, og forstår hvert trin.</p>
-        <p><strong>Vibe coding:</strong> du beskriver <em>hvad</em> du vil have, AI'en skriver koden, og du godkender og tester. Du behøver ikke forstå hver linje — du er arkitekten, AI'en er bygmesteren.</p>
-        <p>Det åbner programmering for en helt ny gruppe mennesker. Har du en idé til et program, en hjemmeside eller et spil? Med vibe coding kan du bygge det — selv hvis du aldrig har lært programmering formelt.</p>
+        <p><strong>Klassisk programmering:</strong> du tænker på <em>hvordan</em> koden skal virke, skriver den linje for linje, og forstår hvert trin. Det kræver typisk måneder til år at lære ordentligt.</p>
+        <p><strong>Vibe coding:</strong> du beskriver <em>hvad</em> du vil have, AI'en skriver koden, og du godkender og tester. Du er arkitekten — AI'en er bygmesteren.</p>
+        <p>Det åbner programmering for en helt ny gruppe mennesker. Med vibe coding kan du bygge ting som:</p>
+        <ul>
+          <li>En quiz-side om dit yndlingsemne</li>
+          <li>Et simpelt spil (gæt et tal, ord-gætter, reaktions-spil)</li>
+          <li>En lommeregner eller konverter (km til miles, celsius til fahrenheit)</li>
+          <li>En hjemmeside til et projekt eller en klub</li>
+          <li>Et lille Python-script der sorterer filer eller sender påmindelser</li>
+        </ul>
+        <p>Du behøver ikke forstå hver linje — men du skal forstå <em>hvad</em> du vil have, og du skal kunne teste om det virker.</p>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
-          <div><strong>Ordforklaring:</strong> <em>Vibe coding</em> er AI-assisteret kodning hvor du beskriver hvad du vil opnå frem for at skrive koden selv. <em>MVP</em> (Minimum Viable Product) er den mindste version af dit program der faktisk virker.</div>
+          <div><strong>Ordforklaring:</strong> <em>Vibe coding</em> er AI-assisteret kodning hvor du beskriver hvad du vil opnå frem for at skrive koden selv. <em>MVP</em> (Minimum Viable Product) er den mindste version af dit program der faktisk virker — ingen ekstra features, bare kernen.</div>
         </div>
         <div class="illustration-wrap"><img src="modul13-ill1-vibe-coding-tankegang.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
         <h2>Tankegang: beskriv hvad, ikke hvordan</h2>
         <p>Det vigtigste skift er at tænke i <em>resultater</em> frem for <em>implementering</em>.</p>
-        <p><strong>Klassisk tankegang:</strong> <em>"Jeg skal skrive en fetch-funktion der kalder et vejr-API og parser JSON-svaret..."</em></p>
-        <p><strong>Vibe coding tankegang:</strong> <em>"Lav en webside der viser det aktuelle vejr for en by jeg skriver ind."</em></p>
-        <p>Jo mere konkret du beskriver slutresultatet, jo bedre kode får du tilbage. Beskriv hvad brugeren skal kunne gøre, hvordan det skal se ud, og hvad der sker ved klik.</p>
+        <p><strong>Klassisk tankegang:</strong> <em>"Jeg skal skrive en fetch-funktion der kalder et vejr-API og parser JSON-svaret til et objekt..."</em></p>
+        <p><strong>Vibe coding tankegang:</strong> <em>"Lav en webside der viser det aktuelle vejr for en by jeg skriver ind — med temperatur og et vejr-ikon."</em></p>
+        <p>Begge fører til den samme kode. Forskellen er hvad du tænker på mens du formulerer opgaven.</p>
+        <p>Beskriv slutresultatet præcist ved at svare på:</p>
+        <ul>
+          <li><strong>Hvad skal brugeren kunne gøre?</strong> — skrive ind, klikke, vælge, se?</li>
+          <li><strong>Hvad skal vises på skærmen?</strong> — tal, tekst, billeder, knapper?</li>
+          <li><strong>Hvad sker der ved klik?</strong> — ny side, opdatering, fejlbesked?</li>
+          <li><strong>Hvilke begrænsninger er der?</strong> — ingen login, kun dansk, virke på mobil?</li>
+        </ul>
+        <p>Jo mere konkret du beskriver slutresultatet, jo bedre kode får du tilbage.</p>
+
+        <h2>Vælg dit vibe coding-miljø</h2>
+        <p>Vibe coding kan foregå på tre måder — vælg ud fra hvad du er komfortabel med:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Miljø</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Hvordan</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Bedst til</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">&#x2601;&#xFE0F; Web chat<br><small style="color:#6b7280;">Claude.ai, ChatGPT</small></td><td style="padding:0.5rem 0.75rem;">Kopiér kode frem og tilbage manuelt</td><td style="padding:0.5rem 0.75rem;">Begyndere, korte projekter</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">&#x1F916; Coding agent<br><small style="color:#6b7280;">OpenCode, Pi Agent</small></td><td style="padding:0.5rem 0.75rem;">Agenten læser og redigerer dine filer direkte</td><td style="padding:0.5rem 0.75rem;">Projekter med flere filer</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">&#x270D;&#xFE0F; Editor plugin<br><small style="color:#6b7280;">GitHub Copilot i VS Code</small></td><td style="padding:0.5rem 0.75rem;">Kodeforslag mens du skriver</td><td style="padding:0.5rem 0.75rem;">Når du vil lære kode sideløbende</td></tr>
+          </tbody>
+        </table>
+        <p>Start med web chat — det kræver ingen opsætning. Når du bygger projekter med mere end to-tre filer, er en coding agent (Modul 10–11) langt hurtigere.</p>
+        <div class="callout" style="border-left-color:#00e5a0; background:#e6fdf6;">
+          <span class="callout-icon">&#x1F517;</span>
+          <div><strong>Forbindelse til tidligere moduler:</strong> GitHub Copilot → Modul 9. OpenCode → Modul 10. Pi Agent → Modul 11. Alle tre er vibe coding-miljøer — de adskiller sig kun i hvordan de kommunikerer med dine filer.</div>
+        </div>
 
         <h2>Prompt engineering til kodning</h2>
-        <p>Et godt prompt er halvdelen af arbejdet:</p>
-        <ul>
-          <li><strong>Beskriv teknologi-stack:</strong> <em>"Brug HTML, CSS og vanilla JavaScript — ingen frameworks"</em></li>
-          <li><strong>Giv eksempler på input/output:</strong> <em>"Brugeren skriver 'Paris' — siden viser temperaturen og et vejr-ikon"</em></li>
-          <li><strong>Nævn begrænsninger:</strong> <em>"Ingen eksterne biblioteker, simpelt design, skal virke i Chrome"</em></li>
-          <li><strong>Bryd store opgaver ned:</strong> Start med ét spørgsmål og to svarmuligheder — tilføj resten bagefter</li>
-        </ul>
+        <p>Et godt prompt er halvdelen af arbejdet. Her er de vigtigste regler:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">&#x2705; Gør dette</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#e05a5a;">&#x274C; Undgå dette</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;"><em>"Brug HTML, CSS og vanilla JavaScript — ingen frameworks"</em></td><td style="padding:0.5rem 0.75rem;"><em>"Lav en hjemmeside"</em> (for vagt)</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;"><em>"Brugeren skriver en by — siden viser temperatur og et ikon"</em></td><td style="padding:0.5rem 0.75rem;"><em>"Lav noget med vejr og AI og også et kort"</em> (for meget på én gang)</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;"><em>"Start med ét spørgsmål og to svarmuligheder"</em></td><td style="padding:0.5rem 0.75rem;"><em>"Byg et fuldt quiz-spil med highscore, timer og 50 spørgsmål"</em></td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;"><em>"Ingen eksterne biblioteker, skal virke i Chrome"</em></td><td style="padding:0.5rem 0.75rem;"><em>"Brug de bedste biblioteker"</em> (uklart)</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Tommelfingerregel:</strong> hvis du kan teste om resultatet er rigtigt på under et minut, er prompten præcis nok. Hvis du ikke ved hvad du forventer at se, er prompten for vag.</p>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
-          <div><strong>Ordforklaring:</strong> <em>Prompt engineering</em> er kunsten at formulere gode instruktioner til en AI-model. <em>Tech stack</em> er de teknologier og programmeringssprog du bruger i et projekt.</div>
+          <div><strong>Ordforklaring:</strong> <em>Prompt engineering</em> er kunsten at formulere gode instruktioner til en AI-model. <em>Tech stack</em> er de teknologier du bruger i et projekt — fx "HTML + CSS + JavaScript" eller "Python + Flask". <em>Vanilla JavaScript</em> betyder JavaScript uden ekstra biblioteker.</div>
         </div>
+
+        <h2>Den iterative arbejdsproces</h2>
+        <p>Den mest effektive metode er at bygge i meget små skridt — og teste efter hvert skridt.</p>
+        <ol style="padding-left:1.5rem;margin-bottom:1rem;">
+          <li style="margin-bottom:0.5rem;"><strong>Start med MVP</strong> — mindste fungerende version. Ingen styling, ingen ekstra features. Bare kernen.<br><small style="color:#6b7280;">→ <em>"Lav en HTML-side med ét quiz-spørgsmål og to svarmuligheder"</em></small></li>
+          <li style="margin-bottom:0.5rem;"><strong>Test straks</strong> — åbn filen i browser. Klik på alt. Virker det? Hvad sker der?<br><small style="color:#6b7280;">→ Gem en kopi af den fungerende version inden du fortsætter</small></li>
+          <li style="margin-bottom:0.5rem;"><strong>Tilføj én ting</strong> — én feature, ikke fem.<br><small style="color:#6b7280;">→ <em>"Tilføj en score-tæller der viser X af Y rigtige svar"</em></small></li>
+          <li style="margin-bottom:0.5rem;"><strong>Test igen</strong> — virker den nye feature? Virker resten stadig?</li>
+          <li style="margin-bottom:0.5rem;"><strong>Gentag</strong> — styling, flere spørgsmål, afslutningsbesked, lyd...</li>
+        </ol>
+        <p><strong>Gem arbejdende versioner undervejs.</strong> Kald dem <code>quiz-v1.html</code>, <code>quiz-v2.html</code> osv. Hvis noget går galt i v4, kan du altid vende tilbage til v3.</p>
+        <p>Undgå at bede om alt på én gang. En lang kompleks prompt giver ofte rodet kode der er svær at rette efterfølgende — og svær for AI'en at holde styr på.</p>
         <div class="illustration-wrap"><img src="modul13-ill2-iterativ-tilgang.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
         <h2>Fejlhåndtering med AI</h2>
-        <p>Du <em>vil</em> få fejl. Det er en del af processen. Det smarte er at AI'en er exceptionelt god til at rette fejl — hvis du giver den den rigtige information.</p>
-        <p><strong>Gør dette:</strong> kopiér hele fejlbeskeden fra terminalen eller browserkonsollen og indsæt den direkte i chatten. Tilføj kontekst: <em>"Denne fejl opstår når jeg klikker på 'Start quiz'-knappen: [fejlbesked]"</em></p>
-        <p><strong>Undgå dette:</strong> omformulere fejlen med dine egne ord — du mister vigtig teknisk information.</p>
-        <p>AI'en er særligt god til stack traces, syntaksfejl, TypeError og NameError i Python, og konsolfejl i JavaScript. Hvis AI'en ikke kan løse det efter 2–3 forsøg: prøv en anden model, eller del problemet op i mindre dele.</p>
+        <p>Du <em>vil</em> få fejl. Det er en del af processen — ikke et tegn på at noget er galt. AI'en er exceptionelt god til at rette fejl, men kun hvis du giver den den rigtige information.</p>
+        <p><strong>Vigtigste regel:</strong> kopiér hele fejlbeskeden fra terminalen eller browserkonsollen og indsæt den direkte i chatten — aldrig omformuler den med dine egne ord. Du mister vigtig teknisk information.</p>
+        <p>Tilføj kontekst om hvad du lavede da fejlen opstod:</p>
+        <pre><code>Denne fejl opstår når jeg klikker på 'Start quiz'-knappen:
+
+TypeError: Cannot read properties of undefined (reading 'length')
+    at startQuiz (quiz.js:23:30)
+    at HTMLButtonElement.onclick (quiz.html:15)</code></pre>
+        <p>En fejlbesked som denne fortæller AI'en tre ting: <strong>hvad</strong> gik galt (TypeError), <strong>hvor</strong> i koden (quiz.js linje 23), og <strong>hvornår</strong> (ved klik på knap). Jo mere information, jo hurtigere løsning.</p>
+        <p>AI'en er særligt god til:</p>
+        <ul>
+          <li><strong>Stack traces</strong> — fejlbeskeder med filnavne og linjenumre</li>
+          <li><strong>Syntaksfejl</strong> — forkert placeret parentes, manglende kolon</li>
+          <li><strong>TypeError og NameError</strong> i Python</li>
+          <li><strong>Konsolfejl</strong> i JavaScript (åbn med F12 i browser)</li>
+        </ul>
+        <p>Hvis AI'en ikke kan løse det efter 2–3 forsøg: start en ny samtale fra bunden (gammel kontekst kan forvirre), prøv en anden model, eller gå tilbage til den seneste fungerende version og start forfra.</p>
         <div class="illustration-wrap"><img src="modul13-ill3-fejlhaandtering.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>Begrænsninger — hvornår slår vibe coding fejl?</h2>
+        <h2>Forstå koden du får</h2>
+        <p>Du behøver ikke kunne skrive koden — men det er værd at forstå <em>hvad den gør</em>. Brug AI'en til at forklare den for dig:</p>
         <ul>
-          <li>Kompleks forretningslogik med mange edge cases</li>
-          <li>Systemer der kræver dyb domæneforståelse — fx medicinsk software</li>
-          <li>Sikkerhedskritiske systemer — autentificering, kryptering, betalinger</li>
-          <li>Store eksisterende codebases — AI'en kender ikke konteksten</li>
+          <li><em>"Forklar hvad denne funktion gør linje for linje"</em></li>
+          <li><em>"Hvad sker der hvis jeg ændrer tallet 5 til 10 på linje 12?"</em></li>
+          <li><em>"Hvilken del af koden håndterer brugerens klik?"</em></li>
         </ul>
-        <p>Den største risiko: <strong>du forstår ikke koden du har fået</strong>. Vibe coding er et godt udgangspunkt — men det er stadig værd at lære det grundlæggende.</p>
+        <p>Det giver dig to fordele: du kan træffe bedre beslutninger om hvad du vil ændre, og du opdager hurtigere hvis AI'en laver en fejl. En AI der skriver kode kan tage genveje eller glemme edge cases — du er den der opdager det ved at teste.</p>
+        <div class="callout">
+          <span class="callout-icon">&#x26A0;&#xFE0F;</span>
+          <div><strong>Vigtigt:</strong> Kopiér aldrig kode til et system der håndterer persondata, login eller penge — uden at forstå hvad den gør. Sikkerhed kræver forståelse, ikke bare fungerende kode.</div>
+        </div>
+
+        <h2>Begrænsninger — hvornår slår vibe coding fejl?</h2>
+        <p>Vibe coding er ikke løsningen på alt. Det kæmper med:</p>
+        <ul>
+          <li><strong>Kompleks forretningslogik</strong> med mange edge cases og undtagelser — AI'en overser nemt specielle tilfælde</li>
+          <li><strong>Systemer der kræver dyb domæneforståelse</strong> — fx medicinsk software eller finansielle beregninger</li>
+          <li><strong>Sikkerhedskritiske systemer</strong> — autentificering, kryptering og betalinger kræver ekspertviden</li>
+          <li><strong>Store eksisterende codebases</strong> — AI'en kender ikke konteksten og historikken i et stort projekt</li>
+          <li><strong>Langsigtede projekter</strong> — AI-genereret kode kan blive rodet og svær at vedligeholde over tid</li>
+        </ul>
+        <p>Den største faldgrube er at du ikke forstår koden du har fået. Det er fint at starte der — men gør en indsats for at forstå hvad de vigtige dele gør. Vibe coding er et godt udgangspunkt, ikke en erstatning for grundlæggende forståelse.</p>
 
         <h2>Praktisk eksempel: byg en quiz-side fra bunden</h2>
+        <p>Her er et konkret forløb der typisk tager 20–30 minutter:</p>
         <ol style="padding-left:1.5rem;margin-bottom:1rem;">
-          <li style="margin-bottom:0.35rem;"><strong>Start:</strong> <em>"Lav en HTML-side med en quiz om danske byer. Vis ét spørgsmål ad gangen med 4 svarmuligheder."</em></li>
-          <li style="margin-bottom:0.35rem;"><strong>Test:</strong> åbn filen i browser — virker det?</li>
-          <li style="margin-bottom:0.35rem;"><strong>Tilføj:</strong> <em>"Tilføj en score-tæller der viser X af Y rigtige svar"</em></li>
-          <li style="margin-bottom:0.35rem;"><strong>Tilføj:</strong> <em>"Giv siden en pæn styling med mørk baggrund og grønne knapper"</em></li>
-          <li style="margin-bottom:0.35rem;"><strong>Tilføj:</strong> <em>"Tilføj 10 spørgsmål mere og vis en afslutningsbesked"</em></li>
+          <li style="margin-bottom:0.5rem;"><strong>Prompt 1 — MVP:</strong><br><em>"Lav en HTML-fil med en quiz om danske byer. Vis ét spørgsmål ad gangen med 4 svarmuligheder som knapper. Vis om svaret var rigtigt eller forkert."</em><br><small style="color:#6b7280;">→ Åbn filen, klik igennem alle spørgsmål</small></li>
+          <li style="margin-bottom:0.5rem;"><strong>Gem v1</strong> — kopier filen som <code>quiz-v1.html</code></li>
+          <li style="margin-bottom:0.5rem;"><strong>Prompt 2 — score:</strong><br><em>"Tilføj en score-tæller øverst der viser 'X af Y rigtige'. Nulstil scoren når quizzen startes forfra."</em><br><small style="color:#6b7280;">→ Test at score tæller korrekt op og nulstiller</small></li>
+          <li style="margin-bottom:0.5rem;"><strong>Prompt 3 — styling:</strong><br><em>"Giv siden en mørk baggrund (#121212), hvid tekst, og grønne knapper (#00e5a0). Centrér alt og gør det pænt på mobil."</em><br><small style="color:#6b7280;">→ Test på mobil (åbn Chrome devtools → mobilvisning)</small></li>
+          <li style="margin-bottom:0.5rem;"><strong>Prompt 4 — indhold:</strong><br><em>"Tilføj 10 spørgsmål mere om danske byer og seværdigheder. Vis en afslutningsbesked med den samlede score og en 'Prøv igen'-knap."</em></li>
         </ol>
-        <p>Slutresultat: et kørende quiz-program du har bygget uden at skrive en linje kode selv.</p>
+        <p>Slutresultat: et kørende quiz-program bygget uden at skrive en linje kode selv — men testet og godkendt ved hvert trin.</p>
 
       </div>
     </div>
@@ -1476,7 +1553,7 @@ pi</code></pre>
         <h2>Hvad er en API?</h2>
         <p><strong>API</strong> står for <em>Application Programming Interface</em> — og det er grundlaget for at få AI ind i dine egne programmer.</p>
         <p>Tænk på det som en restaurant med et drive-through vindue. Du (dit program) kører op til vinduet, bestiller (sender en forespørgsel), og får maden (svaret) tilbage. Du ved ikke hvad der sker i køkkenet — du behøver bare at kende menuen og formatet.</p>
-        <p>En LLM-API: du sender en tekstbesked (HTTP-request), modellen behandler den på udbyderens servere, du får tekst tilbage (HTTP-response).</p>
+        <p>En LLM-API fungerer præcis sådan: du sender en tekstbesked (<strong>HTTP-request</strong>), modellen behandler den på udbyderens servere, og du får tekst tilbage (<strong>HTTP-response</strong>). Det hele sker via REST API over HTTP — den samme protokol din browser bruger til at hente hjemmesider.</p>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
           <div><strong>Ordforklaring:</strong> <em>API</em> er et sæt regler for hvordan to programmer kommunikerer. <em>REST API</em> er en bestemt stil for HTTP-baserede API'er. <em>HTTP-request</em> er en besked sendt over internettet — som at spørge en server om noget.</div>
@@ -1484,7 +1561,7 @@ pi</code></pre>
         <div class="illustration-wrap"><img src="modul14-ill1-api-hvad-er-det.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
         <h2>API-nøgler — sikkerhed er vigtigt</h2>
-        <p>For at bruge en cloud LLM-API skal du bruge en <strong>API-nøgle</strong> — et langt unikt token der identificerer dig og dit forbrug.</p>
+        <p>For at bruge en cloud LLM-API skal du bruge en <strong>API-nøgle</strong> — et langt unikt token der identificerer dig og dit forbrug. Hvis nogen får din nøgle, kan de bruge den i dit navn og koste dig penge.</p>
         <p><strong>Regel nummer ét: del aldrig din API-nøgle.</strong> Gem den i en <code>.env</code>-fil:</p>
         <pre><code># .env fil (aldrig commit denne til git!)
 ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxx</code></pre>
@@ -1492,7 +1569,9 @@ ANTHROPIC_API_KEY=sk-ant-xxxxxxxxxxxxxxxxxxxx</code></pre>
 from dotenv import load_dotenv
 load_dotenv()
 api_key = os.getenv("ANTHROPIC_API_KEY")</code></pre>
-        <p>Tilføj <code>.env</code> til din <code>.gitignore</code>-fil så den aldrig uploades til GitHub.</p>
+        <p>Tilføj <code>.env</code> til din <code>.gitignore</code>-fil så den aldrig uploades til GitHub:</p>
+        <pre><code># .gitignore
+.env</code></pre>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
           <div><strong>Ordforklaring:</strong> <em>API-nøgle</em> er et hemmeligt token der identificerer dig som bruger. <em>.env-fil</em> gemmer miljøvariabler lokalt — commit den aldrig til git. <em>Miljøvariabel</em> er en variabel tilgængelig for alle programmer på dit system.</div>
@@ -1500,8 +1579,12 @@ api_key = os.getenv("ANTHROPIC_API_KEY")</code></pre>
         <div class="illustration-wrap"><img src="modul14-ill2-api-noegle-sikkerhed.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
         <h2>Første API-kald i Python</h2>
+        <p>Installer biblioteket: <code>pip install anthropic python-dotenv</code></p>
         <pre><code>import anthropic
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 message = client.messages.create(
@@ -1512,18 +1595,30 @@ message = client.messages.create(
     ]
 )
 print(message.content[0].text)</code></pre>
-        <p>Installer biblioteket: <code>pip install anthropic</code></p>
-        <p>Til OpenAI er strukturen næsten identisk: <code>pip install openai</code> og brug <code>openai.OpenAI()</code> i stedet.</p>
+        <p>Til OpenAI er strukturen næsten identisk: <code>pip install openai</code> og brug <code>openai.OpenAI()</code> i stedet for <code>anthropic.Anthropic()</code>.</p>
+        <div class="callout" style="border-left-color:#00e5a0; background:#e6fdf6;">
+          <span class="callout-icon">&#x1F517;</span>
+          <div><strong>Husk fra Modul 13:</strong> Du kan vibe-code hele dette program — beskriv hvad du vil bygge til AI'en og lad den generere kode-skelettet. Skriv derefter dine egne API-kald ind.</div>
+        </div>
 
         <h2>System-prompts og roller</h2>
-        <p>En <strong>system-prompt</strong> sættes én gang og gælder for hele samtalen. Den definerer hvem AI'en er og hvordan den skal opføre sig:</p>
+        <p>En <strong>system-prompt</strong> sættes én gang og gælder for hele samtalen. Uden system-prompt er AI'en generalist — med system-prompt er den specialist der opfører sig konsistent og forudsigeligt.</p>
         <pre><code>message = client.messages.create(
     model="claude-haiku-4-5",
     system="Du er en dansk matematik-lærer der altid forklarer trin for trin.",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hvad er 2+2?"}]
 )</code></pre>
-        <p>Brug system-prompts til at definere persona, sætte format og sætte begrænsninger. Det er grundlaget for en <em>skill</em> — se Modul 18.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#f87171;">&#x274C; Undgå</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">&#x2705; Gør i stedet</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">&ldquo;Du er en hjælper&rdquo;</td><td style="padding:0.5rem 0.75rem;">&ldquo;Du er en dansk fysik-lærer for 12-årige der forklarer med hverdagseksempler&rdquo;</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Ingen format-krav</td><td style="padding:0.5rem 0.75rem;">&ldquo;Svar altid i 3 punkter, max 2 sætninger per punkt&rdquo;</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">&ldquo;Svar på alt&rdquo;</td><td style="padding:0.5rem 0.75rem;">&ldquo;Svar kun på spørgsmål om matematik — afvis andet venligt&rdquo;</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Lang, rodet prompt uden struktur</td><td style="padding:0.5rem 0.75rem;">Rolle → Format → Begrænsninger — i den rækkefølge</td></tr>
+          </tbody>
+        </table>
+        <p>En god system-prompt giver konsistente og forudsigelige svar — det er grundlaget for en <em>skill</em> (se Modul 18).</p>
 
         <h2>Konversationshistorik</h2>
         <p>LLM'er er <strong>statsløse</strong> — de husker ingenting mellem kald. Vil du have en rigtig samtale, skal du sende hele historikken med hver gang:</p>
@@ -1539,12 +1634,58 @@ def chat(bruger_besked):
     ai_svar = svar.content[0].text
     historik.append({"role": "assistant", "content": ai_svar})
     return ai_svar</code></pre>
+        <p>Jo længere samtalen bliver, jo flere tokens bruges per kald — og jo dyrere bliver det. Ved meget lange samtaler kan du trunkere de ældste beskeder og beholde kun de seneste.</p>
         <div class="illustration-wrap"><img src="modul14-ill3-konversationshistorik.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
+        <h2>Token-forbrug og priser</h2>
+        <p>Cloud LLM-API'er koster penge baseret på <strong>tokens</strong> — ikke tegn eller ord, men de brudstykker sproget opdeles i indeni modellen. &ldquo;Hej verden&rdquo; er ~3 tokens. En hel roman er ~200.000 tokens.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Model</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Input (per 1M tokens)</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Output (per 1M tokens)</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Typisk til</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Claude Haiku 4.5</td><td style="padding:0.5rem 0.75rem;">~$0.80</td><td style="padding:0.5rem 0.75rem;">~$4</td><td style="padding:0.5rem 0.75rem;">Hurtige svar, chatbots</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Claude Sonnet</td><td style="padding:0.5rem 0.75rem;">~$3</td><td style="padding:0.5rem 0.75rem;">~$15</td><td style="padding:0.5rem 0.75rem;">Komplekse opgaver, kode</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Ollama (lokal)</td><td style="padding:0.5rem 0.75rem;">Gratis</td><td style="padding:0.5rem 0.75rem;">Gratis</td><td style="padding:0.5rem 0.75rem;">Udvikling og test</td></tr>
+          </tbody>
+        </table>
+        <p>Kontrollér dit forbrug direkte i svar-objektet:</p>
+        <pre><code>svar = client.messages.create(...)
+print(f"Input tokens:  {svar.usage.input_tokens}")
+print(f"Output tokens: {svar.usage.output_tokens}")
+print(f"Total:         {svar.usage.input_tokens + svar.usage.output_tokens}")</code></pre>
+        <p>Sæt altid et realistisk <code>max_tokens</code> — det sætter et loft for output og forhindrer overraskende store regninger.</p>
+        <div class="callout">
+          <span class="callout-icon">&#x1F4A1;</span>
+          <div><strong>Tip:</strong> Start altid med Ollama lokalt under udvikling. Skift til cloud-API når du er klar til at deploye — det sparer penge og giver hurtigere feedback-loops.</div>
+        </div>
+
         <h2>Fejlhåndtering og rate limits</h2>
+        <p>Cloud-API'er kan fejle — for mange kald på kort tid giver fejlkode 429 (rate limit). Byg altid <strong>exponential backoff</strong> ind: vent lidt og prøv igen, vent dobbelt så længe næste gang:</p>
+        <pre><code>import time
+from anthropic import RateLimitError, APIConnectionError
+
+def robust_kald(besked, max_forsøg=3):
+    for forsøg in range(max_forsøg):
+        try:
+            return client.messages.create(
+                model="claude-haiku-4-5",
+                max_tokens=1024,
+                messages=[{"role": "user", "content": besked}]
+            )
+        except RateLimitError:
+            vent = 2 ** forsøg  # 1s, 2s, 4s
+            print(f"Rate limit — venter {vent}s...")
+            time.sleep(vent)
+        except APIConnectionError as e:
+            print(f"Forbindelsesfejl: {e}")
+            break
+    return None</code></pre>
         <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
           <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Fejlkode</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Årsag</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Løsning</th></tr></thead>
-          <tbody><tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;color:#6b7280;">429</td><td style="padding:0.5rem 0.75rem;">Rate limit nået</td><td style="padding:0.5rem 0.75rem;">Vent og prøv igen (exponential backoff)</td></tr><tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;color:#6b7280;">401</td><td style="padding:0.5rem 0.75rem;">Ugyldig API-nøgle</td><td style="padding:0.5rem 0.75rem;">Tjek .env filen</td></tr><tr style=""><td style="padding:0.5rem 0.75rem;color:#6b7280;">500</td><td style="padding:0.5rem 0.75rem;">Server-fejl</td><td style="padding:0.5rem 0.75rem;">Prøv igen om lidt</td></tr></tbody>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;color:#6b7280;">429</td><td style="padding:0.5rem 0.75rem;">Rate limit nået</td><td style="padding:0.5rem 0.75rem;">Exponential backoff (se kode ovenfor)</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;color:#6b7280;">401</td><td style="padding:0.5rem 0.75rem;">Ugyldig API-nøgle</td><td style="padding:0.5rem 0.75rem;">Tjek .env — er variabelnavnet korrekt?</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;color:#6b7280;">500</td><td style="padding:0.5rem 0.75rem;">Server-fejl hos udbyderen</td><td style="padding:0.5rem 0.75rem;">Prøv igen om lidt — ikke din fejl</td></tr>
+          </tbody>
         </table>
 
         <h2>Lokalt alternativ: Ollama API</h2>
@@ -1561,11 +1702,55 @@ svar = client.chat.completions.create(
     messages=[{"role": "user", "content": "Hej!"}]
 )
 print(svar.choices[0].message.content)</code></pre>
-        <p>Ingen API-nøgle, ingen token-pris, kører offline. Perfekt til udvikling og test.</p>
+        <p>Ingen API-nøgle, ingen token-pris, kører offline. Skift fra Ollama til cloud-API ved blot at ændre <code>base_url</code> og <code>api_key</code> — resten af koden er identisk.</p>
         <div class="callout" style="border-left-color:#00e5a0; background:#e6fdf6;">
           <span class="callout-icon">&#x1F517;</span>
-          <div><strong>Husk fra Modul 7:</strong> Ollama kører på <code>localhost:11434</code> og starter automatisk som baggrundstjeneste.</div>
+          <div><strong>Husk fra Modul 7:</strong> Ollama kører på <code>localhost:11434</code> og starter automatisk som baggrundstjeneste. Kør <code>ollama list</code> for at se dine installerede modeller.</div>
         </div>
+
+        <h2>Praktisk eksempel: lav en historiefortæller</h2>
+        <p>Vi bygger et program der genererer korte historier baseret på brugerens input — kombinerer system-prompt, konversationshistorik og token-tracking i ét samlet program.</p>
+        <p><strong>1. Opsæt miljø og client:</strong></p>
+        <pre><code>pip install anthropic python-dotenv</code></pre>
+        <pre><code>import anthropic, os
+from dotenv import load_dotenv
+load_dotenv()
+client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))</code></pre>
+        <p><strong>2. Definer system-prompten — specialist, ikke generalist:</strong></p>
+        <pre><code>SYSTEM = """Du er en kreativ historiefortæller for børn på 10-15 år.
+Skriv altid historier der:
+- Er max 150 ord lange
+- Har en overraskende vending i slutningen
+- Slutter med ét spørgsmål der inviterer til næste kapitel
+Brug enkelt sprog. Ingen vold eller skræmmende indhold."""</code></pre>
+        <p><strong>3. Byg chat-løkken med historik og token-tracking:</strong></p>
+        <pre><code>historik = []
+total_tokens = 0
+
+def fortæl_videre(bruger_input):
+    global total_tokens
+    historik.append({"role": "user", "content": bruger_input})
+    svar = client.messages.create(
+        model="claude-haiku-4-5",
+        system=SYSTEM,
+        max_tokens=300,
+        messages=historik
+    )
+    tekst = svar.content[0].text
+    historik.append({"role": "assistant", "content": tekst})
+    total_tokens += svar.usage.input_tokens + svar.usage.output_tokens
+    print(f"[tokens dette kald: {svar.usage.input_tokens + svar.usage.output_tokens} | total: {total_tokens}]")
+    return tekst</code></pre>
+        <p><strong>4. Test og iterér — justér system-prompten efter hvert forsøg:</strong></p>
+        <pre><code># Start historien
+print(fortæl_videre("Start en historie om en robot der finder en gammel nøgle"))
+
+# Fortsæt historien med brugerens valg
+print(fortæl_videre("Robotten åbner en hemmelig dør — hvad sker der?"))
+
+# Prøv en anden genre: skift SYSTEM til sci-fi, detektiv eller eventyr
+# Sammenlign output — system-prompten er den stærkeste kontrol du har</code></pre>
+        <p>Næste skridt: gem historierne til en fil (<code>open("historier.txt", "a")</code>), tilføj en brugergrænseflade med <code>input()</code>, eller skift model fra Haiku til Sonnet og sammenlign kvaliteten.</p>
 
       </div>
     </div>
@@ -1586,45 +1771,140 @@ print(svar.choices[0].message.content)</code></pre>
       <div class="mc-inner">
 
         <h2>Konceptet: AI som en funktion</h2>
-        <p>AI er ikke kun chat. Fra dit programs perspektiv er en LLM bare en <strong>funktion der tager tekst ind og giver tekst ud</strong>:</p>
-        <pre><code>spørg_ai("Hvad er Frankrigs hovedstad?")  →  "Paris"
-spørg_ai("Oversæt 'hund' til spansk")     →  "perro"
-spørg_ai("Er denne kode korrekt: ...")    →  "Nej, fejl på linje 3..."</code></pre>
-        <p>Enhver opgave der involverer at <em>forstå, generere eller transformere tekst</em> kan løses med AI som en byggeklods i dit program.</p>
+        <p>AI er ikke kun chat. Fra dit programs perspektiv er en LLM bare en <strong>funktion der tager tekst ind og giver tekst ud</strong>. Det samme Python-kald kan løse radikalt forskellige opgaver:</p>
+        <pre><code>spørg_ai("Hvad er Frankrigs hovedstad?")     →  "Paris"
+spørg_ai("Omsæt 'hund' til spansk")          →  "perro"
+spørg_ai("Er denne kode korrekt: ...")      →  "Nej, fejl på linje 3..."
+spørg_ai("Opsummer denne tekst i 3 punkter") →  "1. ... 2. ... 3. ..."</code></pre>
+        <p>Du behøver ikke bygge en ny AI til hvert problem. Én genanvendelig funktion er nok — opgaven defineres i prompten.</p>
+        <div class="callout">
+          <span class="callout-icon">&#x1F4AC;</span>
+          <div><strong>Ordforklaring:</strong> <em>Funktion</em> er et genanvendeligt stykke kode der tager input og giver output. Når vi wrapper et AI-kald i en funktion, bliver LLM'en en byggeklods på linje med al anden Python-kode.</div>
+        </div>
         <div class="illustration-wrap"><img src="modul15-ill1-ai-som-funktion.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>Kald Ollama lokalt fra Python</h2>
+        <h2>Lokal eller cloud? Vælg din tilgang</h2>
+        <p>Du har to måder at kalde en LLM fra Python. Valget påvirker pris, hastighed og hvad du kan i praksis:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Egenskab</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Ollama (lokal)</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Cloud-API (Anthropic/OpenAI)</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Pris</td><td style="padding:0.5rem 0.75rem;">Gratis</td><td style="padding:0.5rem 0.75rem;">Betalt per token</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Internet</td><td style="padding:0.5rem 0.75rem;">Ikke nødvendigt</td><td style="padding:0.5rem 0.75rem;">Kræves</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Modelkvalitet</td><td style="padding:0.5rem 0.75rem;">God (7b–14b parametre)</td><td style="padding:0.5rem 0.75rem;">State-of-the-art</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Setup</td><td style="padding:0.5rem 0.75rem;"><code>pip install ollama</code></td><td style="padding:0.5rem 0.75rem;"><code>pip install anthropic</code> + API-nøgle</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Bedst til</td><td style="padding:0.5rem 0.75rem;">Udvikling og test</td><td style="padding:0.5rem 0.75rem;">Produktion og krævende opgaver</td></tr>
+          </tbody>
+        </table>
+        <p>Strategien: <strong>byg med Ollama, deploy med cloud-API</strong>. Koden er næsten identisk — du skifter blot bibliotek og model-navn når du er klar.</p>
+        <div class="callout" style="border-left-color:#00e5a0; background:#e6fdf6;">
+          <span class="callout-icon">&#x1F517;</span>
+          <div><strong>Husk fra Modul 14:</strong> Cloud-API'er bruger tokens — svar på "Hvad er 2+2?" koster ~10 tokens. Under udvikling med hundredvis af test-kald løber det hurtigt op. Ollama er gratis.</div>
+        </div>
+
+        <h2>Byg en genanvendelig AI-funktion</h2>
+        <p>Wrap dit API-kald i en funktion én gang — brug den overalt i dit program:</p>
         <pre><code>import ollama
 
-def spørg_ai(spørgsmål: str) -> str:
-    """Send et spørgsmål til den lokale AI og få svar tilbage."""
+def spørg_ai(spørgsmål: str, model: str = "qwen2.5:7b") -> str:
     svar = ollama.chat(
-        model="qwen2.5:7b",
+        model=model,
         messages=[{"role": "user", "content": spørgsmål}]
     )
     return svar["message"]["content"]
 
 print(spørg_ai("Hvad er Europas højeste bjerg?"))</code></pre>
-        <p>Installer: <code>pip install ollama</code> — nu har du en genanvendelig <code>spørg_ai()</code>-funktion.</p>
+        <p>Vil du skifte til cloud-API? Skift implementationen indeni — resten af koden røres ikke:</p>
+        <pre><code>import anthropic, os
+
+client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+def spørg_ai(spørgsmål: str, model: str = "claude-haiku-4-5") -> str:
+    svar = client.messages.create(
+        model=model, max_tokens=1024,
+        messages=[{"role": "user", "content": spørgsmål}]
+    )
+    return svar.content[0].text
+
+# Resten af dit program er uændret</code></pre>
         <div class="illustration-wrap"><img src="modul15-ill2-python-ollama-kode.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>Strukturér prompts til specifikke formål</h2>
-        <p><strong>Vær specifik om format:</strong></p>
-        <pre><code>prompt = f"Svar KUN med ét ord — ja eller nej. Er '{by}' en dansk by?"</code></pre>
-        <p><strong>Few-shot prompting — vis eksempler:</strong></p>
-        <pre><code>prompt = """Kategorisér disse ord som DYR, PLANTE eller TING.
+        <h2>Strukturér prompts — do/don't</h2>
+        <p>Kvaliteten af AI's output afhænger næsten udelukkende af promptens kvalitet. Små ændringer giver store forskelle:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#f87171;">&#x274C; Undgå</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">&#x2705; Gør i stedet</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;"><code>f"Er {by} en dansk by?"</code></td><td style="padding:0.5rem 0.75rem;"><code>f"Svar KUN med ja eller nej. Er '{by}' en dansk by?"</code></td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Lang tekst uden kontekst</td><td style="padding:0.5rem 0.75rem;">Rolle først: <code>"Du er en [ekspert]. [opgave]."</code></td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Ingen eksempler på format</td><td style="padding:0.5rem 0.75rem;">Few-shot: vis 2–3 eksempler på hvad du forventer</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">"Opsummer det her"</td><td style="padding:0.5rem 0.75rem;">"Opsummer i præcis 3 punkter, max 15 ord per punkt"</td></tr>
+          </tbody>
+        </table>
+        <p><strong>Few-shot eksempel — vis AI'en hvad du vil have:</strong></p>
+        <pre><code>prompt = f"""Kategorisér disse ord som DYR, PLANTE eller TING.
 Eksempler:
 - hund → DYR
 - rose → PLANTE
 - bord → TING
 
 Nu kategorisér: {ord}"""</code></pre>
+
+        <h2>Svar-parsing og struktureret output</h2>
+        <p>Vil du bruge AI's svar som data i dit program — ikke bare printe det — skal du bede om <strong>JSON-format</strong> og parse svaret:</p>
+        <pre><code>import json
+
+def analysér_sætning(sætning: str) -> dict:
+    prompt = f"""Analysér sætningen og svar KUN med JSON. Ingen forklaring.
+Sætning: "{sætning}"
+
+Format:
+{{"sentiment": "positiv/negativ/neutral",
+  "emner": ["emne1", "emne2"],
+  "resumé": "max 10 ord"}}"""
+
+    svar_tekst = spørg_ai(prompt)
+
+    # Rens svaret hvis AI tilføjer markdown code-fence
+    svar_tekst = svar_tekst.strip().removeprefix("```json").removesuffix("```").strip()
+
+    return json.loads(svar_tekst)
+
+data = analysér_sætning("Klimaforandringer truer biodiversiteten i Arktis")
+print(data["sentiment"])   # "negativ"
+print(data["emner"])       # ["klimaforandringer", "biodiversitet", "Arktis"]</code></pre>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
-          <div><strong>Ordforklaring:</strong> <em>Few-shot prompting</em> er at give AI'en et par eksempler på hvad du vil have, inden du stiller dit rigtige spørgsmål. Det forbedrer konsistensen markant.</div>
+          <div><strong>Ordforklaring:</strong> <em>Parsing</em> er at omforme tekst til et brugbart dataformat. <em>JSON</em> (JavaScript Object Notation) er et tekstformat til strukturerede data — Python kan konvertere det til en <code>dict</code> med <code>json.loads()</code>.</div>
         </div>
 
+        <h2>Fejlhåndtering — hvad når AI'en ikke svarer?</h2>
+        <p>To typiske fejlscenarier: Ollama kører ikke, eller modellen er ikke downloadet. Begge skal håndteres:</p>
+        <pre><code>import ollama
+from ollama import ResponseError
+
+def spørg_ai_robust(spørgsmål: str, model: str = "qwen2.5:7b") -> str:
+    try:
+        svar = ollama.chat(
+            model=model,
+            messages=[{"role": "user", "content": spørgsmål}]
+        )
+        return svar["message"]["content"]
+    except ConnectionError:
+        return "Fejl: Ollama kører ikke. Start den med: ollama serve"
+    except ResponseError as e:
+        return f"Model-fejl: {e}. Download modellen: ollama pull {model}"
+    except Exception as e:
+        return f"Ukendt fejl: {e}"</code></pre>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Fejl</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Årsag</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Løsning</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;color:#6b7280;">ConnectionError</td><td style="padding:0.5rem 0.75rem;">Ollama kører ikke</td><td style="padding:0.5rem 0.75rem;"><code>ollama serve</code> i terminal</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;color:#6b7280;">ResponseError</td><td style="padding:0.5rem 0.75rem;">Model ikke downloaded</td><td style="padding:0.5rem 0.75rem;"><code>ollama pull qwen2.5:7b</code></td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;color:#6b7280;">json.JSONDecodeError</td><td style="padding:0.5rem 0.75rem;">AI svarede ikke valid JSON</td><td style="padding:0.5rem 0.75rem;">Prøv igen — eller skift til lavere temperatur</td></tr>
+          </tbody>
+        </table>
+
         <h2>Praktisk eksempel: Grundstof-gætter</h2>
+        <p>Et interaktivt program der kombinerer en system-prompt med bruger-input — og demonstrerer few-shot prompting i praksis:</p>
         <pre><code>import ollama
 
 def grundstof_gætter():
@@ -1638,39 +1918,47 @@ def grundstof_gætter():
 Gæt grundstoffet. Svar med: navn, kemisk symbol, og én sætning om hvorfor."""
         svar = ollama.chat(model="qwen2.5:7b",
             messages=[{"role": "user", "content": prompt}])
-        print(f"AI's gæt: {svar['message']['content']}
-")
+        print(f"AI's gæt: {svar['message']['content']}\n")
 
 grundstof_gætter()</code></pre>
+        <p>Prøv at ændre system-prompten: bed AI'en om at give hints i stedet for direkte svar, eller tilføj svarformat (<code>"Svar KUN med: [navn] ([symbol])"</code>). Hver ændring ændrer oplevelsen markant.</p>
 
-        <h2>Praktisk eksempel: Simpel chatbot</h2>
+        <h2>Praktisk eksempel: Chatbot med historik</h2>
+        <p>En chatbot der husker hele samtalen — og har en persona via system-prompt:</p>
         <pre><code>import ollama
+
+SYSTEM = "Du er en venlig dansk hjælper for elever på 10-15 år. Brug enkelt sprog."
 
 def chatbot():
     historik = []
-    print("Chatbot klar! Skriv 'stop' for at afslutte.
-")
+    print("Chatbot klar! Skriv 'stop' for at afslutte.\n")
     while True:
         bruger_input = input("Du: ")
         if bruger_input.lower() == "stop":
             break
         historik.append({"role": "user", "content": bruger_input})
-        svar = ollama.chat(model="qwen2.5:7b", messages=historik)
+        svar = ollama.chat(
+            model="qwen2.5:7b",
+            messages=[{"role": "system", "content": SYSTEM}] + historik
+        )
         ai_tekst = svar["message"]["content"]
         historik.append({"role": "assistant", "content": ai_tekst})
-        print(f"AI: {ai_tekst}
-")
+        print(f"AI: {ai_tekst}\n")
 
 chatbot()</code></pre>
         <div class="illustration-wrap"><img src="modul15-ill3-praktiske-eksempler.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>Næste skridt: hvad kan du bygge herfra?</h2>
-        <ul>
-          <li><strong>Lektiehjælper</strong> — tag emnet som input, få forklaring tilbage</li>
-          <li><strong>Tekst-opsummerer</strong> — paste en lang artikel, få 5 punkter ud</li>
-          <li><strong>Automatisk kategorisering</strong> — sorter en liste af ting i kategorier</li>
-          <li><strong>Quiz-generator</strong> — giv et emne, få 10 spørgsmål med svar tilbage</li>
-        </ul>
+        <h2>Hvad kan du bygge herfra?</h2>
+        <p>Du har nu alle byggeklodser: en genanvendelig AI-funktion, strukturerede prompts og fejlhåndtering. Kombiner dem:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Program</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Prompt-tilgang</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Output-type</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Lektiejælper</td><td style="padding:0.5rem 0.75rem;">System-prompt: tålmodig tutor</td><td style="padding:0.5rem 0.75rem;">Tekst</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Tekst-opsummerer</td><td style="padding:0.5rem 0.75rem;">Few-shot: eksempel på godt resumé</td><td style="padding:0.5rem 0.75rem;">Tekst</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Sentiment-analysator</td><td style="padding:0.5rem 0.75rem;">Svar KUN med JSON</td><td style="padding:0.5rem 0.75rem;">JSON → dict</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Quiz-generator</td><td style="padding:0.5rem 0.75rem;">Format: nøjagtigt 5 spørgsmål med svar</td><td style="padding:0.5rem 0.75rem;">Struktureret tekst</td></tr>
+          </tbody>
+        </table>
         <div class="callout" style="border-left-color:#00e5a0; background:#e6fdf6;">
           <span class="callout-icon">&#x1F517;</span>
           <div><strong>Kommer i Modul 16:</strong> RAG — giv din AI adgang til dine egne dokumenter og noter, så den kan svare baseret på specifik viden du har givet den.</div>
@@ -1682,31 +1970,49 @@ chatbot()</code></pre>
       <div class="module-num">16</div>
       <div class="module-info">
         <h3 data-da="RAG — giv AI adgang til din viden" data-en="RAG — give AI access to your knowledge">RAG — giv AI adgang til din viden</h3>
-        <p data-da="Retrieval-Augmented Generation — AI der svarer ud fra dine dokumenter." data-en="Retrieval-Augmented Generation — AI that answers from your documents.">Retrieval-Augmented Generation — AI der svarer ud fra dine dokumenter.</p>
+        <p data-da="Retrieval-Augmented Generation — AI der svarer ud fra dine egne dokumenter." data-en="Retrieval-Augmented Generation — AI that answers from your own documents.">Retrieval-Augmented Generation — AI der svarer ud fra dine egne dokumenter.</p>
       </div>
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="module-tag tag-advanced" data-da="Avanceret" data-en="Advanced">Avanceret</span>
         <span class="chevron">&#9660;</span>
       </div>
     </div>
-
     <div class="module-content" id="content-16">
       <div class="mc-close"><button onclick="toggleModule('16')">&#x2715; luk</button></div>
       <div class="mc-inner">
 
         <h2>Hvad er RAG?</h2>
-        <p><strong>RAG</strong> står for <em>Retrieval-Augmented Generation</em> — og det løser et af AI's største problemer: modellen kender ikke dine egne dokumenter, og den kan hallucere fakta den ikke ved.</p>
-        <p>Med RAG giver du AI'en adgang til et "bibliotek" af dine egne dokumenter. Når du stiller et spørgsmål, finder systemet først de relevante dele og putter dem ind i prompten — så AI'en svarer baseret på din faktiske viden.</p>
-        <p><strong>RAG løser:</strong> hallucination (AI'en ser de rigtige fakta), forældet viden (du kan give nyeste dokumenter), og specifik viden (AI'en kender dine interne dokumenter).</p>
+        <p><strong>RAG</strong> står for <em>Retrieval-Augmented Generation</em> — og det løser et af AI's største problemer: modellen kender kun det den er trænet på. Den kender ikke dine noter, din skoles regler eller gårsdagens nyheder.</p>
+        <p>Med RAG giver du AI'en adgang til et "bibliotek" af dine egne dokumenter. Når du stiller et spørgsmål, finder systemet først de relevante dokumentstykker og lægger dem ind i prompten — så AI'en svarer baseret på din faktiske viden, ikke bare sin træning.</p>
+        <p><strong>RAG løser tre problemer på én gang:</strong> hallucination (AI'en ser de rigtige fakta), forældet viden (du kan give de nyeste dokumenter), og specifik viden (din AI kender dine interne dokumenter).</p>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
-          <div><strong>Ordforklaring:</strong> <em>RAG</em> kombinerer søgning i et dokumentarkiv med AI-generering. <em>Retrieval</em> = hentning. <em>Augmented</em> = forbedret. <em>Generation</em> = AI's tekstgenerering.</div>
+          <div><strong>Ordforklaring:</strong> <em>RAG</em> kombinerer søgning i et dokumentarkiv med AI-generering. <em>Retrieval</em> = hentning. <em>Augmented</em> = forbedret. <em>Generation</em> = AI's tekstgenerering. Det er ikke en model — det er en <em>arkitektur</em>.</div>
         </div>
         <div class="illustration-wrap"><img src="modul16-ill1-rag-pipeline.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>Embeddings og vektor-databaser</h2>
-        <p>For at søge på <em>mening</em> (ikke bare nøgleord) bruger RAG <strong>embeddings</strong> — hvert tekststykke omdannes til en lang liste tal der repræsenterer dets betydning. Disse tal gemmes i en <strong>vektor-database</strong> der er ekstremt hurtig til at finde de tal der ligner hinanden mest.</p>
-        <p>Populære vektor-databaser: <strong>ChromaDB</strong> (lokal, perfekt til begyndere), <strong>Pinecone</strong> (cloud, skalerbar), <strong>Weaviate</strong> (open source).</p>
+        <h2>RAG vs. „bas bare al tekst ind i prompten“</h2>
+        <p>Kan du ikke bare paste hele dit dokument ind i prompten? Teknisk ja — men det skalerer ikke:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#f87171;">&#x274C; Al tekst i prompten</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">&#x2705; RAG</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Max ~200.000 tokens — så er context-vinduet fyldt</td><td style="padding:0.5rem 0.75rem;">Ubegrænset antal dokumenter i databasen</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Koster mange tokens per kald — dyrt ved gentagne spørgsmål</td><td style="padding:0.5rem 0.75rem;">Kun relevante chunks sendes — typisk 3–5 stykker</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">AI'en fortaber sig i lang tekst — kvaliteten falder</td><td style="padding:0.5rem 0.75rem;">AI får præcis det relevante — koncentreret svar</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Virker ikke med 1.000+ siders PDF-arkiv</td><td style="padding:0.5rem 0.75rem;">Virker med millioner af dokumenter</td></tr>
+          </tbody>
+        </table>
+        <p>Tommelfingerregel: under 5 sider og ét enkelt dokument — paste det ind. Over det — brug RAG.</p>
+
+        <h2>Embeddings og semantisk søgning</h2>
+        <p>RAG søger på <em>mening</em>, ikke nøgleord. Det sker via <strong>embeddings</strong> — hvert tekststykke omdannes til en lang liste tal der repræsenterer dets betydning:</p>
+        <pre><code># Keyword-søgning finder intet:
+søg("bil")  →  ingen hits  # dokumentet siger "køretøj"
+
+# Semantisk søgning finder det:
+vektor_søg("bil")  →  "Et køretøj med fire hjul..."  # ens betydning</code></pre>
+        <p>Dine dokumenter får hver sin embedding-vektor og gemmes i en <strong>vektor-database</strong>. Når du spørger, omdannes dit spørgsmål også til en vektor — databasen finder de dokumentstykker der er tættest på.</p>
+        <p>Populære vektor-databaser: <strong>ChromaDB</strong> (lokal, ingen installation, perfekt til begyndere), <strong>Pinecone</strong> (cloud, skalerbar), <strong>Weaviate</strong> (open source).</p>
         <div class="callout" style="border-left-color:#00e5a0; background:#e6fdf6;">
           <span class="callout-icon">&#x1F517;</span>
           <div><strong>Husk fra Modul 2:</strong> Embeddings som koordinater på et betydningskort — ord med ens mening havner tæt på hinanden. RAG bruger præcis den mekanisme til at finde relevante dokumentstykker.</div>
@@ -1714,14 +2020,51 @@ chatbot()</code></pre>
 
         <h2>Chunking — opdel dokumenter smart</h2>
         <p>Inden du kan søge i dine dokumenter, skal de opdeles i passende bidder — <strong>chunks</strong>. Typisk 200–500 ord med et overlap på 50–100 ord. Overlap sikrer at information på grænsen mellem to chunks ikke går tabt.</p>
+        <pre><code>def chunk_tekst(tekst: str, chunk_størrelse: int = 400, overlap: int = 50) -> list:
+    ord = tekst.split()
+    chunks = []
+    i = 0
+    while i < len(ord):
+        chunk = " ".join(ord[i:i + chunk_størrelse])
+        chunks.append(chunk)
+        i += chunk_størrelse - overlap
+    return chunks</code></pre>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#f87171;">&#x274C; Dårlig chunking</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">&#x2705; God chunking</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Hele dokumentet som ét chunk</td><td style="padding:0.5rem 0.75rem;">200–500 ord per chunk</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Ingen overlap — grænse-information går tabt</td><td style="padding:0.5rem 0.75rem;">50–100 ords overlap mellem chunks</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Sætninger klippes midt over</td><td style="padding:0.5rem 0.75rem;">Klip ved naturlige grænser (afsnit, punktum)</td></tr>
+          </tbody>
+        </table>
         <div class="illustration-wrap"><img src="modul16-ill2-chunking-overlap.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
+        <h2>RAG-pipeline: installér og opsæt</h2>
+        <p>Du skal bruge tre pakker:</p>
+        <pre><code>pip install chromadb ollama</code></pre>
+        <p>ChromaDB gemmer automatisk data i hukommelsen (ingen fil) med <code>chromadb.Client()</code>, eller persistent på disk:</p>
+        <pre><code>import chromadb
+
+# Midlertidigt (nulstilles ved genstart)
+client = chromadb.Client()
+
+# Persistent (gemmes på disk)
+client = chromadb.PersistentClient(path="./min-rag-db")</code></pre>
+        <p>Opret en <strong>samling</strong> — tænk på det som en mappe til beslaegtede dokumenter:</p>
+        <pre><code># Opret ny samling
+samling = client.create_collection("pensum-biologi")
+
+# Eller hent eksisterende
+samling = client.get_or_create_collection("pensum-biologi")</code></pre>
+
         <h2>RAG i praksis med ChromaDB</h2>
+        <p>Det fulde mønster: tilføj dokumenter én gang, søg og svar mange gange:</p>
         <pre><code>import chromadb, ollama
 
-# 1. Opret database og tilføj dokumenter
 client = chromadb.Client()
 samling = client.create_collection("mine-noter")
+
+# 1. Indlæs dokumenter (gøres kun én gang)
 samling.add(
     documents=[
         "Fotosyntese er den proces hvor planter omdanner sollys til sukker.",
@@ -1731,113 +2074,283 @@ samling.add(
     ids=["dok1", "dok2", "dok3"]
 )
 
-# 2. Søg og svar
-spørgsmål = "Hvad er klorofyl?"
-resultater = samling.query(query_texts=[spørgsmål], n_results=2)
-kontekst = "
-".join(resultater["documents"][0])
+# 2. Søg og svar (gentages for hvert spørgsmål)
+def rag_svar(spørgsmål: str, antal_resultater: int = 2) -> str:
+    resultater = samling.query(
+        query_texts=[spørgsmål],
+        n_results=antal_resultater
+    )
+    kontekst = "\n".join(resultater["documents"][0])
 
-prompt = f"Svar baseret KUN på denne kontekst:
-{kontekst}
+    prompt = f"""Svar baseret KUN på denne kontekst. Siger konteksten ikke svaret, sig "Det ved jeg ikke ud fra de givne dokumenter."\n\nKontekst:\n{kontekst}\n\nSpørgsmål: {spørgsmål}"""
 
-Spørgsmål: {spørgsmål}"
-svar = ollama.chat(model="qwen2.5:7b",
-    messages=[{"role": "user", "content": prompt}])
-print(svar["message"]["content"])</code></pre>
+    svar = ollama.chat(model="qwen2.5:7b",
+        messages=[{"role": "user", "content": prompt}])
+    return svar["message"]["content"]
 
-        <h2>Praktiske use cases</h2>
-        <ul>
-          <li><strong>Personlig vidensbase</strong> — indlæs dine noter og få AI til at svare baseret på dem</li>
-          <li><strong>Skoleopgave-assistent</strong> — giv AI dit pensum og stil spørgsmål om det</li>
-          <li><strong>Hjemmeside-chatbot</strong> — AI der svarer baseret på hjemmesidens indhold</li>
-          <li><strong>Dokumentsøgning</strong> — find relevant information i store PDF-arkiver</li>
-        </ul>
+print(rag_svar("Hvad er klorofyl?"))
+print(rag_svar("Hvad er Danmarks hovedstad?"))  # "Det ved jeg ikke..."</code></pre>
+        <p>Bemærk instruksen <em>„Sig 'Det ved jeg ikke' hvis svaret ikke er i konteksten“</em> — den er kritisk. Uden den gætter AI'en og hallucinerer.</p>
+
+        <h2>Søgekvalitet — hvad påvirker resultatet?</h2>
+        <p>Tre parametre gør størst forskel:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Parameter</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Påvirker</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Anbefaling</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;"><code>n_results</code></td><td style="padding:0.5rem 0.75rem;">Antal chunks i kontekst</td><td style="padding:0.5rem 0.75rem;">Start med 2–3. For mange = forvirret AI</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Chunk-størrelse</td><td style="padding:0.5rem 0.75rem;">Præcision vs. kontekst</td><td style="padding:0.5rem 0.75rem;">200–400 ord til fakta, 400–600 til analyse</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Prompt-instruks</td><td style="padding:0.5rem 0.75rem;">Om AI hallucinerer</td><td style="padding:0.5rem 0.75rem;">Altid: „sig 'ved ikke' hvis ikke i kontekst“</td></tr>
+          </tbody>
+        </table>
+        <p>Fejlfinding: får du dårlige svar? Prøv at printe <code>resultater["documents"][0]</code> og se hvilke chunks der faktisk hentes. Henter den de forkerte — juster chunk-størrelse eller øg overlap.</p>
         <div class="illustration-wrap"><img src="modul16-ill3-rag-use-cases.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
+
+        <h2>Praktisk eksempel: byg en pensum-assistent</h2>
+        <p>Vi bygger et program der læser dine egne noter og svarer på spørgsmål om dem.</p>
+        <p><strong>1. Forbered dine noter som Python-liste:</strong></p>
+        <pre><code>noter = [
+    "Andenskoloven: F = m * a. Kraft er lig masse gange acceleration.",
+    "Newton's tredjelov: For enhver kraft er der en modsat og lige stor reaktionskraft.",
+    "Energibevarelse: Energi kan ikke skabes eller forsvinde, kun omdannes.",
+    "Kinetisk energi: Ek = 0.5 * m * v^2. Afhænger af masse og hastighed.",
+    "Potentiel energi: Ep = m * g * h. Afhænger af højde og masse.",
+]</code></pre>
+        <p><strong>2. Indlæs i ChromaDB:</strong></p>
+        <pre><code>import chromadb
+samling = chromadb.Client().create_collection("fysik-noter")
+samling.add(
+    documents=noter,
+    ids=[f"note{i}" for i in range(len(noter))]
+)</code></pre>
+        <p><strong>3. Byg spørgsmåls-løkken:</strong></p>
+        <pre><code>import ollama
+
+print("Pensum-assistent klar! Stil spørgsmål om fysik ('stop' for at afslutte)\n")
+while True:
+    q = input("Spørgsmål: ")
+    if q.lower() == "stop": break
+    hits = samling.query(query_texts=[q], n_results=2)
+    kontekst = "\n".join(hits["documents"][0])
+    svar = ollama.chat(model="qwen2.5:7b", messages=[{"role": "user",
+        "content": f"Baseret KUN på disse noter:\n{kontekst}\n\nSvar kort: {q}"}])
+    print(f"\nSvar: {svar['message']['content']}\n")</code></pre>
+        <p><strong>4. Udvid med dine egne noter:</strong> skift <code>noter</code>-listen ud med indhold fra dine egne undervisningsbøger. Jo flere og bedre noter, jo præcisere svar. Prøv at tilføje modstridende information og se om AI'en håndterer det korrekt.</p>
 
       </div>
     </div>
     <div class="module-card" onclick="toggleModule('17')">
       <div class="module-num">17</div>
       <div class="module-info">
-        <h3 data-da="Skills" data-en="Skills">Skills</h3>
-        <p data-da="Lær AI at følge faste instruktioner og workflows." data-en="Teach AI to follow fixed instructions and workflows.">Lær AI at følge faste instruktioner og workflows.</p>
+        <h3 data-da="Agenter — autonome AI-workflows" data-en="Agents — autonomous AI workflows">Agenter — autonome AI-workflows</h3>
+        <p data-da="Byg AI der planlægger, kalder tools og løser mål selvstændigt." data-en="Build AI that plans, calls tools and solves goals autonomously.">Byg AI der planlægger, kalder tools og løser mål selvstændigt.</p>
       </div>
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="module-tag tag-advanced" data-da="Avanceret" data-en="Advanced">Avanceret</span>
         <span class="chevron">&#9660;</span>
       </div>
     </div>
-
     <div class="module-content" id="content-17">
       <div class="mc-close"><button onclick="toggleModule('17')">&#x2715; luk</button></div>
       <div class="mc-inner">
 
         <h2>Hvad er en AI-agent?</h2>
-        <p>En <strong>chatbot</strong> svarer på ét spørgsmål ad gangen. Du spørger, den svarer. Du bestemmer hvert trin.</p>
-        <p>En <strong>AI-agent</strong> er noget fundamentalt anderledes. Du giver den et <em>mål</em> — og den planlægger selv hvordan den når det, kalder de nødvendige funktioner, evaluerer resultaterne og fortsætter — alt sammen uden at du behøver at styre hvert trin.</p>
-        <p>Agenter kombinerer tre ting: <strong>LLM</strong> (reasoning), <strong>tools</strong> (handlinger i verden) og <strong>hukommelse</strong> (kontekst på tværs af trin).</p>
+        <p>En <strong>chatbot</strong> svarer på ét spørgsmål ad gangen. Du spørger, den svarer, du beslutter hvad der sker hærnest.</p>
+        <p>En <strong>AI-agent</strong> er fundamentalt anderledes. Du giver den et <em>mål</em> — og den planlægger selv, kalder de nødvendige funktioner, evaluerer resultater og fortsætter uden at du behøver at styre hvert trin. Agenten er det der sker imellem dine instruktioner og det færdige resultat.</p>
+        <p>En agent kombinerer tre ting: <strong>LLM</strong> (reasoning — hvad skal der ske?), <strong>tools</strong> (handlinger i verden — søg, skriv, læs) og <strong>hukommelse</strong> (kontekst på tværs af trin — hvad skete der før?).</p>
         <div class="callout">
           <span class="callout-icon">&#x1F4AC;</span>
-          <div><strong>Ordforklaring:</strong> <em>Agent</em> er en AI der selvstændigt planlægger og udfører en sekvens af handlinger for at nå et mål. <em>Tools</em> er Python-funktioner som agenten kan kalde. <em>Hukommelse</em> er den kontekst agenten husker på tværs af trin.</div>
+          <div><strong>Ordforklaring:</strong> <em>Agent</em> er en AI der selvstændigt planlægger og udfører en sekvens af handlinger for at nå et mål. <em>Tools</em> er Python-funktioner agenten kan kalde. <em>Orchestration</em> er koordineringen af hvilke tools der kaldes hvornår.</div>
         </div>
         <div class="illustration-wrap"><img src="modul17-ill1-agent-vs-chatbot.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>Tools og function calling</h2>
-        <p>Kernen i en agent er <strong>tools</strong> — Python-funktioner som AI'en kan beslutte at kalde. Du beskriver hvad hvert tool gør — AI'en beslutter <em>hvornår og hvordan</em> den kalder det:</p>
-        <pre><code>tools = [
+        <h2>Chatbot eller agent? Vælg rigtigt</h2>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Brug chatbot når…</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Brug agent når…</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Opgaven er ét trin: stil spørgsmål, få svar</td><td style="padding:0.5rem 0.75rem;">Opgaven kræver flere trin og beslutninger</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Alt information er allerede i prompten</td><td style="padding:0.5rem 0.75rem;">AI skal hente information undervejs (søg, læs filer)</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Output er ren tekst</td><td style="padding:0.5rem 0.75rem;">Output inkluderer handlinger (gem fil, send besked)</td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Du ved præcis hvad der skal ske</td><td style="padding:0.5rem 0.75rem;">Planen afhænger af hvad AI'en finder undervejs</td></tr>
+          </tbody>
+        </table>
+        <p>En agent er mere kompleks at bygge og fejlhåndtere end en chatbot. Brug den kun når opgaven faktisk kræver det.</p>
+
+        <h2>Tools — definer og implementér</h2>
+        <p>Et tool har to dele: en <strong>JSON-beskrivelse</strong> som AI'en læser, og en <strong>Python-funktion</strong> som programmet kalder:</p>
+        <pre><code># Del 1: JSON-beskrivelse (AI'en ser dette)
+tools = [
     {
         "name": "søg_web",
-        "description": "Søg efter information på internettet",
+        "description": "Søg efter faktuel information på internettet",
         "input_schema": {
             "type": "object",
             "properties": {
-                "query": {"type": "string", "description": "Søgeord"}
+                "query": {"type": "string", "description": "Søgeord eller spørgsmål"}
             },
             "required": ["query"]
         }
+    },
+    {
+        "name": "gem_fil",
+        "description": "Gem tekst til en fil på disk",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "filnavn": {"type": "string"},
+                "indhold": {"type": "string"}
+            },
+            "required": ["filnavn", "indhold"]
+        }
     }
-]</code></pre>
+]
+
+# Del 2: Python-implementering (programmet kalder dette)
+def udfør_tool(navn: str, args: dict) -> str:
+    if navn == "søg_web":
+        # I en rigtig implementation: kald en søge-API
+        return f"[Søgeresultat for '{args['query']}': Django, Flask og FastAPI er populære]"
+    elif navn == "gem_fil":
+        with open(args["filnavn"], "w", encoding="utf-8") as f:
+            f.write(args["indhold"])
+        return f"Fil '{args['filnavn']}' gemt ({len(args['indhold'])} tegn)"
+    return f"Ukendt tool: {navn}"</code></pre>
         <div class="illustration-wrap"><img src="modul17-ill2-tools-function-calling.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
-        <h2>ReAct-pattern — Reason + Act</h2>
-        <p>Den mest udbredte agent-arkitektur hedder <strong>ReAct</strong> (Reasoning + Acting):</p>
-        <pre><code>1. REASON:  "Jeg skal finde vejret i Paris. Jeg har et søg_web tool."
-2. ACT:     Kalder søg_web("vejr Paris i dag")
-3. OBSERVE: Ser resultatet: "22°C, sol"
-4. REASON:  "Nu har jeg vejret. Jeg kan svare."
-5. SVAR:    "Vejret i Paris er 22°C med sol."</code></pre>
-        <p>Loopet kører indtil agenten konkluderer at opgaven er løst — eller det maksimale antal trin er nået.</p>
+        <h2>ReAct-pattern og agent-løkken</h2>
+        <p>Den mest udbredte agent-arkitektur hedder <strong>ReAct</strong> (Reasoning + Acting). AI'en skifter mellem at tænke og handle — indtil målet er nået:</p>
+        <pre><code>REASON:  "Jeg skal finde Python frameworks. Jeg har søg_web."
+ACT:     søg_web("populære Python web-frameworks")
+OBSERVE: "Django, Flask og FastAPI er de mest populære"
+REASON:  "Jeg har information. Nu skal jeg gemme resultatet."
+ACT:     gem_fil("frameworks.txt", "Django: ...\nFlask: ...")
+OBSERVE: "Fil gemt"
+REASON:  "Opgaven er løst."
+SVAR:    "Sammenligningen er gemt i frameworks.txt"</code></pre>
+        <p>Her er den fulde Python-løkke der kører dette mønster:</p>
+        <pre><code>import anthropic, os
+from dotenv import load_dotenv
+load_dotenv()
+
+client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+def kør_agent(mål: str, max_trin: int = 10) -> str:
+    beskeder = [{"role": "user", "content": mål}]
+
+    for trin in range(max_trin):
+        svar = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=1024,
+            tools=tools,
+            messages=beskeder
+        )
+
+        if svar.stop_reason == "end_turn":
+            # Agent er færdig — returner slutsvaret
+            for blok in svar.content:
+                if hasattr(blok, "text"):
+                    return blok.text
+
+        # Tilføj agentens svar til historikken
+        beskeder.append({"role": "assistant", "content": svar.content})
+        tool_resultater = []
+
+        for blok in svar.content:
+            if blok.type == "tool_use":
+                print(f"  Trin {trin+1}: {blok.name}({blok.input})")
+                resultat = udfør_tool(blok.name, blok.input)
+                tool_resultater.append({
+                    "type": "tool_result",
+                    "tool_use_id": blok.id,
+                    "content": resultat
+                })
+
+        beskeder.append({"role": "user", "content": tool_resultater})
+
+    return "Max trin nået"
+
+# Kør agenten
+resultat = kør_agent(
+    "Research de 3 mest populære Python web-frameworks og gem en sammenligning i frameworks.txt"
+)
+print(resultat)</code></pre>
         <div class="illustration-wrap"><img src="modul17-ill3-react-loop.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
 
         <h2>Multi-step planlægning</h2>
-        <p>Giv agenten et overordnet mål — den bryder det ned selv:</p>
-        <pre><code>kør_agent("Research de 3 mest populære Python web-frameworks og skriv en sammenligning")</code></pre>
-        <p>Agenten vil: søge på nettet, læse de relevante sider, sammenligne og skrive resultatet til en fil — alt koordineret af AI'ens reasoning.</p>
+        <p>Agenten behøver ikke en step-by-step plan fra dig. Giv den et mål — den nedbryder det selv og beslutter rækkefølgen:</p>
+        <pre><code>kør_agent("Lav en liste over de 5 største danske byer, søg befolkningstal for hver, og gem en sorteret tabel i byer.csv")</code></pre>
+        <p>Agenten vil typisk: søge efter listen, søge befolkningstal for hver by, formatere resultatet som CSV, og gemme filen — alt koordineret af AI'ens reasoning uden at du definerer hvert trin.</p>
+        <p>Jo bedre målet er beskrevet, jo bedre planlægger agenten. Vær specifik om <em>format</em> og <em>output</em> — ikke om <em>fremgangsmåden</em>.</p>
+
+        <h2>Hukommelse og tilstand i agenter</h2>
+        <p>Agenten husker alle trin i <code>beskeder</code>-listen — hver tool-handling og dens resultat tilføjes. Det er agentens <strong>working memory</strong>:</p>
+        <pre><code># Beskeder-listen vokser for hvert trin:
+beskeder = [
+    {"role": "user",      "content": "Research Python frameworks..."},
+    {"role": "assistant", "content": [tool_use: søg_web(...)]},
+    {"role": "user",      "content": [tool_result: "Django, Flask..."]},
+    {"role": "assistant", "content": [tool_use: gem_fil(...)]},
+    {"role": "user",      "content": [tool_result: "Fil gemt"]},
+    {"role": "assistant", "content": "Sammenligningen er gemt..."}
+]</code></pre>
+        <p>Det betyder at agenten ved hvad den allerede har prøvet — den gentager ikke de samme tool-kald. Men listen vokser med hvert trin, så lange agenter bruger mange tokens. Sæt altid <code>max_trin</code> for at undgå ukontrollerede kørsler.</p>
 
         <h2>Sikkerhed og begrænsninger</h2>
-        <p>Agenter med adgang til filsystem og internet kan gøre skade hvis de fejler:</p>
-        <ul>
-          <li><strong>Sæt max trin</strong> — en agent der løber i loop i 1000 trin er et problem</li>
-          <li><strong>Principle of least privilege</strong> — giv kun de tools der er nødvendige</li>
-          <li><strong>Kør i sandbox</strong> under udvikling — ikke på dit rigtige filsystem</li>
-          <li><strong>Log alle tool-kald</strong> — så du kan se hvad agenten faktisk har gjort</li>
-          <li><strong>Menneskeligt godkendelsestrin</strong> ved kritiske handlinger</li>
-        </ul>
+        <p>Agenter med adgang til filsystem og internet kan gøre skade hvis de fejler eller misforstår. Byg disse sikkerhedslag ind fra start:</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.9rem;margin-bottom:1rem;">
+          <thead><tr style="background:#1a2a1a;"><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Regel</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Hvorfor</th><th style="padding:0.5rem 0.75rem;text-align:left;color:#00e5a0;">Implementering</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Max trin</td><td style="padding:0.5rem 0.75rem;">Loop kan køre evigt</td><td style="padding:0.5rem 0.75rem;"><code>max_trin=10</code> i agent-løkken</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Least privilege</td><td style="padding:0.5rem 0.75rem;">Agenten gør kun hvad den må</td><td style="padding:0.5rem 0.75rem;">Kun de nødvendige tools i listen</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Sandbox</td><td style="padding:0.5rem 0.75rem;">Fejl ødelægger ikke rigtige filer</td><td style="padding:0.5rem 0.75rem;">Test i separat testmappe</td></tr>
+            <tr style="border-bottom:1px solid #2a3a2a;"><td style="padding:0.5rem 0.75rem;">Log tool-kald</td><td style="padding:0.5rem 0.75rem;">Se hvad agenten faktisk gjorde</td><td style="padding:0.5rem 0.75rem;"><code>print(f"Kalder {blok.name}")</code></td></tr>
+            <tr><td style="padding:0.5rem 0.75rem;">Godkendelsestrin</td><td style="padding:0.5rem 0.75rem;">Irreversible handlinger</td><td style="padding:0.5rem 0.75rem;"><code>input("Bekræft sletning? (j/n)")</code></td></tr>
+          </tbody>
+        </table>
+
+        <h2>Praktisk eksempel: research-assistent</h2>
+        <p>Vi bygger en agent med to tools — søg og gem — og giver den en konkret research-opgave.</p>
+        <p><strong>1. Opsæt client og tools:</strong></p>
+        <pre><code>pip install anthropic python-dotenv</code></pre>
+        <pre><code>import anthropic, os
+from dotenv import load_dotenv
+load_dotenv()
+client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+tools = [  # indsæt tool-definitioner fra "Tools" sektionen ovenfor
+    { "name": "søg_web", ... },
+    { "name": "gem_fil", ... }
+]</code></pre>
+        <p><strong>2. Implementér tool-handler:</strong></p>
+        <pre><code>def udfør_tool(navn, args):
+    if navn == "søg_web":
+        # Erstat med rigtig søge-API (fx DuckDuckGo, Serper)
+        return f"Mock resultat for: {args['query']}"
+    elif navn == "gem_fil":
+        with open(args["filnavn"], "w", encoding="utf-8") as f:
+            f.write(args["indhold"])
+        return f"Gemt: {args['filnavn']}"
+    return "Ukendt tool"</code></pre>
+        <p><strong>3. Indsæt agent-løkken fra sektionen ovenfor og kør:</strong></p>
+        <pre><code>resultat = kør_agent(
+    "Find de 3 vigtigste forskelle mellem Django og FastAPI. Gem resultatet i sammenligning.txt"
+)
+print(resultat)
+# Tjek at sammenligning.txt er oprettet</code></pre>
+        <p><strong>4. Eksperimenter med målet:</strong> prøv korte mål vs. detaljerede, ændr <code>max_trin</code>, tilføj et tredje tool (<code>læs_fil</code>). Hvornår vælger agenten det forkerte tool? Hvornår løber den i loop?</p>
 
       </div>
     </div>
     <div class="module-card" onclick="toggleModule('18')">
       <div class="module-num">18</div>
       <div class="module-info">
-        <h3 data-da="Agenter" data-en="Agents">Agenter</h3>
-        <p data-da="Autonome workflows — AI der planlægger og handler på egne vegne." data-en="Autonomous workflows — AI that plans and acts on its own.">Autonome workflows — AI der planlægger og handler på egne vegne.</p>
+        <h3 data-da="Skills — lær AI at følge faste instruktioner" data-en="Skills — teach AI to follow fixed instructions">Skills — lær AI at følge faste instruktioner</h3>
+        <p data-da="Genanvendelige instruktionspakker der gør AI'ens adfærd konsistent og forudsigelig." data-en="Reusable instruction packages that make AI behaviour consistent and predictable.">Genanvendelige instruktionspakker der gør AI'ens adfærd konsistent og forudsigelig.</p>
       </div>
       <div style="display:flex;align-items:center;gap:0.75rem">
         <span class="module-tag tag-advanced" data-da="Avanceret" data-en="Advanced">Avanceret</span>
         <span class="chevron">&#9660;</span>
       </div>
     </div>
-
     <div class="module-content" id="content-18">
       <div class="mc-close"><button onclick="toggleModule('18')">&#x2715; luk</button></div>
       <div class="mc-inner">
