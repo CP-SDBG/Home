@@ -1,12 +1,12 @@
-# SESSION_STATE.md — AI·KLAR
+# SESSION_STATE.md - AI·KLAR
 
-**Gemt:** 2026-06-08
+**Gemt:** 2026-06-09 (session 4)
 
 ---
 
 ## Mål
 
-Bygge dansk/engelsk undervisningssite **AI·KLAR** — 19 moduler, 4 trin, målgruppe 10–15 år med let CS-baggrund. Standalone HTML-fil + PNG-billeder i samme mappe.
+Bygge dansk/engelsk undervisningssite **AI·KLAR** - 19 moduler, 4 trin, målgruppe 10-15 år med let CS-baggrund. Standalone HTML-fil + PNG-billeder i samme mappe.
 
 ---
 
@@ -24,23 +24,49 @@ Bygge dansk/engelsk undervisningssite **AI·KLAR** — 19 moduler, 4 trin, målg
   - Kritisk detalje: "sig 'ved ikke' hvis ikke i kontekst"-instruks
 - **Modul 17** (Agenter): 5 → 8 sektioner ✅
   - Tilføjet: "Chatbot eller agent?" (sammenligningstabel), komplet kørende ReAct agent-løkke (30 linjers Python), "Hukommelse og tilstand", "Sikkerhed" (bullet → tabel)
-  - Manglede den fulde agent-løkke — nu tilføjet
+  - Manglede den fulde agent-løkke - nu tilføjet
 
 ### MD-filer synkroniseret med HTML
-- `trin-2-interfaces-værktøjer.md`: verificeret i sync (modul 6–12) ✅
-- `trin-3-byg-selv.md`: modul 13–17 alle opdateret ✅
-- `trin-4-avanceret.md`: uberørt (modul 18–19 ikke udvidet endnu)
+- `trin-2-interfaces-værktøjer.md`: verificeret i sync (modul 6-12) ✅
+- `trin-3-byg-selv.md`: modul 13-17 alle opdateret ✅
+- `trin-4-avanceret.md`: uberørt (modul 18-19 ikke udvidet endnu)
 
 ### PNG-filer uploadet og verificeret
 - Modul 15: 3 PNG-filer uploadet ✅
 - Modul 16: 3 PNG-filer uploadet ✅
-- `illustrations-reference.md`: modul 13–16 alle ✅ (63 ✅, 8 🔲 tilbage)
+- `illustrations-reference.md`: modul 13-16 alle ✅ (63 ✅, 8 🔲 tilbage)
 
 ### Illustrations-standard (understøt, ikke kopier)
-Fastholdt og anvendt konsekvent på modul 14–17:
+Fastholdt og anvendt konsekvent på modul 14-17:
 - **Visualisér kontrasten**: to tilstande/veje der leder til forskelligt resultat
 - **Gør det konkret**: anatomisér protokol/flow der er usynlig i teksten
 - **Skalérbarheds-perspektiv**: samme kode, vidt forskellig kontekst
+
+---
+
+## Filstruktur — arbejdsdokumenter
+
+Hvert modul har sin egen MD-fil:
+```
+TrinXX-ModulYY-Titel.md        ← 19 modulfiler
+Appendix-AXX-Titel.md          ← 3 appendix-filer
+Reference-Kodeeksempler.md     ← 1 referencefil
+illustrations-reference.md     ← illustrationsbeskrivelser
+SESSION_STATE.md               ← dette dokument
+```
+
+Aeldre trin-MD-filer (trin-1 til trin-4) beholdes som backup indtil videre.
+
+---
+
+## Modulstruktur
+
+| Trin | Moduler |
+|------|---------|
+| Trin 1: Grundlæggende | 1–5 |
+| Trin 2: Interfaces & værktøjer | 6–12 |
+| Trin 3: Byg selv | 13–16 |
+| Trin 4: Avanceret | 17–19 |
 
 ---
 
@@ -48,34 +74,34 @@ Fastholdt og anvendt konsekvent på modul 14–17:
 
 | Modul | HTML-indhold | PNG-filer | Illustrations-koncepter |
 |-------|-------------|-----------|------------------------|
-| 01–05 | ✅ fuldt | ✅ alle | ✅ |
-| 06–12 | ✅ fuldt | ✅ alle | ✅ |
+| 01-05 | ✅ fuldt | ✅ alle | ✅ |
+| 06-12 | ✅ fuldt | ✅ alle | ✅ |
 | 13 | ✅ fuldt (9 h2) | ✅ alle | ✅ |
 | 14 | ✅ fuldt (9 h2) | ✅ alle | ✅ |
 | 15 | ✅ fuldt (9 h2) | ✅ alle | ✅ |
 | 16 | ✅ fuldt (8 h2) | ✅ alle | ✅ |
-| 17 | ✅ fuldt (8 h2) | 🔲 mangler | ✅ |
-| 18 | ✅ grundindhold (6 h2) | 🔲 mangler | 🔲 generiske beskrivelser |
-| 19 | ✅ grundindhold (8 h2) | 🔲 mangler | 🔲 generiske beskrivelser |
-| Appendix 1–3 | 🔲 kun outline | — | — |
+| 17 | ✅ fuldt (8 h2) | ✅ alle | ✅ |
+| 18 | ✅ fuldt (9 h2) | ✅ alle | ✅ |
+| 19 | ✅ fuldt (9 h2) | ✅ alle | ✅ |
+| Appendix 1-3 | 🔲 kun outline | - | - |
 
 ---
 
-## Fastlagt arbejdsmetode — gælder fremadrettet
+## Fastlagt arbejdsmetode - gælder fremadrettet
 
 ### Indholdsstandard for moduler
-- **Minimum 7–9 sektioner** med `<h2>` overskrifter
-- **Konkrete eksempler** — kode og prompts der kan kopieres direkte
+- **Minimum 7-9 sektioner** med `<h2>` overskrifter
+- **Konkrete eksempler** - kode og prompts der kan kopieres direkte
 - **Do/don't- eller sammenligningstabeller** frem for rene bullet-lister
 - **Callouts** til ordforklaringer og cross-modul-referencer
 - **Praktisk eksempel** som afsluttende sektion med nummererede trin
 
 ### Illustrations-standard
-Illustrationer skal **understøtte** teksten — ikke kopiere den. Tre typer der virker:
+Illustrationer skal **understøtte** teksten - ikke kopiere den. Tre typer der virker:
 
-1. **Visualisér kontrasten** — to veje/tilstande, forskelligt resultat (modul 14 ill2, modul 16 ill1)
-2. **Gør det usynlige synligt** — anatomisér protokol/flow/kode (modul 15 ill2, modul 17 ill2)
-3. **Skalerbarhed og komposabilitet** — samme arkitektur, forskellig skala (modul 15 ill1, modul 16 ill3)
+1. **Visualisér kontrasten** - to veje/tilstande, forskelligt resultat (modul 14 ill2, modul 16 ill1)
+2. **Gør det usynlige synligt** - anatomisér protokol/flow/kode (modul 15 ill2, modul 17 ill2)
+3. **Skalerbarhed og komposabilitet** - samme arkitektur, forskellig skala (modul 15 ill1, modul 16 ill3)
 
 **Format for illustrations-reference:**
 - **Titel**: beskrivende navn
@@ -87,67 +113,63 @@ Illustrationer skal **understøtte** teksten — ikke kopiere den. Tre typer der
 2. Identificér mangler (sektioner, konkrethed, do/don't, praktisk eksempel)
 3. Skriv udvidet HTML (Python-script til præcis replace)
 4. Opdatér MD-arbejdsdokument tilsvarende
-5. Opdatér `illustrations-reference.md` — Titel + Indhold + Formål
+5. Opdatér `illustrations-reference.md` - Titel + Indhold + Formål
 6. Opdatér `SESSION_STATE.md`
 
 ---
 
 ## PNG-filer der mangler
 
-| Modul | Manglende filer |
-|-------|----------------|
-| 17 | modul17-ill1 til ill3 (3 filer) |
-| 18 | modul18-ill1 til ill2 (2 filer) |
-| 19 | modul19-ill1 til ill3 (3 filer) |
+Alle PNG-filer modul 1–19 uploadet og verificeret ✅
 
 **Workflow når PNG-filer uploades:**
 1. Bruger dropper PNG-filer i mappen og giver besked
 2. Verificér filnavne matcher HTML-referencer (`ls *.png | sort`)
-3. Opdatér `illustrations-reference.md` — sæt 🔲 → ✅ (både `####`-headers og summary-tabel)
+3. Opdatér `illustrations-reference.md` - sæt 🔲 → ✅ (både `####`-headers og summary-tabel)
 
 ---
 
 ## Indhold der mangler
 
-- **Modul 18** (Skills): grundindhold i HTML, ikke udvidet til fuld standard
-- **Modul 19** (MCP): grundindhold i HTML, ikke udvidet til fuld standard
+- **Modul 18** (Skills): ✅ udvidet til fuld standard (9 h2), ill3 tilføjet
+- **Modul 19** (MCP): ✅ udvidet til fuld standard (9 h2)
 - **Appendix 1** (Hvorfor Linux), **Appendix 2** (Linux cheatsheet), **Appendix 3** (CPU offloading): kun outline
-- `overdragelsesdokument.md`: forældet — bør opdateres til nuværende tilstand
+- `overdragelsesdokument.md`: forældet - bør opdateres til nuværende tilstand
 
 ---
 
 ## Kendte problemer / blokkere
 
-- Engelske oversættelser (`data-en`) kun på navigation, ikke brødtekst — laveste prioritet
-- `overdragelsesdokument.md` forældet — beskriver gammel fejltilstand
+- Engelske oversættelser (`data-en`) kun på navigation, ikke brødtekst - laveste prioritet
+- `overdragelsesdokument.md` forældet - beskriver gammel fejltilstand
 
 ---
 
 ## Vigtige beslutninger
 
-- **Alle illustrationer er PNG** — ingen SVG inline
-- **PNG-filnavngivning:** `modul[N]-ill[N]-[beskrivende-navn].png` — låst i HTML
+- **Alle illustrationer er PNG** - ingen SVG inline
+- **PNG-filnavngivning:** `modul[N]-ill[N]-[beskrivende-navn].png` - låst i HTML
 - **illustrations-reference.md** er primær kilde til illustration-status og -koncepter
-- **Én HTML-fil + PNG-mappe** — ingen multi-page konvertering planlagt
-- **HTML er kilde til sandhed** — MD-filer synkroniseres med HTML (ikke omvendt)
+- **Én HTML-fil + PNG-mappe** - ingen multi-page konvertering planlagt
+- **HTML er kilde til sandhed** - MD-filer synkroniseres med HTML (ikke omvendt)
 
 ---
 
 ## Næste skridt (i rækkefølge)
 
-1. **Udvid Modul 18** (Skills) til fuld standard (7–9 sektioner, do/don't, praktisk eksempel)
-2. **Udvid Modul 19** (MCP) til fuld standard
-3. **Upload PNG-filer** til modul 17–19 efterhånden → verificér + opdatér illustrations-reference
-4. **Appendix 1–3** — skriv fuldt tekstindhold
-5. **overdragelsesdokument.md** — opdatér til nuværende tilstand
+1. **Appendix 1–3** — skriv fuldt tekstindhold
+2. **overdragelsesdokument.md** — opdatér til nuværende tilstand
+3. **Upload PNG-filer** til modul 17-19 efterhånden → verificér + opdatér illustrations-reference
+4. **Appendix 1-3** - skriv fuldt tekstindhold
+5. **overdragelsesdokument.md** - opdatér til nuværende tilstand
 
 ---
 
 ## Valideringstatus
 
 - HTML åbner uden fejl i browser ✅
-- Alle PNG-referencer modul 1–16 matcher filer i mappen ✅
-- Modul 17–19 PNG-referencer indsat men filer mangler — broken images indtil upload ⚠️
+- Alle PNG-referencer modul 1–19 matcher filer i mappen ✅
+- 0 broken images ✅
 - Alle udvidede moduler: 0 ulukkede divs ✅
 
 ---

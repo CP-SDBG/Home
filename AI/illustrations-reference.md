@@ -1,544 +1,332 @@
 # Illustrations Reference — AI·KLAR
 
-Oversigt over alle illustrationer til AI·KLAR (alle trin og moduler).
+Kilde til sandhed for alle illustrationer: filnavne, status og konceptbeskrivelser.
 
-**Formatkonvention:**
-- **PNG (ekstern):** Alle illustrationer er PNG-filer refereret via `<img src="...">` i HTML — filer skal ligge i samme mappe som HTML
-
----
-
-## Generelle designretningslinjer
-
-### PNG (bruger-lavet)
-- Lys baggrund, farverig, begynder-venlig
-- Bredt format foretrukket (landscape)
-
-### HTML-indsætning
-```html
-<div class="illustration-wrap"><img src="filnavn.png" style="width:100%;height:auto;display:block;border-radius:8px;"></div>
-```
+**Format for hvert entry:**
+- **Titel:** beskrivende navn
+- **Indhold:** hvad der vises præcist
+- **Formål:** hvad illustrationen tilføjer som teksten ikke siger
 
 ---
 
 ## Trin 1: Grundlæggende (Moduler 1–5)
 
-### Modul 1: Introduktion til AI
+### Modul 1: Hvad er AI?
 
-#### ✅ modul1-ill1-ai-vs-ikke-ai.png — PNG ekstern
-**Titel:** Hvad er AI — og hvad er det ikke?
-**Indhold:** To kolonner adskilt af en stiplet linje.
-- Venstre (IKKE AI): lommeregner med "2+2=4", tekst "Følger kun præcis de regler den fik", "Intet nyt, ingen læring"
-- Højre (AI ✓): kamera der scanner en kat, AI-boble "Det er en kat!", tekst "Lærte selv at genkende katte fra eksempler", "Finder mønstre selv"
+#### ✅ modul1-ill1-ai-vs-ikke-ai.png
+**Titel:** Lommeregner vs. kamera — hvad er forskellen?
+**Indhold:** Sammenligning: lommeregner (ikke AI) vs. kamera der genkender en kat (AI). Lommeregneren viser fast regelkode → output. Kameraet viser billede-input → mønstergenkendelse → "kat".
+**Formål:** Gør det centrale skel konkret — AI genkender mønstre, klassisk software følger regler.
 
-#### ✅ modul1-ill2-tidslinje.png — PNG ekstern
-**Titel:** AI's historie — fra drøm til virkelighed
-**Indhold:** Vandret tidslinje med 4 punkter:
-- 1950'erne: "?" ikon, "Kan maskiner tænke?", "Regler kodes i hånden"
-- 1997: skakbrik ikon, "Deep Blue slår verdensmester i skak"
-- 2012–2017: neural netværk prikker, "Deep learning gennembruddet", "Transformer-arkitektur opfindes"
-- 2022–nu: chat-boble ikon (grøn fyldt cirkel), "ChatGPT, Claude og AI for alle", "Du er her! 🎉"
+#### ✅ modul1-ill2-tidslinje.png
+**Titel:** AI's vej fra ide til eksplosion
+**Indhold:** Vandret tidslinje: 1950 → 1997 → 2012–2017 → 2022–nu. Vigtige milepæle annoteret ved hvert punkt.
+**Formål:** Viser at AI ikke er nyt — og hvorfor det eksploderede netop nu.
 
-#### ✅ modul1-ill3-programmering-vs-ml.png — PNG ekstern
-**Titel:** To måder at lære en computer noget
-**Indhold:** To vandrette rækker med flowdiagram (4 bokse + pile):
-- Øverst (KLASSISK PROGRAMMERING, grå): Menneske → Regler → Computer → Problem: spammere ændrer ordene 😤
-- Nederst (MACHINE LEARNING, grøn): Eksempler (5000 spam + 5000 normal) → AI træner → Model → Virker stadig ✅
+#### ✅ modul1-ill3-programmering-vs-ml.png
+**Titel:** Regler ind vs. mønstre ud
+**Indhold:** To parallelle flowdiagrammer side om side: klassisk programmering (regler + data → output) vs. machine learning (data + output → regler).
+**Formål:** Illustrerer den fundamentale vending i tankegang — ML lærer reglerne, det skrives dem ikke.
 
-#### ✅ modul1-ill4-neuralt-netvaerk.png — PNG ekstern
-**Titel:** Sådan ser et neuralt netværk ud
-**Indhold:** Klassisk neural network diagram, venstre til højre:
-- Input (pixels): 5 cirkler med pixel-ikoner
-- Lag 1 (kanter og linjer): 4 cirkler
-- Lag 2 (former): 3 cirkler (større)
-- Lag 3 (ansigtstræk): 3 cirkler
-- Output: 2 cirkler (grønne) "Ansigt 😊" og "Ikke ansigt"
-- Linjer mellem alle lag, tykkere mod output
-- Bundtekst: "Hvert lag lærer noget mere komplekst end laget før"
+#### ✅ modul1-ill4-neuralt-netvaerk.png
+**Titel:** Fra pixels til "ansigt"
+**Indhold:** Neuralt netværk med input-lag, skjulte lag og output-lag — pixels til "ansigt / ikke ansigt".
+**Formål:** Gør den usynlige netværksstruktur synlig for første gang.
 
-#### ✅ modul1-ill5-tre-grunde.png — PNG ekstern
-**Titel:** Hvorfor eksploderede AI nu? — Tre grunde
-**Indhold:** Tre lodrette kort side om side med + tegn imellem:
-- Kort 1 (blå top): Database-ikon, "Mere Data", "Internettet har skabt milliarder af tekster, billeder og videoer", "AI lærer fra data"
-- Kort 2 (grøn top): GPU-chip ikon med 🎮, "Hurtigere Hardware", "Grafikkort (GPU) kan lave millioner af beregninger på én gang", "Samme chip som i spil!"
-- Kort 3 (rød top): Tandhjul med "T", "Bedre Algoritmer", "Transformer-arkitekturen fra 2017", "Grundlag for ChatGPT m.fl."
+#### ✅ modul1-ill5-tre-grunde.png
+**Titel:** Tre ting der skete på samme tid
+**Indhold:** Tre kort side om side: Data + Hardware + Algoritmer med plus-tegn imellem. Viser at det er kombinationen der udløste AI-eksplosionen.
+**Formål:** Forklarer HVORFOR AI eksploderede nu — ikke ét gennembrud men tre parallelle faktorer.
 
-#### ✅ modul1-ill6-styrker-svagheder.png — PNG ekstern
-**Titel:** Hvad kan AI — og hvad kan det ikke?
-**Indhold:** To store kort side om side:
-- Venstre (grøn header ✅): 4 rækker med ikon + titel + undertekst: 🔍 Genkende mønstre, ✍️ Generere tekst/billeder/kode, 🌍 Oversætte sprog, 💬 Besvare spørgsmål
-- Højre (rød header ⚠️): 4 rækker: 🤔 Forstå verden som menneske, 🎭 Holde styr på hvad der er sandt, 💡 Ægte kreativitet/følelser, 🆕 Ting den ikke er trænet på
-- Midten: Lille cirkel med "VS ⚖️"
-
----
+#### ✅ modul1-ill6-styrker-svagheder.png
+**Titel:** Hvad AI er god til — og hvad den ikke er
+**Indhold:** To-kolonne oversigt: grøn kolonne (styrker) og rød kolonne (svagheder) med konkrete eksempler i hvert felt.
+**Formål:** Sætter realistiske forventninger — understøtter pointe om at AI ikke er magisk.
 
 ### Modul 2: AI engine og LLM
 
-#### ✅ modul2-ill1-engine-vs-model.png — PNG ekstern
-**Titel:** Model og Engine — hvad er forskellen?
-**Indhold:** Tre bokse vandret med pile imellem:
-- Venstre (blå top): DVD-ikon (cirkel med hul), "Modellen", "fx Llama 3, Qwen 2.5", "En stor fil med tal"
-- Pil med tekst "indlæses i"
-- Midten (grøn top): DVD-afspiller med knapper og PLAY-display, "Engineen", "fx Ollama, PyTorch", "Kører modellen"
-- Pil med tekst "producerer"
-- Højre (rød top): TV-skærm med chat-boble "Hej! Jeg er klar til at hjælpe!", "Output", "AI's svar til dig"
-- Bundtekst: "Modellen = opskriften · Engineen = køkkenet · Output = maden"
+#### ✅ modul2-ill1-engine-vs-model.png
+**Titel:** DVD, afspiller og TV-skærm
+**Indhold:** Tre bokse med pile: DVD'en = modellen (fx Llama 3), DVD-afspilleren = engineen (fx Ollama), TV-skærmen = output (AI's svar).
+**Formål:** Gør det abstrakte engine/model-skel håndgribeligt med en analogi alle kender.
 
-#### ✅ modul2-ill2-token-forudsigelse.png — PNG ekstern
-**Titel:** En LLM gætter hele tiden næste ord
-**Indhold:** Tre zoner ovenfra:
-- Top: Ord-bokse "Jeg går en tur i [?]" — de kendte ord i blå bokse, spørgsmålstegn i stiplet grøn boks
-- Midten: Hjerne-ikon 🧠 med pile ned fra spørgsmålstegn og op fra søjlerne
-- Bund: Sandsynligheds-søjler: "skoven 42%" (grøn, størst, "← vælges!"), "parken 28%" (blå), "haven 18%", "byen 8%", "mørket 4%"
-- Stiplet pil fra "vælges" tilbage til den tomme boks der nu viser "skoven"
+#### ✅ modul2-ill2-token-forudsigelse.png
+**Titel:** Næste ord er en sandsynlighed — ikke et faktum
+**Indhold:** En sætning med tomt felt: "Jeg går en tur i ___". Søjlediagram viser sandsynligheder: "skoven" 42%, "parken" 28%, "byen" 18%, andre 12%.
+**Formål:** Teksten forklarer token-forudsigelse. Illustrationen viser at output er probabilistisk — der er altid andre muligheder.
 
-#### ✅ modul2-ill3-tokenisering.png — PNG ekstern
-**Titel:** Tokenisering — tekst splittes i bidder
-**Indhold:** Tre sektioner:
-- Top: "INPUT:" — hvid boks med teksten "Kunstig intelligens er sejt!" og en saks ✂️
-- Pil ned med tekst "splittes til tokens"
-- Midten "TOKENS:" — 7 farvede bokse:
-  - Orange (del af ord): "Kunst", "ig", " intel", "ligens"
-  - Grøn (helt ord): " er", " sejt"
-  - Blå (tegn): "!"
-  - Sort boks til højre: "I alt: 7 tokens" (grøn tekst)
-- Bund: Farvelegend + context window-bar (7 tokens brugt af 128.000)
+#### ✅ modul2-ill3-tokenisering.png
+**Titel:** Tekst klipt i stykker
+**Indhold:** Papirstrimmel med teksten "Kunstig intelligens er sejt!" der klippes op. Hvert stykke er et token i farvet boks. Enkelt-ord = grøn, del-af-ord = gul, tegnsætning = rød.
+**Formål:** Gør det usynlige tokeniseringslag synligt — AI læser ikke ord, den læser bidder.
 
-#### ✅ modul2-ill4-attention.png — PNG ekstern
-**Titel:** Attention — hvad fokuserer "den" på?
-**Indhold:** Sætningens ord i individuelle bokse øverst:
-- "Katten" (grøn border), "jagede" (grå), "musen" (rød border), "fordi" (grå), "den" (gul border, fremhævet), "var" (grå), "sulten" (grøn border)
-- Attention-linjer fra "den":
-  - Tyk grøn linje til "Katten" (92%)
-  - Medium grøn linje til "sulten" (78%)
-  - Tynd rød stiplet linje til "musen" (6%)
-  - Meget tynd grå linje til "jagede" (3%)
-- Bundforklaring i mørk boks: "Ordet 'den' kigger på alle andre ord... → 'den' = Katten ✓"
-- Legend: tyk linje = stærk forbindelse, stiplet = svag
+#### ✅ modul2-ill4-attention.png
+**Titel:** "Den" — hvem er det?
+**Indhold:** Sætningen "Katten jagede musen fordi den var sulten" med hvert ord i boks. Fra "den" trækkes linjer til alle andre ord — tyk linje til "Katten", tyndere til resten.
+**Formål:** Viser hvad attention-mekanismen faktisk gør — den finder kontekst, ikke bare nabo-ord.
 
-#### ✅ modul2-ill5-embeddings.png — PNG ekstern
-**Titel:** Embeddings — ord med ens betydning bor tæt på hinanden
-**Indhold:** 2D koordinatsystem med 4 farvede ordklynger:
-- 🐾 DYR (grøn zone): hund, kat, fugl, fisk
-- 🚗 TRANSPORT (blå zone): bil, tog, cykel, fly
-- 🍎 MAD (orange zone): æble, brød, pizza, mælk
-- 👑 ROYALT (lilla zone): Konge, Dronning, Mand, Kvinde
-- Stiplet linje ml. hund og bil med tekst "langt fra hinanden"
-- Mørk formel-boks i hjørnet: "Konge − Mand + Kvinde ≈ Dronning ✓"
+#### ✅ modul2-ill5-embeddings.png
+**Titel:** Ords "plads" i betydningsrummet
+**Indhold:** 2D-kort med fire klynger: Dyr (hund, kat, fugl), Transport (bil, tog, cykel), Mad (æble, brød, pizza), Sport (fodbold, tennis, svømning). Afstand mellem klynger synlig.
+**Formål:** Gør embeddings konkret — ord med ens betydning ligger tæt, uens langt fra hinanden.
 
-#### ✅ modul2-ill6-model-sammenligning.png — PNG ekstern
-**Titel:** De store modeller — hvem er hvem?
-**Indhold:** 2×2 grid med fire modell-kort:
-- Øverste venstre (grøn border): C-cirkel, "Claude / af Anthropic", ☁️ Cloud badge, ✦ 200K tokens, ✦ Analyse og lange tekster, ✦ Multimodal
-- Øverste højre (blå border): GPT-cirkel, "GPT-4o / af OpenAI", ☁️ Cloud badge, ✦ Den mest kendte, ✦ Alsidig, ✦ Multimodal
-- Nederste venstre (orange border): 🦙 Llama 3 / af Meta, 💻 Lokal badge, 🔓 Open Source badge, ✦ Gratis lokalt, ✦ Næsten cloud-kvalitet
-- Nederste højre (rød border): Q-cirkel, "Qwen 2.5 / af Alibaba", 💻 Lokal badge, 🔓 Open Source badge, ✦ Stærk til kodning, ✦ Effektiv hardware-brug
-- Bundlinje: "Cloud → hurtigt, kraftfuldt" | "Lokal → privat, gratis"
+#### ✅ modul2-ill6-model-sammenligning.png
+**Titel:** Cloud eller lokal — hvad er hvad?
+**Indhold:** Fire kort i 2×2 grid. Hvert kort: modelnavn, afsender, sky-ikon ☁️ eller computer-ikon 💻, og to-tre nøgleord. Cloud i blå toner, lokale i grønne.
+**Formål:** Giver et hurtigt overblik over modellers placering og egenskaber — ikke en rangliste.
 
----
+### Modul 3: Lokal AI vs. cloud AI
 
-### Modul 3: Local vs Cloud
+#### ✅ modul3-ill1-lokal-vs-cloud.png
+**Titel:** To veje til det samme svar
+**Indhold:** Split-screen: lokal AI (data forbliver på maskinen, pil vender ind) vs. cloud AI (data sendes til server, pil vender ud).
+**Formål:** Visualiserer data-flow — den vigtigste forskel der ikke er synlig i svaret.
 
-#### ✅ modul3-ill1-lokal-vs-cloud.png — PNG ekstern
-**Titel:** To veje til AI — hvilken vælger du?
-**Indhold:** Central computer-boks i midten. To stier:
-- Venstre (grøn pil): "Ingen internet" label, lokal PC-boks med 🔒 badge, grøn nøgleords-boks: ✅ Privat, ✅ Gratis drift, ✅ Offline, ⚠️ Kræver hardware
-- Højre (blå pil): "via internet" label, sky-boks med ☁️, blå nøgleords-boks: ✅ Hurtigt, ✅ Ingen opsætning, ✅ De bedste modeller, ⚠️ Data til tredjemand
-- Bundforklaring i mørk boks: madlavnings-analogien (restaurant vs hjemmelavet)
+#### ✅ modul3-ill2-privacy.png
+**Titel:** Hvad forlader din maskine?
+**Indhold:** To scenarier: lokal AI (grøn lås, ingen pil ud) vs. cloud AI (rød pil ud til server, liste af hvad der sendes: prompt, kontekst, evt. filer).
+**Formål:** Gør privacy-konsekvensen konkret og synlig.
 
-#### ✅ modul3-ill2-privacy.png — PNG ekstern
-**Titel:** Privacy — hvor rejser dine data?
-**Indhold:** To store sektioner side om side:
-- Venstre "🔒 Lokal AI" (grøn): Flowdiagram Person → Computer → Model, alt inde i grøn stiplet boble "Alt foregår inde i din computer", Hvid boks med ✅ eksempler på hvad man trygt kan spørge om
-- Højre "☁️ Cloud AI" (rød): Flowdiagram Person → internet → 🏢 Virksomhedens servere → Model, rød advarsel "⚠️ Dine beskeder kan logges og analyseres", Hvid boks med ❌ ting man skal være forsigtig med
+#### ✅ modul3-ill3-cpu-gpu-ram-vram.png
+**Titel:** Hardwarens fire roller
+**Indhold:** Computerkasse med fire annoterede dele: CPU, GPU, RAM, VRAM — med pil der viser hvilken del modellen kører på.
+**Formål:** Teksten forklarer hvad de er. Illustrationen viser SAMMENHÆNGEN — hvilken del der er flaskehalsen for AI.
 
-#### ✅ modul3-ill3-cpu-gpu-ram-vram.png — PNG ekstern
-**Titel:** Hardware 101 — CPU, GPU, RAM og VRAM
-**Indhold:** 2×2 grid:
-- Øverste venstre (blå): CPU chip-ikon, 👨‍💼 rektor-analogi, "Meget klog, løser alle slags opgaver — men behandler én ad gangen", "Typisk 8–32 kerner"
-- Øverste højre (grøn): GPU med mange små kerner-grid, 👩‍🎓👨‍🎓 klasse-analogi, "Tusindvis af kerner der løser simple opgaver alle på samme tid", "Typisk 3.000–16.000 kerner"
-- Nederste venstre (lilla): Skrivebords-ikon med papirer, RAM, "Jo større bord, jo mere kan du have fremme", "Typisk 8–64 GB"
-- Nederste højre (orange): Lille skrivebord inde i GPU med "AI MODEL" blok, VRAM, "Modellen SKAL passe ind her for at køre hurtigt", "Typisk 4–24 GB"
+#### ✅ modul3-ill4-model-storrelse.png
+**Titel:** Størrelse vs. hvad der passer i dit VRAM
+**Indhold:** Søjlediagram: 7B, 13B, 34B, 70B modeller vs. VRAM-krav. Farvekodet: grøn = passer i 8GB, gul = kræver 16GB, rød = kræver 24GB+.
+**Formål:** Giver praktisk beslutningsgrundlag — ikke abstrakt størrelse, men om det passer på din hardware.
 
-#### ✅ modul3-ill4-model-storrelse.png — PNG ekstern
-**Titel:** Modellens størrelse og hvad du skal bruge
-**Indhold:** Lodret thermometer/søjle til venstre (farvet fra grøn bund til orange top). Fem vandrette rækker:
-- 1–3B (grøn): "Lille og hurtig", "4 GB RAM (CPU) · Kører på alt"
-- 7–8B (grøn, fremhævet med "⭐ sweet spot"): "God allrounder ← Anbefalet start", "8 GB VRAM / 16 GB RAM · Qwen2.5 7B, Llama 3.1 8B"
-- 13–14B (blå): "Stærkere reasoning", "12 GB VRAM / 32 GB RAM"
-- 32–70B (orange): "Næsten cloud-kvalitet", "24+ GB VRAM"
-- 405B+ (rød): "Kun realistisk i cloud"
-- Bundtekst i mørk boks: "Tommelfingerregel: start med 7–8B"
+#### ✅ modul3-ill5-quantization.png
+**Titel:** Præcision byttet for størrelse
+**Indhold:** Samme model i tre størrelser: Q8 (stor, præcis) → Q4 (medio) → Q2 (lille, unøjagtig). Størrelse-bar krymper, kvalitets-indikator falder let.
+**Formål:** Viser tradeoff-et visuelt — quantization er ikke gratis, men tabet er lille ved Q4.
 
-#### ✅ modul3-ill5-quantization.png — PNG ekstern
-**Titel:** Quantization — større modeller på mindre hardware
-**Indhold:** To søjler side om side med pil imellem:
-- Venstre "Original model (16-bit / FP16)": Stort grid af præcise decimaltal, "Hvert tal: 16 bits = høj præcision", filstørrelse-bar: "~140 GB" (fuld blå bar)
-- Pil med "Q4 quantize" i mørk boks
-- Højre "Q4 model (4-bit)": Grovere tal, "Hvert tal: 4 bits = lidt lavere præcision", filstørrelse-bar: "~40 GB" (kort grøn bar), "75% mindre! Kører på RTX 4090"
-- Bund: Kvalitets-sammenligning: "Original 100%" vs "Q4 ~95%"
+### Modul 4: Hvad sker der bag skærmen?
+
+#### ✅ modul4-ill1-pipeline-overblik.png
+**Titel:** Fra prompt til svar — 6 trin
+**Indhold:** Vandret pipeline med 6 nummererede trin fra input til output. Hvert trin navngivet og kort beskrevet.
+**Formål:** Gør den usynlige inferens-pipeline synlig og lineær.
+
+#### ✅ modul4-ill2-token-by-token-generation.png
+**Titel:** Svaret vokser et token ad gangen
+**Indhold:** Vertikal sekvens der viser svaret vokse token for token. Hvert trin tilføjer ét ord/token til strengen.
+**Formål:** Forklarer HVORFOR streaming ser ud som det gør — output genereres ikke på én gang.
+
+#### ✅ modul4-ill3-temperature.png
+**Titel:** Lav vs. høj temperature — to vidt forskellige AI'er
+**Indhold:** To søjlediagrammer side om side med samme prompt. Lav temperature (0.1): én høj søjle — forudsigeligt svar. Høj temperature (1.0): mange jævne søjler — kreativt men uforudsigeligt.
+**Formål:** Gør den abstrakte parameter konkret som en visuel fordeling.
+
+#### ✅ modul4-ill4-context-window.png
+**Titel:** Hukommelsesvinduet — hvad AI'en kan "se"
+**Indhold:** Lang samtale-scroll med vindue der fremhæver de nyeste beskeder — ældre nedtonet og ude af vindue.
+**Formål:** Forklarer kontekstvinduet som et fysisk vindue — AI'en ser kun det der er indenfor.
+
+#### ✅ modul4-ill5-hallucination.png
+**Titel:** Opdigtet med selvsikker stemme
+**Indhold:** Chat-mockup med opdigtet bogtitel fremhævet med rød boks og ❌. AI-svaret ser normalt ud — kun den røde markering afslører fejlen.
+**Formål:** Viser at hallucination ikke ser anderledes ud end korrekte svar — det er det farlige.
+
+### Modul 5: Pris og forretningsmodel
+
+#### ✅ modul5-ill1-token-priser.png
+**Titel:** Hvad koster én besked?
+**Indhold:** Prisberegning pr. besked + søjlediagram over modeller. Viser konkret udregning: antal tokens × pris pr. token.
+**Formål:** Gør token-priser håndgribelige med et regneeksempel.
+
+#### ✅ modul5-ill2-abonnement-vs-api.png
+**Titel:** Fast pris vs. betaling pr. brug
+**Indhold:** To kort side om side: abonnement (fast månedspris, ubegrænset brug) vs. API (nul grundpris, betaler pr. kald).
+**Formål:** Hjælper med at vælge model — synliggør hvornår API er billigst.
+
+#### ✅ modul5-ill3-pris-sammenligning.png
+**Titel:** Lokal vs. abonnement vs. API — hvad koster det over et år?
+**Indhold:** Tre lodrette kort: lokal (engangsomkostning hardware), abonnement (månedlig fast), API (variabel, afh. af brug). Årlig totalpris for typisk bruger.
+**Formål:** Giver et samlet beslutningsgrundlag på tværs af de tre modeller.
 
 ---
 
-### Modul 4: Processen fra forespørgsel til svar
+## Trin 2: Interfaces & Værktøjer (Moduler 6–12)
 
-#### ✅ modul4-ill1-pipeline-overblik.png — PNG ekstern
-**Titel:** Fra spørgsmål til svar — hele rejsen
-**Indhold:** Vandret pipeline med 6 nummererede trin, forbundet med pile:
-1. **Input** (tastatur-ikon): "Din tekst: Hvad er verdens højeste bjerg?"
-2. **Tokenisering** (saks-ikon): teksten opdeles i tokens
-3. **Embeddings** (koordinat-ikon): tokens → tal/vektorer
-4. **Attention** (øje-ikon): alle tokens kigger på hinanden
-5. **Generering** (tandhjul-ikon): token-for-token output
-6. **Output** (chat-ikon): "Mount Everest er verdens højeste bjerg..."
-Under hele pipelinen: en lang grøn pil venstre til højre. Farver: trin 1–2 = blå, trin 3–4 = lilla, trin 5–6 = grøn.
-
-#### ✅ modul4-ill2-token-by-token-generation.png — PNG ekstern
-**Titel:** Svaret bygges op ét token ad gangen
-**Indhold:** Vertikal sekvens der viser svar der vokser token for token:
-- "Mount" → "Mount Everest" → "Mount Everest er" → osv.
-- Hvert nyt token markeret grønt
-- Pile fra nyt token tilbage til alle tidligere tokens — viser kontekst-opslag
-- Bundtekst: "Hvert token = én beregning · Længere svar = flere beregninger"
-
-#### ✅ modul4-ill3-temperature.png — PNG ekstern
-**Titel:** Temperature — kreativ eller fokuseret?
-**Indhold:** To sektioner side om side:
-- Venstre "🌡️ Lav temperature (0.1)": Søjlediagram ét ord dominerer (85%). Output: "Mount Everest er 8.849 meter højt." (faktuel)
-- Højre "🎨 Høj temperature (1.0)": Søjlediagram jævn fordeling. Output: "Tænk på bjerget som et svar på universets største spørgsmål..." (kreativ)
-- Bundtekst: "Lav = præcis og forudsigelig · Høj = kreativ og overraskende"
-
-#### ✅ modul4-ill4-context-window.png — PNG ekstern
-**Titel:** Context window — hvad kan modellen huske?
-**Indhold:** Lang samtale-scroll, vindue fremhæver kun de nyeste beskeder. Øverste beskeder nedtonet: "Modellen ser ikke dette længere". Til højre: tre modeller med bar for vinduesstørrelse:
-- Llama 3 (lokal): "8.000 tokens"
-- GPT-4o: "128.000 tokens"
-- Claude: "200.000 tokens ≈ en hel roman"
-
-#### ✅ modul4-ill5-hallucination.png — PNG ekstern
-**Titel:** Hallucination — når AI gætter forkert
-**Indhold:** Chat-mockup:
-- Bruger: "Hvornår udgav Astrid Lindgren bogen 'Brødrene Bjørnedal'?"
-- AI svarer selvsikkert med opdigtet svar — fremhævet med rød boks og ❌ "Denne bog eksisterer ikke! AI opfandt den."
-- Forklarings-boks: "AI genererer sandsynlig tekst — ikke nødvendigvis sand tekst"
-- Grøn boks: "✅ Tjek altid vigtige fakta i andre kilder"
-
----
-
-### Modul 5: Prismodeller
-
-#### ✅ modul5-ill1-token-priser.png — PNG ekstern
-**Titel:** Hvad koster et token?
-**Indhold:**
-- Top: Besked sendes (200 input tokens) og svar returneres (150 output tokens)
-- Midten: Prisberegning: 200 × $0.000003 = $0.0006, 150 × $0.000015 = $0.0023, total ~$0.003
-- Bund: Søjlediagram input vs output priser for 4 modeller (Haiku, Sonnet, GPT-4o mini, GPT-4o)
-- Bundtekst: "1 kop kaffe ≈ pris for ~50.000 GPT-4o mini beskeder"
-
-#### ✅ modul5-ill2-abonnement-vs-api.png — PNG ekstern
-**Titel:** Abonnement eller API — hvornår vælger du hvad?
-**Indhold:** To kort side om side:
-- Venstre "📅 Abonnement": Fast pris, check-liste med hvornår det giver mening. Pris-badge: "$20/md"
-- Højre "🔌 API (pay-per-use)": Betaler pr. brug, check-liste. Pris-badge: "Fra $0.0002/besked"
-- Bund: "Ny bruger? Start med gratis tier → opgrader kun hvis du har brug for det"
-
-#### ✅ modul5-ill3-pris-sammenligning.png — PNG ekstern
-**Titel:** Hvad koster et år med AI?
-**Indhold:** Tre lodrette kort:
-- Lokal (grøn): 🖥️ "~$10–20/år (kun strøm)", ✅ Gratis modeller, ⚠️ Kræver hardware
-- Cloud abonnement (blå): ☁️ "~$240/år ($20/md)", ✅ Bedste modeller, ⚠️ Fast udgift
-- Cloud API (lilla): 🔌 "~$5–50/år (typisk brug)", ✅ Fleksibel, ⚠️ Kræver programmering
-- Gratis tier fremhævet som startpunkt for unge/studerende
-
----
-
-## Trin 2: Interfaces og værktøjer (Moduler 6–12)
-
-### Modul 6: Web-interfaces — ChatGPT, Claude, OpenRouter
+### Modul 6: Web-interfaces
 
 #### ✅ modul6-ill1-web-interface-oversigt.png
-**Titel:** Hvad sker der når du skriver til en LLM?
-**Indhold:** Browser → internet-pil → AI-server-boks → svar-pil tilbage til browser. Vis login-symbol og historik-symbol på serverens side. Under: lille advarsel-boks “dine beskeder sendes over internettet”.
+**Titel:** Browser til AI og tilbage
+**Indhold:** Oversigt: browser → internet → AI-server → svar tilbage — med login og historik markeret.
+**Formål:** Viser den tekniske kæde bag et simpelt klik — og at data forlader maskinen.
 
 #### ✅ modul6-ill2-chatgpt-interface.png
-**Titel:** ChatGPT — hvad kan det?
-**Indhold:** Mockup af ChatGPT-interface med: tekstboks, filupload-ikon, websøgnings-ikon og GPT-4o label. Pile der peger på de vigtigste features med korte labels.
+**Titel:** ChatGPT-interface annoteret
+**Indhold:** ChatGPT-interface med eksempel på samtale, filupload og websøgning markeret med pile og labels.
+**Formål:** Anatomiserer interfacet — gør de skjulte funktioner synlige.
 
 #### ✅ modul6-ill3-claude-interface.png
-**Titel:** Claude.ai — hvad kan det?
-**Indhold:** Mockup af Claude-interface. Fremhæv 200K context window som en lang bar sammenlignet med andre modellers kortere bar. Label: “svarende til en hel roman”.
+**Titel:** Claude.ai og det lange kontekstvindue
+**Indhold:** Claude.ai-interface med eksempel på lang dokument-analyse og 200K context window markeret.
+**Formål:** Differentierer Claude fra ChatGPT visuelt — kontekststørrelsen som konkret fordel.
 
 #### ✅ modul6-ill4-openrouter-model-valg.png
-**Titel:** OpenRouter — ét sted, alle modeller
-**Indhold:** Ét interface i midten med pile til mange model-logoer rundt om (GPT, Claude, Llama, Mistral, Gemini). Prissammenligning-tabel under. Label: “ét API-key til dem alle”.
+**Titel:** Ét interface — mange modeller
+**Indhold:** OpenRouter: ét interface med mange modeller — prissammenligning og model-skift vist.
+**Formål:** Viser OpenRouters unikke value prop — ikke et chatvindue men et switchboard.
 
 #### ✅ modul6-ill5-web-vs-api.png
-**Titel:** Web-interface vs. API — hvornår bruger du hvad?
-**Indhold:** To kolonner. Venstre (browser-ikon): klik og skriv, ingen kode, manuel. Højre (kode-ikon): Python/JS, automatisk, skalerbar. Under hver: checkmarks for hvornår det giver mening.
+**Titel:** Klik vs. kode — hvornår vælger du hvad?
+**Indhold:** To kolonner: web-interface (browser, klik, manuel) vs. API (kode, automatisering). Eksempler på use cases i hvert felt.
+**Formål:** Giver beslutningsramme — understøtter kapitlets centrale valg-pointe.
 
----
-
-### Modul 7: Ollama — kør AI-modeller lokalt
+### Modul 7: Ollama — lokal AI
 
 #### ✅ modul7-ill1-ollama-arkitektur.png
-**Titel:** Ollama — hvad er det og hvad løser det?
-**Indhold:** Tre lag lodret stablet:
-- Top: Programmer der bruger AI (terminal, browser, Python-script)
-- Midt: Ollama-server (grøn boks) med label “lokal server på port 11434”
-- Bund: Model-filer (Qwen, Llama, Mistral som filbokse)
-- Pile op og ned der viser data-flow. Til venstre: “før Ollama — kompleks opsætning” (rod af pile og fejl-ikoner). Til højre: “med Ollama — én kommando” (enkelt pil ned).
+**Titel:** Ollama som midterlag
+**Indhold:** Ollama som lag mellem model-filer og bruger/programmer — terminal, browser og Python alle forbundet til Ollama i midten.
+**Formål:** Viser HVAD Ollama gør — ikke bare at det er et program, men at det er et interface-lag.
 
 #### ✅ modul7-ill2-ollama-kommandoer.png
-**Titel:** De vigtigste Ollama-kommandoer
-**Indhold:** 5 vandrette rækker, hver med:
-- Kommando i monospace grøn kode-boks (fx `ollama pull qwen2.5:7b`)
-- Ikon der illustrerer handlingen (download-pil, play-knap, liste, skraldespand, info-i)
-- Kort forklaring (fx “Download en model til din computer”)
-- Eksempel på output i grå boks under
-Bundlinje: “Brug `ollama list` jævnligt for at holde styr på plads”
+**Titel:** De 5 kommandoer du skal kende
+**Indhold:** De 5 vigtigste Ollama-kommandoer med eksempler og hvad de gør. Terminal-format.
+**Formål:** Giver hurtig reference — teksten forklarer, illustrationen strukturerer.
 
 #### ✅ modul7-ill3-lokal-api-server.png
-**Titel:** Ollama som lokal API-server
-**Indhold:** Central boks “Ollama :11434” i midten. Fire klienter forbundet med pile:
-- Terminal (sort vindue-ikon)
-- Python-script (Python-logo)
-- Open WebUI (browser-ikon)
-- VS Code extension (editor-ikon)
-Over pilen: “HTTP request”. Under: “HTTP response”. Mørk boks i hjørnet: “localhost — trafik forlader aldrig din maskine 🔒”
+**Titel:** Port 11434 — din lokale AI-server
+**Indhold:** Ollama på port 11434 — terminal, Python-script, Open WebUI og browser alle forbundet.
+**Formål:** Viser at Ollama er en server — ikke kun et CLI-tool. Åbner for programmatisk brug.
 
 #### ✅ modul7-ill4-model-library.png
-**Titel:** Model library — hvad vælger du?
-**Indhold:** Tabel-layout med 6 rækker (en per model-familie):
-- Kolonne 1: Model-navn + logo/farve-ikon
-- Kolonne 2: Størrelse (fx 3B / 7B / 14B som farvede badges)
-- Kolonne 3: Bedst til (fx “God allrounder”, “Kodning”, “Reasoning”)
-- Fremhæv “Qwen 2.5 7B” med ⭐ “Anbefalet start” badge
-- Bundlinje: “Start med 7B — opgrader kun hvis du skal bruge mere”
+**Titel:** Hvilken model til hvad?
+**Indhold:** Oversigt over populære Ollama-modeller med størrelse, styrker og anbefalede use cases.
+**Formål:** Hjælper med modelvalg — giver overblik teksten ikke kan give i lineær form.
 
----
-
-### Modul 8: Lokale interfaces — LM Studio, Open WebUI, Msty
+### Modul 8: Lokale interfaces
 
 #### ✅ modul8-ill1-lokal-interface-oversigt.png
-**Titel:** Lokalt interface — hvad er det?
-**Indhold:** Lagdiagram med tre niveauer (top til bund):
-- Top (lys baggrund): Grafisk interface — tre ikoner side om side: LM Studio (desktop), Open WebUI (browser), Msty (desktop)
-- Midt (grøn baggrund): Ollama / model-engine med gear-ikon
-- Bund (blå baggrund): Model-filer (Qwen, Llama, Mistral)
-- Pile ned og op. Højre side: stor grøn boks “Alt foregår på din computer 🔒”
+**Titel:** Tre lag — én lokal stak
+**Indhold:** Lagdiagram: Grafisk interface (top) → Ollama (midt) → Model-fil (bund) — alt lokalt.
+**Formål:** Viser arkitekturen der gør lokale interfaces mulige.
 
 #### ✅ modul8-ill2-sammenligning.png
-**Titel:** LM Studio vs Open WebUI vs Msty — hvornår bruger du hvad?
-**Indhold:** Tre kort side om side, hvert med farvet header:
-- LM Studio (blå): “Fulld kontrol” — ikon: desktop-app, ✅ Model browser, ✅ Parameter-justering, ✅ Lokal API-server, Target: avancerede brugere
-- Open WebUI (grøn): “ChatGPT-følelsen, lokalt” — ikon: browser, ✅ Historik, ✅ Flere brugere, ✅ Model-skift, Target: server / homelab
-- Msty (lilla): “Bare kom i gang” — ikon: desktop-app, ✅ Auto-forbinder til Ollama, ✅ Ingen konfiguration, Target: begyndere
+**Titel:** LM Studio, Open WebUI, Msty — hvornår vælger du hvad?
+**Indhold:** Tre kort side om side: LM Studio, Open WebUI, Msty — installation, krav og hvornår du vælger det.
+**Formål:** Giver beslutningsramme i stedet for en liste af egenskaber.
 
 #### ✅ modul8-ill3-hardware-krav.png
-**Titel:** Hardware-krav til lokale modeller
-**Indhold:** Vandret bjælke-diagram — tre niveauer markeret med farver:
-- Rød zone: “Minimum — 8 GB RAM, CPU-kørsel” — ikon: gammel laptop — “3B model, langsomt”
-- Gul zone: “Anbefalet — 16 GB RAM + 8 GB VRAM” — ikon: gaming-PC — “7B model, hurtigt”
-- Grøn zone: “Komfortabelt — 32 GB RAM + 12–16 GB VRAM” — ikon: workstation — “13–14B model”
-Bundtekst: “Uden GPU: 5–20x langsommere — muligt men ikke ideelt”
+**Titel:** Tre niveauer — hvad kan din maskine?
+**Indhold:** Tre niveauer: minimum (CPU-only), anbefalet (8GB VRAM), komfortabelt (16GB VRAM) — med konkrete model-eksempler på hvert niveau.
+**Formål:** Sætter realistiske forventninger baseret på hardware — ikke abstrakte krav.
 
 #### ✅ modul8-ill4-lokal-vs-cloud-fordele.png
-**Titel:** Lokal AI — fordele og ulemper
-**Indhold:** To kolonner:
-- Venstre “🔒 Lokal AI” (grøn header): ✅ Privacy — data forlader ikke maskinen, ✅ Offline, ✅ Ingen løbende omkostninger, ✅ Fuld kontrol, ⚠️ Kræver hardware, ⚠️ Initial opsætning
-- Højre “☁️ Cloud AI” (blå header): ✅ Hurtigt og kraftfuldt, ✅ Ingen hardware-krav, ✅ Altid opdateret, ⚠️ Data til tredjemand, ⚠️ Koster penge ved højt forbrug
+**Titel:** Hvornår vælger du lokal — og hvornår cloud?
+**Indhold:** To kolonner: lokal AI (grøn) vs. cloud AI (blå) — fordele og ulemper for begge. Beslutnings-ikon nederst.
+**Formål:** Samler kapitlets centrale valg i et overblik — teksten argumenterer, illustrationen strukturerer.
 
----
-
-### Modul 9: GitHub Copilot — AI i din editor
+### Modul 9: GitHub Copilot
 
 #### ✅ modul9-ill1-copilot-i-vscode.png
-**Titel:** GitHub Copilot i VS Code
-**Indhold:** Mockup af VS Code-editor:
-- Venstre: kode med nedtonet grå autocomplete-forslag synligt
-- Højre sidebar: Copilot Chat-panel åbent med en samtale
-- Pile og labels der peger på: “Autocomplete”, “Chat-panel”, “Inline edit (Ctrl+I)”
-- Bundlinje: “Copilot er en co-pilot — ikke en pilot”
+**Titel:** Copilot som ekstra programmør i editoren
+**Indhold:** VS Code med Copilot aktiv — autocomplete-forslag vist som nedtonet tekst, chat-panel og inline suggestions markeret.
+**Formål:** Viser Copilots tre tilstande på én gang — giver overblik før man åbner VS Code.
 
 #### ✅ modul9-ill2-autocomplete-eksempel.png
-**Titel:** Autocomplete — kodeforslag mens du skriver
-**Indhold:** Kode-editor-udsnit med:
-- Kommentar øverst (grøn): `# Funktion der beregner gennemsnittet af en liste tal`
-- Første linje skrevet af bruger: `def beregn_gennemsnit(`
-- Resten af funktionen vist som nedtonet grå Copilot-forslag
-- Tre pile med labels: `Tab → acceptér`, `Esc → afvis`, `Alt+] → næste forslag`
+**Titel:** Tab, Esc eller Alt+pil — tre reaktioner
+**Indhold:** Kode-editor med Copilot-forslag vist som nedtonet tekst. Tab/Esc/Alt-pil forklaret med pile og resultater.
+**Formål:** Gør det interaktive workflow konkret — de tre tastevalg og hvad de gør.
 
 #### ✅ modul9-ill3-copilot-workflow.png
-**Titel:** Copilot-workflow fra kommentar til færdig kode
-**Indhold:** Vandret sekvens med 4 trin og pile imellem:
-1. “Skriv kommentar” — ikon: tastatur — eksempel: `# Sorter liste og fjern dubletter`
-2. “Copilot foreslår” — ikon: gul lysære — nedtonet kode dukker op
-3. “Gennemgå forslaget” — ikon: øje — “Forstå inden du acceptérer!”
-4. “Acceptér eller afvis” — ikon: grøn flueben / rød kryds — Tab / Esc
-Bundlinje: “Gennemgå altid koden inden accept” (rød fremhævning)
+**Titel:** Kommentar → forslag → godkend
+**Indhold:** Workflow: skriv kommentar → Copilot foreslår → gennemgå → acceptér/afvis. Med Tab/Esc markeret.
+**Formål:** Viser den iterative loop — at Copilot er en dialog, ikke et enkelt kald.
 
 #### ✅ modul9-ill4-pris-oversigt.png
-**Titel:** GitHub Copilot — pris og licens
-**Indhold:** Tre plan-kort vandret:
-- Grå kort “Gratis”: $0, begrænsede completions per måned, godt til at prøve
-- Blå kort “Individual”: ~$10/md, ubegrænset, alle features
-- Grøn kort “Studerende”: GRATIS badge i rødt, “Via GitHub Education”, “tjek om du er berettiget →”
-Bundlinje: “Studerende med .edu-mail — tjek GitHub Education inden du betaler”
+**Titel:** Gratis, Individual, Studerende — hvad får du?
+**Indhold:** Tre plan-kort: Gratis, Individual, Studerende — med hvad hvert indeholder og pris.
+**Formål:** Giver beslutningsgrundlag for plan-valg på ét overblik.
 
----
-
-### Modul 10: OpenCode — AI-assisteret kodning i terminalen
+### Modul 10: OpenCode
 
 #### ✅ modul10-ill1-opencode-oversigt.png
-**Titel:** OpenCode — AI agent der ser hele dit projekt
-**Indhold:** To sider:
-- Venstre “Copilot”: editor med én fil åben, pil markerer “ser kun denne fil”
-- Højre “OpenCode”: terminal med mappetrae vist, pile ud til mange filer, label “forstår hele projektet”
-Under: workflow-pile → “Naturligt sprog ind” → “Filer læses” → “Diff vises” → “Du godkender”
+**Titel:** Naturligt sprog ind — kodeændringer ud
+**Indhold:** Terminal med OpenCode: naturligt sprog ind → filer læses → kodeændringer foreslås → bruger godkender/afviser.
+**Formål:** Viser OpenCodes flow i modsætning til Copilots inline-model.
 
 #### ✅ modul10-ill2-opencode-workflow.png
-**Titel:** OpenCode — workflow fra instruktion til kørende kode
-**Indhold:** Lodret sekvens — 4 trin med terminal-mockup:
-1. Bruger skriver: `> Tilføj email-validering til auth.py`
-2. OpenCode: “Scanner projekt...” + mappetræ vist
-3. Diff-visning: grønne linjer (tilføjet) og røde linjer (fjernet)
-4. Prompt: “Godkend ændringer? [j/n]” — grøn j-knap fremhævet
+**Titel:** Diff-visning — se præcis hvad der ændres
+**Indhold:** Terminal-session: instruktion → fil-scanning → diff-visning med grønt/rødt → godkend/afvis.
+**Formål:** Viser det centrale feature der adskiller OpenCode fra chatbots: diff-approval.
 
 #### ✅ modul10-ill3-cloud-vs-lokal-kodning.png
-**Titel:** Cloud vs. lokal model til kodning
-**Indhold:** To stier fra “OpenCode”-boksen i midten:
-- Venstre sti (blå): “Cloud” — ikon: sky — ✅ Hurtigst og smartest, ✅ Komplekse opgaver, ⚠️ Koster penge, ⚠️ Kode sendes til ekstern server
-- Højre sti (grøn): “Lokal (Ollama)” — ikon: computer — ✅ Gratis, ✅ Fuldt privat 🔒, ⚠️ Langsommere, ⚠️ Kræver god hardware
-Bundlinje: “Fortrolig kode? Altid lokal.”
+**Titel:** Hurtigt og dyrt vs. langsomt og privat
+**Indhold:** To stier side om side: cloud-kodning (hurtig, koster penge, data ud) vs. lokal kodning (langsommere, gratis, privat).
+**Formål:** Giver det centrale valg visuelt — understøtter teksten om hvornår lokal kodning giver mening.
 
----
-
-### Modul 11: Pi Agent — letvægts AI coding agent
+### Modul 11: Pi Agent
 
 #### ✅ modul11-ill1-pi-agent-oversigt.png
-**Titel:** Pi Agent — letvægts terminal-agent
-**Indhold:** Terminal-vindue med Pi Agent i gang:
-- Øverst: projekt-mappe vises (`/mit-projekt`)
-- Bruger skriver: `> Tilføj docstrings til alle funktioner i utils.py`
-- Pi Agent: “Læser utils.py...”, “Forslår 3 ændringer”
-- Diff vist med grønne tilføjelser
-- Prompt: “Godkend? [j/n]”
-Højre side: tre labels med pile — “Laser-fokus”, “Letvægts”, “Virker med Ollama”
+**Titel:** Pi Agent som kodende agent med godkendelse
+**Indhold:** Pi Agent i terminal: læser filer, skriver kode, kører kommandoer — bruger godkender hvert trin.
+**Formål:** Viser agent-tilgangen i kontrast til Copilots forslag-model.
 
 #### ✅ modul11-ill2-agent-sammenligning.png
-**Titel:** Pi Agent vs OpenCode vs Claude Code
-**Indhold:** Tre kort side om side:
-- Pi Agent (lilla): “Letvægts” — ✅ Simpel opsætning, ✅ Lokal-model fokus, ✅ Få afhængigheder, ❌ Færre features
-- OpenCode (grøn): “Bred support” — ✅ Mange modeller, ✅ Aktivt community, ✅ Fuld feature-set, ❌ Mere kompleks
-- Claude Code (blå): “Officiel” — ✅ Tæt Claude-integration, ✅ Officiel support, ✅ Stor community, ❌ Primært cloud
-Bund: “Alle tre: terminal-baserede, arbejder med hele projekter, naturligt sprog”
+**Titel:** Pi Agent, OpenCode, Claude Code — hvornår vælger du hvad?
+**Indhold:** Tre kort: Pi Agent, OpenCode, Claude Code — nøgleforskelle og hvornår du vælger det.
+**Formål:** Giver beslutningsramme på tværs af de tre agenter.
 
----
-
-### Modul 12: Vælg den rigtige model til opgaven
+### Modul 12: Modelvalg
 
 #### ✅ modul12-ill1-model-landskab.png
-**Titel:** AI-model landskabet — overblik
-**Indhold:** 2D diagram med to akser:
-- X-akse: Lokal ↔ Cloud
-- Y-akse: Lille/hurtig ↔ Stor/kraftfuld
-Modeller placeret som farvede cirkler:
-- Lokal/lille: Qwen 2.5 3B, Gemma 3 4B (grøn)
-- Lokal/stor: Qwen 2.5 14B, DeepSeek-R1 14B (blå)
-- Cloud/hurtig: GPT-4o mini, Claude Haiku (gul)
-- Cloud/kraftfuld: Claude Sonnet, GPT-4o, o3 (rød)
-Farve-legend og “sweet spot” markeret
+**Titel:** Hele landskabet — cloud og lokal på ét overblik
+**Indhold:** Oversigt over alle modeller fordelt på cloud/lokal og størrelse — visuelt landskab.
+**Formål:** Giver overblik teksten ikke kan give lineært — positionerer alle modeller relativt.
 
 #### ✅ modul12-ill2-benchmarks.png
-**Titel:** Benchmarks — sådan måles modeller
-**Indhold:** Gruperet søjlediagram — 6 modeller på X-aksen, tre farvede søjler per model:
-- Grøn søjle: MMLU (generel viden)
-- Blå søjle: HumanEval (kodning)
-- Orange søjle: MATH (matematik)
-Advarsel-boks under: “⚠️ Benchmarks måler specifikke ting — test altid på dine egne use cases”
+**Titel:** Hvem vinder på hvad?
+**Indhold:** Søjlediagram: top 6 modeller på tværs af 3 benchmarks (kodning, reasoning, generel viden).
+**Formål:** Viser at ingen model vinder på alle discipliner — understøtter "rigtig model til opgaven"-pointen.
 
 #### ✅ modul12-ill3-valg-guide.png
-**Titel:** Vælg den rigtige model — step by step
-**Indhold:** Flowdiagram (top til bund):
-- Start: “Hvad er opgaven?”
-- Forgrening 1: Kodning → “Cloud: Claude Sonnet / Lokal: Qwen2.5-Coder”
-- Forgrening 2: Skriving → “Cloud: GPT-4o / Lokal: Mistral 7B”
-- Forgrening 3: Langt dokument → “Claude (200K)”
-- Forgrening 4: Matematik/logik → “Cloud: o3 / Lokal: DeepSeek-R1”
-- Forgrening 5: Hurtigt og billigt → “GPT-4o mini / Qwen 2.5 3B”
-Farve-kode: grøn = lokal, blå = cloud
+**Titel:** Trin-for-trin modelvalg
+**Indhold:** Flowdiagram: opgave → spørgsmål → modelvalg — beslutningsguide.
+**Formål:** Gør valget til en proces i stedet for en liste — brugervenlig beslutningsstruktur.
 
 #### ✅ modul12-ill4-model-sammenligning-tabel.png
-**Titel:** Komplet model-sammenligning
-**Indhold:** Tabel med 7 rækker (en per model) og 5 kolonner:
-- Model-navn + ikon
-- Cloud ☁️ eller Lokal 💻 badge
-- Bedst til (2–3 nøgleord)
-- Context window
-- Pris (gratis / $/md / $/token)
-Fremhæv “Anbefalet start” badge på Claude Sonnet og Qwen 2.5 7B
-
-| Fil | Modul | Status |
-|-----|-------|--------|
-| modul6-ill1-web-interface-oversigt.png | 6 | ✅ |
-| modul6-ill2-chatgpt-interface.png | 6 | ✅ |
-| modul6-ill3-claude-interface.png | 6 | ✅ |
-| modul6-ill4-openrouter-model-valg.png | 6 | ✅ |
-| modul6-ill5-web-vs-api.png | 6 | ✅ |
-| modul7-ill1-ollama-arkitektur.png | 7 | ✅ |
-| modul7-ill2-ollama-kommandoer.png | 7 | ✅ |
-| modul7-ill3-lokal-api-server.png | 7 | ✅ |
-| modul7-ill4-model-library.png | 7 | ✅ |
-| modul8-ill1-lokal-interface-oversigt.png | 8 | ✅ |
-| modul8-ill2-sammenligning.png | 8 | ✅ |
-| modul8-ill3-hardware-krav.png | 8 | ✅ |
-| modul8-ill4-lokal-vs-cloud-fordele.png | 8 | ✅ |
-| modul9-ill1-copilot-i-vscode.png | 9 | ✅ |
-| modul9-ill2-autocomplete-eksempel.png | 9 | ✅ |
-| modul9-ill3-copilot-workflow.png | 9 | ✅ |
-| modul9-ill4-pris-oversigt.png | 9 | ✅ |
-| modul10-ill1-opencode-oversigt.png | 10 | ✅ |
-| modul10-ill2-opencode-workflow.png | 10 | ✅ |
-| modul10-ill3-cloud-vs-lokal-kodning.png | 10 | ✅ |
-| modul11-ill1-pi-agent-oversigt.png | 11 | ✅ |
-| modul11-ill2-agent-sammenligning.png | 11 | ✅ |
-| modul12-ill1-model-landskab.png | 12 | ✅ |
-| modul12-ill2-benchmarks.png | 12 | ✅ |
-| modul12-ill3-valg-guide.png | 12 | ✅ |
-| modul12-ill4-model-sammenligning-tabel.png | 12 | ✅ |
+**Titel:** Alle modeller på én gang
+**Indhold:** Komplet sammenligningstabel: alle modeller, cloud/lokal, stærke sider, pris, context window.
+**Formål:** Reference-illustration — teksten diskuterer, tabellen samler.
 
 ---
 
-## Trin 3: Byg selv (Moduler 13–17)
+## Trin 3: Byg selv (Moduler 13–16)
 
 ### Modul 13: Vibe coding
 
 #### ✅ modul13-ill1-vibe-coding-tankegang.png
 **Titel:** Samme mål — to helt forskellige tankegange
-**Indhold:** En færdig vejr-app på en skærm står i midten. To tankebobler fører hen til den:
-- Venstre boble (klassisk programmering): fyldt med kode-syntax, funktionsnavne, pile og tekniske begreber — en rodet mentalt landkort
-- Højre boble (vibe coding): kun naturligt sprog “lav en side der viser vejret— temperatur og et ikon”, rød/grøn feedback-boks, mobilvisning
-Under midterbilledet: lille arkitekt-ikon + bygmester-ikon med tekst “du bestemmer hvad — AI bygger hvordan”
+**Indhold:** En færdig vejr-app på en skærm i midten. To tankebobler fører hen til den:
+- Venstre boble (klassisk programmering): fyldt med kode-syntax, funktionsnavne, pile og tekniske begreber — et rodet mentalt landkort
+- Højre boble (vibe coding): kun naturligt sprog "lav en side der viser vejret — temperatur og et ikon", rød/grøn feedback-boks, mobilvisning
+Under midterbilledet: lille arkitekt-ikon + bygmester-ikon med tekst "du bestemmer hvad — AI bygger hvordan"
 **Formål:** Visualiserer at resultatet er det samme, men den mentale model er fundamentalt forskellig — understøtter pointe om resultattænkning frem for implementation
 
 #### ✅ modul13-ill2-iterativ-tilgang.png
 **Titel:** Fra blank side til færdig quiz — 4 prompts, 25 minutter
 **Indhold:** Vandret filmstrimmel med 4 frames, forbundet med pile:
-- Frame 1: Blank HTML → chat-boble “Lav quiz med ét spørgsmål” → mini-browser: grim men fungerende quiz
-- Frame 2: chat-boble “Tilføj score-tæller” → mini-browser: quiz + “2 af 5 rigtige” øverst
-- Frame 3: chat-boble “mørk baggrund, grønne knapper” → mini-browser: styled quiz
-- Frame 4: chat-boble “10 spørgsmål mere + afslutningsbesked” → mini-browser: færdig quiz
-Under strimlen: “Gem quiz-v1.html efter frame 1 — quiz-v2.html efter frame 2” med lille diskette-ikon
+- Frame 1: Blank HTML → chat-boble "Lav quiz med ét spørgsmål" → mini-browser: grim men fungerende quiz
+- Frame 2: chat-boble "Tilføj score-tæller" → mini-browser: quiz + "2 af 5 rigtige" øverst
+- Frame 3: chat-boble "mørk baggrund, grønne knapper" → mini-browser: styled quiz
+- Frame 4: chat-boble "10 spørgsmål mere + afslutningsbesked" → mini-browser: færdig quiz
+Under strimlen: "Gem quiz-v1.html efter frame 1 — quiz-v2.html efter frame 2" med lille diskette-ikon
 **Formål:** Gør den iterative arbejdsproces konkret og håndgribelig — tekstens punktliste føles abstrakt, illustrationen viser det faktiske resultat af hvert trin
 
 #### ✅ modul13-ill3-fejlhaandtering.png
 **Titel:** Anatomien af en god fejlrapport
 **Indhold:** To chat-vinduer side om side:
-- Venstre (rød header “Dårlig fejlrapport”): Bruger skriver “det virker ikke når jeg klikker”. AI svarer: “Kan du give mere information om hvad der sker?”. Spildt udveksling markeret med rød pil.
-- Højre (grøn header “God fejlrapport”): Bruger indsætter fuld stack trace med kontekst. Stack trace annoteret med pile der peger på:
-  - “HVAD gik galt: TypeError”
-  - “HVOR i koden: quiz.js linje 23”
-  - “HVORNÅR: ved klik på knap”
-Bunder med lille guide: “F12 i Chrome → Console → kopiér alt”
+- Venstre (rød header "Dårlig fejlrapport"): Bruger skriver "det virker ikke når jeg klikker". AI svarer: "Kan du give mere information om hvad der sker?". Spildt udveksling markeret med rød pil.
+- Højre (grøn header "God fejlrapport"): Bruger indsætter fuld stack trace med kontekst. Stack trace annoteret med pile der peger på:
+  - "HVAD gik galt: TypeError"
+  - "HVOR i koden: quiz.js linje 23"
+  - "HVORNÅR: ved klik på knap"
+Bunder med lille guide: "F12 i Chrome → Console → kopiér alt"
 **Formål:** Viser hvad en fejlbesked indeholder og hvorfor hver del hjælper — understøtter pointe om at omformulering mister information
 
 ### Modul 14: API co-pilot
@@ -592,100 +380,148 @@ Bunder med lille guide: “F12 i Chrome → Console → kopiér alt”
 **Indhold:** Venstre: en elev med 5 noter → ChromaDB lokal → Ollama → AI svarer. Højre: en virksomhed med 50.000 dokumenter → ChromaDB/Pinecone → cloud-API → AI svarer. Kode-mønstret er identisk begge steder — vist med "samme kode" label.
 **Formål:** Teksten viser use cases. Illustrationen viser SKALERBARHEDEN — at det samme mønster virker fra hobbyprojekt til produktion.
 
-### Modul 17: Agenter
+## Trin 4: Avanceret (Moduler 17–19)
 
-#### 🔲 modul17-ill1-agent-vs-chatbot.png
+### Modul 17: Skills
+
+#### ✅ modul17-ill1-skill-opbygning.png
+**Titel:** Samme spørgsmål — to vidt forskellige AI'er
+**Indhold:** To chat-vinduer side om side. Venstre (ingen system-prompt): samme spørgsmål stillet 3 gange → 3 svar med forskelligt format (punktliste, prose, enkelt sætning), forskellig længde, forskellig tone. Lille konsistens-måler viser 2/10. Højre (med skill): samme spørgsmål 3 gange → 3 svar der er identisk strukturerede. Konsistens-måler viser 10/10. Under hvert vindue: en lille box viser system-prompt (tom vs. udfyldt).
+**Formål:** Teksten forklarer HVAD en skill er. Illustrationen viser KONSEKVENSEN AF AT MANGLE EN SKILL — uforudsigelig opførsel der er usynlig i kode-eksemplerne.
+
+#### ✅ modul17-ill2-ollama-modelfile.png
+**Titel:** Skill sendt med — vs. skill bagt ind
+**Indhold:** To workflows side om side, begge til samme model. Venstre (API + system_prompt): hvert kald sender [system_prompt, 600 tokens] + [bruger-besked]. En token-tæller ved siden af viser tallet stige for hvert kald. System-prompt-blokken gentages med grå pile. Højre (Ollama Modelfile): Modelfile køres én gang → "geo-lærer" model oprettet med stempel "Permanent". Hvert kald sender kun [bruger-besked]. Token-tæller viser 0 system-tokens. Pris pr. kald markant lavere.
+**Formål:** Teksten viser HVORDAN man skriver en Modelfile. Illustrationen viser HVAD DU VINDER — skill betales én gang i stedet for ved hvert kald, og ingen system-prompt skal huskes i koden.
+
+#### ✅ modul17-ill3-skill-bibliotek.png
+**Titel:** Én fil — ét ændringspunkt
+**Indhold:** Én `skills/kodereview.txt`-fil i midten med pile ud til fire brugere: `main.py`, `web_server.py`, `test_runner.py` og `ollama run kodereview-model`. Alle fire peger på samme fil. Under filen: rød boks "Før: samme system-prompt kopieret 4 steder" → grøn boks "Efter: én fil, opdateres ét sted — alle bruger ny version automatisk".
+**Formål:** Teksten viser mappestrukturen. Illustrationen viser GEVINSTEN VED SINGLE SOURCE OF TRUTH — at ændre én fil opdaterer alle programmer på en gang, i stedet for at jage duplikerede system-prompts.
+
+### Modul 18: MCP
+
+#### ✅ modul18-ill1-mcp-arkitektur.png
+**Titel:** Spaghetti-integrationer vs. ét stik
+**Indhold:** Split-screen. Venstre (Før MCP): én AI-klient med 4 separate pile ud til GitHub, filsystem, database og web — hver pil har et forskelligt kode-snippet ved siden (unik implementering). Kaotisk, 4 forskellige farver. Højre (Med MCP): samme AI-klient → én bred MCP-linje → de 4 servere. Alle pile identiske. USB-stik-ikon over MCP-linjen.
+**Formål:** Teksten nævner USB-analogien. Illustrationen viser DET KONKRETE PROBLEM MCP LØSER — ikke hvad MCP er, men hvad det erstatter: spaghetti-kode med 4 unikke integrationer.
+
+#### ✅ modul18-ill2-mcp-servere-oversigt.png
+**Titel:** Hvad MCP faktisk sender
+**Indhold:** Tre-trins sekvens for ét enkelt tool-kald (zoomet ind på protokollen). Trin 1 — AI sender: `{"method": "tools/call", "params": {"name": "læs_fil", "arguments": {"sti": "noter.txt"}}}`. Trin 2 — Server behandler: Python-kode `open("noter.txt")` kører. Trin 3 — Server svarer: `{"result": {"content": [{"type": "text", "text": "indhold af fil..."}]}}`. Annoteret med: hvad AI-klienten ser (JSON) vs. hvad Python-koden håndterer.
+**Formål:** Teksten lister hvilke servere der findes. Illustrationen viser DEN FAKTISKE JSON-RPC KOMMUNIKATION — gør protokollen konkret og viser at det er struktureret data, ikke magi.
+
+#### ✅ modul18-ill3-mcp-integration.png
+**Titel:** Fra prompt til filsystem og tilbage — 7 trin
+**Indhold:** Vandret tidslinje med 7 nummererede trin: 1) Bruger skriver prompt „Læs mine noter og opsummér" → 2) Claude spørger MCP-server: „hvilke tools har du?" → 3) Server svarer: tool-liste → 4) Claude beslutter: kald `læs_fil` → 5) Server åbner filen fysisk på disk → 6) Server returnerer indhold til Claude → 7) Claude formulerer opsummering til bruger. Hvert trin farvekodet: grøn = bruger, blå = Claude, orange = MCP-server.
+**Formål:** Teksten viser hvilke klienter der understøtter MCP. Illustrationen viser HELE FLOWEN for ét MCP-kald — hvad der sker fra prompt til svar, og at det er AI'en der beslutter hvornår og hvad der kaldes.
+
+### Modul 19: Agenter
+
+#### ✅ modul19-ill1-agent-vs-chatbot.png
 **Titel:** 12 manuelle trin vs. ét agent-kald
-**Indhold:** Opgaven „research 3 frameworks og gem fil“ vist som manuel tjekliste med 12 nummererede bokse (åbn browser, google, klik, læs, noter...) på venstre side. Højre side: én linje kode `kør_agent("...")`. Antallet 12 vs 1 fremhævet.
+**Indhold:** Opgaven „research 3 frameworks og gem fil" vist som manuel tjekliste med 12 nummererede bokse (åbn browser, google, klik, læs, noter...) på venstre side. Højre side: én linje kode `kør_agent("...")`. Antallet 12 vs 1 fremhævet.
 **Formål:** Teksten forklarer HVAD en agent er. Illustrationen gør MÆNGDEN AF ARBEJDE konkret — ikke et arkitekturdiagram.
 
-#### 🔲 modul17-ill2-tools-function-calling.png
+#### ✅ modul19-ill2-tools-function-calling.png
 **Titel:** Det usynlige JSON-kald
-**Indhold:** Sekvens i tre trin: 1) AI'en genererer JSON: `{"name": "søg_web", "input": {"query": "Python frameworks"}}` → 2) Python parser og kalder `udfør_tool("søg_web", {"query": "..."})` → 3) Python returnerer string „Django, Flask...“ tilbage til AI. Hvert trin annoteret med hvad der sker.
+**Indhold:** Sekvens i tre trin: 1) AI'en genererer JSON: `{"name": "søg_web", "input": {"query": "Python frameworks"}}` → 2) Python parser og kalder `udfør_tool("søg_web", {"query": "..."})` → 3) Python returnerer string „Django, Flask..." tilbage til AI. Hvert trin annoteret med hvad der sker.
 **Formål:** Teksten viser tool-definitioner og -implementering. Illustrationen viser DEN USYNLIGE PROTOKOL imellem dem — hvad AI'en faktisk sender og modtager.
 
-#### 🔲 modul17-ill3-react-loop.png
+#### ✅ modul19-ill3-react-loop.png
 **Titel:** Agentens logbog
 **Indhold:** Et konkret kørende transcript som terminal-output: `[THOUGHT] Jeg skal søge...` / `[ACTION] søg_web("Python frameworks")` / `[OBSERVATION] Django, Flask...` / `[THOUGHT] Nu skal jeg gemme...` / `[ACTION] gem_fil(...)` / `[FINAL] Færdig`. Ligner debugger-output.
 **Formål:** Teksten viser ReAct-mønsteret abstrakt. Illustrationen gør LØKKENS KONKRETE FORLØB læseligt — hvad agenten faktisk tænker og gør.
-
-| Fil | Modul | Status |
-|-----|-------|--------|
-| modul13-ill1-vibe-coding-tankegang.png | 13 | ✅ Uploadet |
-| modul13-ill2-iterativ-tilgang.png | 13 | ✅ Uploadet |
-| modul13-ill3-fejlhaandtering.png | 13 | ✅ Uploadet |
-| modul14-ill1-api-hvad-er-det.png | 14 | ✅ Uploadet |
-| modul14-ill2-api-noegle-sikkerhed.png | 14 | ✅ Uploadet |
-| modul14-ill3-konversationshistorik.png | 14 | ✅ Uploadet |
-| modul15-ill1-ai-som-funktion.png | 15 | ✅ Uploadet |
-| modul15-ill2-python-ollama-kode.png | 15 | ✅ Uploadet |
-| modul15-ill3-praktiske-eksempler.png | 15 | ✅ Uploadet |
-| modul16-ill1-rag-pipeline.png | 16 | ✅ Uploadet |
-| modul16-ill2-chunking-overlap.png | 16 | ✅ Uploadet |
-| modul16-ill3-rag-use-cases.png | 16 | ✅ Uploadet |
-| modul17-ill1-agent-vs-chatbot.png | 17 | 🔲 Mangler |
-| modul17-ill2-tools-function-calling.png | 17 | 🔲 Mangler |
-| modul17-ill3-react-loop.png | 17 | 🔲 Mangler |
-
----
-
-## Trin 4: Avanceret (Moduler 18–19)
-
-### Modul 18: Skills
-
-#### 🔲 modul18-ill1-skill-opbygning.png
-**Indhold:** Tre byggeklodser: Rolle + Format + Begrænsninger → Skill. Eksempel på system-prompt der kombinerer alle tre.
-
-#### 🔲 modul18-ill2-ollama-modelfile.png
-**Indhold:** Modelfile struktur: FROM model + SYSTEM prompt → ollama create → custom model klar til brug.
-
-### Modul 19: MCP
-
-#### 🔲 modul19-ill1-mcp-arkitektur.png
-**Indhold:** MCP client (AI) ↔ MCP protocol ↔ MCP servere (filer, GitHub, database, web). USB-analogi vist.
-
-#### 🔲 modul19-ill2-mcp-servere-oversigt.png
-**Indhold:** Grid af MCP-server ikoner: filsystem, GitHub, database, web, kalender, Slack — med kort beskrivelse.
-
-#### 🔲 modul19-ill3-mcp-integration.png
-**Indhold:** Samme MCP-servere (filsystem, GitHub, DB) forbundet til Claude Desktop, OpenCode og Pi Agent.
-
-| Fil | Modul | Status |
-|-----|-------|--------|
-| modul18-ill1-skill-opbygning.png | 18 | 🔲 Mangler |
-| modul18-ill2-ollama-modelfile.png | 18 | 🔲 Mangler |
-| modul19-ill1-mcp-arkitektur.png | 19 | 🔲 Mangler |
-| modul19-ill2-mcp-servere-oversigt.png | 19 | 🔲 Mangler |
-| modul19-ill3-mcp-integration.png | 19 | 🔲 Mangler |
-
----
 
 ## Samlet oversigt — Trin 1
 
 | Fil | Format | Modul | Status |
 |-----|--------|-------|--------|
-| modul1-ill1-ai-vs-ikke-ai.png | PNG ekstern | 1 | ✅ |
-| modul1-ill2-tidslinje.png | PNG ekstern | 1 | ✅ |
-| modul1-ill3-programmering-vs-ml.png | PNG ekstern | 1 | ✅ |
-| modul1-ill4-neuralt-netvaerk.png | PNG ekstern | 1 | ✅ |
-| modul1-ill5-tre-grunde.png | PNG ekstern | 1 | ✅ |
-| modul1-ill6-styrker-svagheder.png | PNG ekstern | 1 | ✅ |
-| modul2-ill1-engine-vs-model.png | PNG ekstern | 2 | ✅ |
-| modul2-ill2-token-forudsigelse.png | PNG ekstern | 2 | ✅ |
-| modul2-ill3-tokenisering.png | PNG ekstern | 2 | ✅ |
-| modul2-ill4-attention.png | PNG ekstern | 2 | ✅ |
-| modul2-ill5-embeddings.png | PNG ekstern | 2 | ✅ |
-| modul2-ill6-model-sammenligning.png | PNG ekstern | 2 | ✅ |
-| modul3-ill1-lokal-vs-cloud.png | PNG ekstern | 3 | ✅ |
-| modul3-ill2-privacy.png | PNG ekstern | 3 | ✅ |
-| modul3-ill3-cpu-gpu-ram-vram.png | PNG ekstern | 3 | ✅ |
-| modul3-ill4-model-storrelse.png | PNG ekstern | 3 | ✅ |
-| modul3-ill5-quantization.png | PNG ekstern | 3 | ✅ |
-| modul4-ill1-pipeline-overblik.png | PNG ekstern | 4 | ✅ |
-| modul4-ill2-token-by-token-generation.png | PNG ekstern | 4 | ✅ |
-| modul4-ill3-temperature.png | PNG ekstern | 4 | ✅ |
-| modul4-ill4-context-window.png | PNG ekstern | 4 | ✅ |
-| modul4-ill5-hallucination.png | PNG ekstern | 4 | ✅ |
-| modul5-ill1-token-priser.png | PNG ekstern | 5 | ✅ |
-| modul5-ill2-abonnement-vs-api.png | PNG ekstern | 5 | ✅ |
-| modul5-ill3-pris-sammenligning.png | PNG ekstern | 5 | ✅ |
+| modul1-ill1-ai-vs-ikke-ai.png | PNG | 1 | ✅ |
+| modul1-ill2-tidslinje.png | PNG | 1 | ✅ |
+| modul1-ill3-programmering-vs-ml.png | PNG | 1 | ✅ |
+| modul1-ill4-neuralt-netvaerk.png | PNG | 1 | ✅ |
+| modul1-ill5-tre-grunde.png | PNG | 1 | ✅ |
+| modul1-ill6-styrker-svagheder.png | PNG | 1 | ✅ |
+| modul2-ill1-engine-vs-model.png | PNG | 2 | ✅ |
+| modul2-ill2-token-forudsigelse.png | PNG | 2 | ✅ |
+| modul2-ill3-tokenisering.png | PNG | 2 | ✅ |
+| modul2-ill4-attention.png | PNG | 2 | ✅ |
+| modul2-ill5-embeddings.png | PNG | 2 | ✅ |
+| modul2-ill6-model-sammenligning.png | PNG | 2 | ✅ |
+| modul3-ill1-lokal-vs-cloud.png | PNG | 3 | ✅ |
+| modul3-ill2-privacy.png | PNG | 3 | ✅ |
+| modul3-ill3-cpu-gpu-ram-vram.png | PNG | 3 | ✅ |
+| modul3-ill4-model-storrelse.png | PNG | 3 | ✅ |
+| modul3-ill5-quantization.png | PNG | 3 | ✅ |
+| modul4-ill1-pipeline-overblik.png | PNG | 4 | ✅ |
+| modul4-ill2-token-by-token-generation.png | PNG | 4 | ✅ |
+| modul4-ill3-temperature.png | PNG | 4 | ✅ |
+| modul4-ill4-context-window.png | PNG | 4 | ✅ |
+| modul4-ill5-hallucination.png | PNG | 4 | ✅ |
+| modul5-ill1-token-priser.png | PNG | 5 | ✅ |
+| modul5-ill2-abonnement-vs-api.png | PNG | 5 | ✅ |
+| modul5-ill3-pris-sammenligning.png | PNG | 5 | ✅ |
+
+## Samlet oversigt — Trin 2
+
+| Fil | Format | Modul | Status |
+|-----|--------|-------|--------|
+| modul6-ill1-web-interface-oversigt.png | PNG | 6 | ✅ |
+| modul6-ill2-chatgpt-interface.png | PNG | 6 | ✅ |
+| modul6-ill3-claude-interface.png | PNG | 6 | ✅ |
+| modul6-ill4-openrouter-model-valg.png | PNG | 6 | ✅ |
+| modul6-ill5-web-vs-api.png | PNG | 6 | ✅ |
+| modul7-ill1-ollama-arkitektur.png | PNG | 7 | ✅ |
+| modul7-ill2-ollama-kommandoer.png | PNG | 7 | ✅ |
+| modul7-ill3-lokal-api-server.png | PNG | 7 | ✅ |
+| modul7-ill4-model-library.png | PNG | 7 | ✅ |
+| modul8-ill1-lokal-interface-oversigt.png | PNG | 8 | ✅ |
+| modul8-ill2-sammenligning.png | PNG | 8 | ✅ |
+| modul8-ill3-hardware-krav.png | PNG | 8 | ✅ |
+| modul8-ill4-lokal-vs-cloud-fordele.png | PNG | 8 | ✅ |
+| modul9-ill1-copilot-i-vscode.png | PNG | 9 | ✅ |
+| modul9-ill2-autocomplete-eksempel.png | PNG | 9 | ✅ |
+| modul9-ill3-copilot-workflow.png | PNG | 9 | ✅ |
+| modul9-ill4-pris-oversigt.png | PNG | 9 | ✅ |
+| modul10-ill1-opencode-oversigt.png | PNG | 10 | ✅ |
+| modul10-ill2-opencode-workflow.png | PNG | 10 | ✅ |
+| modul10-ill3-cloud-vs-lokal-kodning.png | PNG | 10 | ✅ |
+| modul11-ill1-pi-agent-oversigt.png | PNG | 11 | ✅ |
+| modul11-ill2-agent-sammenligning.png | PNG | 11 | ✅ |
+| modul12-ill1-model-landskab.png | PNG | 12 | ✅ |
+| modul12-ill2-benchmarks.png | PNG | 12 | ✅ |
+| modul12-ill3-valg-guide.png | PNG | 12 | ✅ |
+| modul12-ill4-model-sammenligning-tabel.png | PNG | 12 | ✅ |
+
+## Samlet oversigt — Trin 3
+
+| Fil | Format | Modul | Status |
+|-----|--------|-------|--------|
+| modul13-ill1-vibe-coding-tankegang.png | PNG | 13 | ✅ |
+| modul13-ill2-iterativ-tilgang.png | PNG | 13 | ✅ |
+| modul13-ill3-fejlhaandtering.png | PNG | 13 | ✅ |
+| modul14-ill1-api-hvad-er-det.png | PNG | 14 | ✅ |
+| modul14-ill2-api-noegle-sikkerhed.png | PNG | 14 | ✅ |
+| modul14-ill3-konversationshistorik.png | PNG | 14 | ✅ |
+| modul15-ill1-ai-som-funktion.png | PNG | 15 | ✅ |
+| modul15-ill2-python-ollama-kode.png | PNG | 15 | ✅ |
+| modul15-ill3-praktiske-eksempler.png | PNG | 15 | ✅ |
+| modul16-ill1-rag-pipeline.png | PNG | 16 | ✅ |
+| modul16-ill2-chunking-overlap.png | PNG | 16 | ✅ |
+| modul16-ill3-rag-use-cases.png | PNG | 16 | ✅ |
+
+## Samlet oversigt — Trin 4
+
+| Fil | Format | Modul | Status |
+|-----|--------|-------|--------|
+| modul17-ill1-skill-opbygning.png | PNG | 17 | ✅ |
+| modul17-ill2-ollama-modelfile.png | PNG | 17 | ✅ |
+| modul17-ill3-skill-bibliotek.png | PNG | 17 | ✅ |
+| modul18-ill1-mcp-arkitektur.png | PNG | 18 | ✅ |
+| modul18-ill2-mcp-servere-oversigt.png | PNG | 18 | ✅ |
+| modul18-ill3-mcp-integration.png | PNG | 18 | ✅ |
+| modul19-ill1-agent-vs-chatbot.png | PNG | 19 | ✅ |
+| modul19-ill2-tools-function-calling.png | PNG | 19 | ✅ |
+| modul19-ill3-react-loop.png | PNG | 19 | ✅ |
+
