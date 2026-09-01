@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8">
+  <title>RPG 2 – Løsningsforslag</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <h1>RPG 2 – Løsningsforslag</h1>
+  <p class="left">
+    Her finder du løsningsforslag til alle øvelserne i RPG 2.<br>
+    <strong>Prøv selv først!</strong> Brug kun disse som hjælp hvis du sidder fast – der er ofte flere måder at løse en opgave på,
+    og din løsning kan sagtens være lige så god som den her.
+  </p>
+
+
+  <!-- ============================================================ -->
+  <!-- AFSNIT 2: LOKATIONER                                          -->
+  <!-- ============================================================ -->
+  <h2>Afsnit 2 – Lokationer</h2>
+
+  <div class="code-block">
+    <h3>Øvelse 1 – Hvilke nøgler har lokationerne?</h3>
+    <p>Spørgsmålet handler om at forstå strukturen. Hver lokation har disse nøgler:</p>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># Hver lokation i 'locations' ordbogen har disse nøgler:
+# "navn"        – Det fulde navn der vises til spilleren
+# "beskrivelse" – Tekst der beskrives når man ankommer
+# "udgange"     – Liste over steder man kan gå til
+# "npc"         – Navn på NPC (eller None hvis ingen)
+# "æg"          – Navn på æg der kan findes (eller None)
+# "genstand"    – Navn på dekoration der kan findes (eller None)
+
+# Man kan se alle nøgler i en ordbog med:
+loc = locations["kasernen"]
+print(loc.keys())
+# Output: dict_keys(['navn', 'beskrivelse', 'udgange', 'npc', 'æg', 'genstand'])</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 2 – Tilføj rønhaveplads til locations</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">locations["rønhaveplads"] = {
+    "navn": "Rønhaveplads",
+    "beskrivelse": (
+        "Du ankommer til den hyggelige Rønhaveplads.\n"
+        "Forårsblomster springer ud i bedene. Der er stille og fredeligt."
+    ),
+    "udgange": ["havn", "gågaden"],
+    "npc": None,
+    "æg": None,
+    "genstand": "blå farve",
+}
+
+# Husk også at tilføje "rønhaveplads" som udgang fra havn og gågaden:
+locations["havn"]["udgange"].append("rønhaveplads")
+locations["gågaden"]["udgange"].append("rønhaveplads")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 3 – Hent beskrivelsen for havnen</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># Vi bruger to nøgler – først lokationens navn, derefter feltet:
+print(locations["havn"]["beskrivelse"])
+
+# Eller gem det i en variabel først:
+havn = locations["havn"]
+print(havn["beskrivelse"])</code></pre>
+    </details>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- AFSNIT 3: NPC'ER                                              -->
+  <!-- ============================================================ -->
+  <h2>Afsnit 3 – NPC'er</h2>
+
+  <div class="code-block">
+    <h3>Øvelse 4 – Tilføj "gammel dame" til npc_dialog</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">npc_dialog["gammel dame"] = (
+    "Den gamle dame hvisker: 'Pssst... det røde æg?\n"
+    "En dame nede på Strandpromenaden har det – gå derned og tal med hende!\n"
+    "Her er et grønt mønster du kan bruge til pynt.' 🌿"
+)</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 5 – Hvad sker der hvis NPC ikke findes? Håndter fejlen.</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python"># Hvis man slår en nøgle op der ikke findes, får man en KeyError:
+# print(npc_dialog["ukendt"])  -->  KeyError: 'ukendt'
+
+# Løsning 1: Tjek om nøglen findes før opslag
+npc = "ukendt npc"
+if npc in npc_dialog:
+    print(npc_dialog[npc])
+else:
+    print("Den person kender jeg ikke.")
+
+# Løsning 2: Brug .get() som returnerer None hvis nøglen ikke findes
+dialog = npc_dialog.get(npc)
+if dialog:
+    print(dialog)
+else:
+    print("Den person kender jeg ikke.")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 6 – Skriv en NPC til en lokation du selv finder på</h3>
+    <p>Her er et eksempel med en bager på et tænkt "torvet":</p>
+    <details>
+      <summary>Løsningsforslag (eksempel)</summary>
+      <pre class="line-numbers"><code class="language-python"># Tilføj lokationen
+locations["torvet"] = {
+    "navn": "Torvet",
+    "beskrivelse": (
+        "Du ankommer til det travle torv midt i byen.\n"
+        "Der dufter af nybagt brød fra bageren ved siden af."
+    ),
+    "udgange": ["gågaden"],
+    "npc": "bager",
+    "æg": None,
+    "genstand": None,
+}
+
+# Tilføj NPC-dialogen
+npc_dialog["bager"] = (
+    "Bageren siger: 'God påske! Jeg så en dreng løbe forbi med et æg\n"
+    "tidligere – han løb i retning mod havnen. Held og lykke med jagten!' 🥐"
+)
+
+# Husk at tilføje torvet som udgang fra gågaden
+locations["gågaden"]["udgange"].append("torvet")</code></pre>
+    </details>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- AFSNIT 4: INVENTORY                                           -->
+  <!-- ============================================================ -->
+  <h2>Afsnit 4 – Inventory</h2>
+
+  <div class="code-block">
+    <h3>Øvelse 7 – Tjek om spilleren har alle dekorationsgenstande</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">dekorationsgenstande = ["blå farve", "gul sløjfe", "grønt mønster", "rød sløjfe"]
+
+# Løsning 1: Tjek én for én
+alle_med = True
+for genstand in dekorationsgenstande:
+    if genstand not in inventory:
+        alle_med = False
+
+if alle_med:
+    print("Du har alle dekorationsgenstande! 🎨")
+else:
+    print("Du mangler stadig nogle genstande.")
+
+# Løsning 2: Kortere med all()
+if all(g in inventory for g in dekorationsgenstande):
+    print("Du har alle dekorationsgenstande! 🎨")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 8 – Skriv funktionen print_inventory()</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">def print_inventory():
+    print("\n" + "=" * 50)
+    print("🧺 Din kurv indeholder:")
+    if not inventory:
+        print("  (kurven er tom)")
+    else:
+        for item in inventory:
+            print(f"  - {item}")
+    print(f"\n🥚 Æg fundet:    {len(eggs_found)}/4")
+    print(f"🎨 Æg dekoreret: {len(eggs_decorated)}/4")
+
+# Kald funktionen:
+print_inventory()</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 9 – Håndter at spilleren prøver at dekorere uden de rigtige ting</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">def dekorér_æg():
+    dekorationsgenstande = {
+        "blå farve":     "blåt æg",
+        "gul sløjfe":    "gult æg",
+        "grønt mønster": "grønt æg",
+        "rød sløjfe":    "rødt æg",
+    }
+
+    kan_dekorere = False
+    for genstand, æg in dekorationsgenstande.items():
+        if genstand in inventory and æg in inventory and æg not in eggs_decorated:
+            print(f"\n🎨 Du dekorerer dit {æg} med {genstand}. Fantastisk!")
+            eggs_decorated.append(æg)
+            inventory.remove(genstand)
+            kan_dekorere = True
+
+    if not kan_dekorere:
+        # Fortæl spilleren præcis hvad de mangler
+        print("\nDu kan ikke dekorere noget endnu. Her er hvad du mangler:")
+        for genstand, æg in dekorationsgenstande.items():
+            if æg not in eggs_decorated:
+                har_æg = "✅" if æg in inventory else "❌"
+                har_genstand = "✅" if genstand in inventory else "❌"
+                print(f"  {har_æg} {æg}  +  {har_genstand} {genstand}")</code></pre>
+    </details>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- AFSNIT 5: FUNKTIONER                                          -->
+  <!-- ============================================================ -->
+  <h2>Afsnit 5 – Funktioner</h2>
+
+  <div class="code-block">
+    <h3>Øvelse 10 – Hvad gør ", ".join(loc["udgange"])?</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># .join() sætter elementerne i en liste sammen til én streng,
+# adskilt af det du skriver i anførselstegnene.
+
+udgange = ["havn", "gågaden", "rønhaveplads"]
+
+print(", ".join(udgange))
+# Output: havn, gågaden, rønhaveplads
+
+print(" | ".join(udgange))
+# Output: havn | gågaden | rønhaveplads
+
+print(" --> ".join(udgange))
+# Output: havn --> gågaden --> rønhaveplads</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 11 – Hvad sker der hvis man skriver "gå baghaven"?</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># "baghaven" er ikke i loc["udgange"], så if-betingelsen er False.
+# Koden hopper til else-blokken og udskriver:
+# "Du kan ikke gå til 'baghaven' herfra."
+# "Mulige veje: havn, gågaden"
+
+# Funktionen gå_til() håndterer det allerede korrekt:
+def gå_til(destination):
+    global location
+    loc = locations[location]
+
+    if destination in loc["udgange"]:
+        location = destination
+        print_location()
+    else:
+        # Denne blok kører når destination ikke findes
+        print(f"Du kan ikke gå til '{destination}' herfra.")
+        print(f"Mulige veje: {', '.join(loc['udgange'])}")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 12 – Besked første gang man ankommer til et sted</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python"># Vi laver en liste der husker hvilke steder spilleren har besøgt
+besøgte_steder = []
+
+def gå_til(destination):
+    global location
+    loc = locations[location]
+
+    if destination in loc["udgange"]:
+        location = destination
+
+        # Tjek om det er første besøg
+        if location not in besøgte_steder:
+            print("\n✨ Du er på et nyt sted for første gang!")
+            besøgte_steder.append(location)
+
+        print_location()
+    else:
+        print(f"Du kan ikke gå til '{destination}' herfra.")
+        print(f"Mulige veje: {', '.join(loc['udgange'])}")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 13 – Hvorfor tjekker vi "æg not in eggs_found"?</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># Uden tjekket ville spilleren kunne finde det samme æg igen og igen!
+# eggs_found ville indeholde dubletter, og len(eggs_found) ville tælle forkert.
+
+# Eksempel UDEN tjek – forkert adfærd:
+# eggs_found = ["blåt æg", "blåt æg", "blåt æg"]  # Kan finde det 3 gange!
+
+# Med tjekket sikrer vi at hvert æg kun tælles én gang:
+if æg and æg not in eggs_found:
+    inventory.append(æg)
+    eggs_found.append(æg)
+    print(f"Du finder et {æg}! 🥚")
+elif æg and æg in eggs_found:
+    print("Du har allerede fundet ægget her.")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 14 – Forklar hvordan det røde æg gives af stranddamen</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># I tal_med_npc() er der en særlig betingelse efter dialogen:
+# Hvis NPC'en er "stranddame" OG spilleren ikke allerede har det røde æg,
+# så tilføjes ægget automatisk til inventory og eggs_found.
+
+# Det røde æg har æg: None i locations["strandpromenaden"],
+# så 'søg' finder det ikke – man SKAL tale med stranddamen.
+
+if npc == "stranddame" and "rødt æg" not in eggs_found:
+    print("Stranddamen rækker dig det røde æg! 🥚")
+    inventory.append("rødt æg")
+    eggs_found.append("rødt æg")
+
+# Betingelsen "not in eggs_found" sikrer at ægget kun gives én gang,
+# selv hvis spilleren taler med stranddamen flere gange.</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 15 – Hvad gør return i tal_med_npc()?</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># return afslutter funktionen med det samme – resten af koden kører ikke.
+# Den aktiveres når loc["npc"] er None (ingen NPC på stedet).
+
+def tal_med_npc():
+    loc = locations[location]
+    npc = loc["npc"]
+
+    if not npc:
+        print("Der er ingen at tale med her.")
+        return          # <-- Funktionen stopper her, resten springes over
+
+    # Denne kode kører KUN hvis der er en NPC:
+    print(f"\n💬 Du taler med {npc}:")
+    print(npc_dialog[npc])</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 16 – Blomsterhandleren giver kun sløjfen første gang</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">def tal_med_npc():
+    loc = locations[location]
+    npc = loc["npc"]
+
+    if not npc:
+        print("Der er ingen at tale med her.")
+        return
+
+    print(f"\n💬 Du taler med {npc}:")
+    print(npc_dialog[npc])
+
+    # Stranddamen giver det røde æg første gang
+    if npc == "stranddame" and "rødt æg" not in eggs_found:
+        print("Stranddamen rækker dig det røde æg! 🥚")
+        inventory.append("rødt æg")
+        eggs_found.append("rødt æg")
+
+    # Blomsterhandleren giver kun sløjfen første gang
+    if npc == "blomsterhandler" and "gul sløjfe" not in inventory:
+        print("Blomsterhandleren rækker dig en gul sløjfe! 🎀")
+        inventory.append("gul sløjfe")
+        # Fjern sløjfen fra lokationens genstand så søg ikke finder den igen
+        locations["gågaden"]["genstand"] = None</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 17 – Hvad returnerer .items()?</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># .items() returnerer alle nøgle-værdi par i en ordbog som tuples.
+# I en for-løkke kan vi "pakke" dem ud i to variable.
+
+dekorationsgenstande = {
+    "blå farve":  "blåt æg",
+    "gul sløjfe": "gult æg",
+}
+
+# Uden .items() – vi kan kun løbe over nøglerne:
+for nøgle in dekorationsgenstande:
+    print(nøgle)
+# Output: blå farve
+#         gul sløjfe
+
+# Med .items() – vi får både nøgle og værdi:
+for genstand, æg in dekorationsgenstande.items():
+    print(f"{genstand} pynter på {æg}")
+# Output: blå farve pynter på blåt æg
+#         gul sløjfe pynter på gult æg</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 18 – Tilføj et 5. æg til spillet</h3>
+    <p>Her er et eksempel med et lilla æg på Dybbøl Mølle:</p>
+    <details>
+      <summary>Løsningsforslag (eksempel)</summary>
+      <pre class="line-numbers"><code class="language-python"># 1. Tilføj ny lokation
+locations["dybbøl mølle"] = {
+    "navn": "Dybbøl Mølle",
+    "beskrivelse": (
+        "Du ankommer til den historiske Dybbøl Mølle.\n"
+        "Møllevingerne drejer langsomt i vinden. Udsigten er fantastisk!"
+    ),
+    "udgange": ["rådhuspladsen"],
+    "npc": "guide",
+    "æg": "lilla æg",
+    "genstand": None,
+}
+
+# Tilføj udgang fra rådhuspladsen
+locations["rådhuspladsen"]["udgange"].append("dybbøl mølle")
+
+# 2. Tilføj NPC
+npc_dialog["guide"] = (
+    "Guiden siger: 'Velkommen til Dybbøl Mølle! Et lilla æg? Ja,\n"
+    "det lå gemt bag møllestenen. Og her er en lilla sløjfe til pynt!' 🎀"
+)
+
+# 3. Tilføj dekoration et sted (fx hos guiden ved tale):
+# I tal_med_npc():
+if npc == "guide" and "lilla sløjfe" not in inventory:
+    inventory.append("lilla sløjfe")
+
+# 4. Tilføj til dekorationsgenstande i dekorér_æg():
+dekorationsgenstande["lilla sløjfe"] = "lilla æg"
+
+# 5. Opdater sejrsbetingelsen fra 4 til 5
+# I aflever_æg(): if len(eggs_decorated) < 5:</code></pre>
+    </details>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- AFSNIT 6: GAME LOOP                                           -->
+  <!-- ============================================================ -->
+  <h2>Afsnit 6 – Game loop</h2>
+
+  <div class="code-block">
+    <h3>Øvelse 19 – Fordelen ved Enum frem for string</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># Med string kan man skrive hvad som helst – Python opdager ikke stavefejl:
+game_state = "Play"
+if game_state == "Ply":   # Stavefejl! Men Python klager ikke
+    print("Spillet kører")  # Denne linje kører aldrig – men ingen fejlbesked!
+
+# Med Enum får man en AttributeError med det samme:
+from enum import Enum
+class GameState(Enum):
+    Play = 1
+    Won  = 2
+    Quit = 3
+
+game_state = GameState.Ply  # AttributeError: 'Ply' is not a valid GameState
+# Python fortæller os straks at noget er galt!
+
+# Enum gør koden:
+# - Mere sikker  (stavefejl opdages)
+# - Mere læsbar  (GameState.Won er tydeligere end "won" eller 2)
+# - Lettere at vedligeholde  (alle tilstande er samlet ét sted)</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 20 – Hvorfor bruger vi .lower().strip()?</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre><code class="language-python"># .lower() konverterer al tekst til små bogstaver.
+# Uden det ville "Søg", "SØGE" og "søg" alle være forskellige kommandoer.
+print("GÅ HAVN".lower())   # --> "gå havn"  ✅ genkendes
+print("GÅ HAVN")            # --> "GÅ HAVN"  ❌ genkendes ikke
+
+# .strip() fjerner mellemrum i starten og slutningen af strengen.
+# Spillere trykker ofte en gang for meget på mellemrum.
+print("  søg  ".strip())    # --> "søg"      ✅ genkendes
+print("  søg  ")             # --> "  søg  "  ❌ genkendes ikke
+
+# Kombineret:
+command = input("Hvad vil du gøre? ").lower().strip()
+# Nu virker "  Søg  ", "SØGE", "søg" og "Søg" alle ens</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 21 – Tilføj kommandoen "kort"</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">def print_kort():
+    print("\n" + "=" * 50)
+    print("🗺️  KORT OVER SØNDERBORG")
+    print("=" * 50)
+    print()
+    print("  [KASERNEN] ★")
+    print("      |    \\")
+    print("   [HAVN]  [GÅGADEN]")
+    print("      |    /    \\")
+    print(" [RØNHAVE] [RÅDHUS]")
+    print("               |    \\")
+    print("          [STRAND] [SLOT] 🏆")
+    print("               \\   /")
+    print("               [SLOT] 🏆")
+    print()
+    # Vis spillerens aktuelle placering
+    print(f"Du er nu på: {locations[location]['navn']}")
+
+# Tilføj i game loopen:
+elif command == "kort":
+    print_kort()</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Øvelse 22 – Tilføj kommandoen "status"</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">def print_status():
+    print("\n" + "=" * 50)
+    print(f"👤 Spiller:       {player_name}")
+    print(f"📍 Lokation:      {locations[location]['navn']}")
+    print(f"🥚 Æg fundet:     {len(eggs_found)}/4")
+    print(f"🎨 Æg dekoreret:  {len(eggs_decorated)}/4")
+    if eggs_found:
+        print(f"   Fundne æg: {', '.join(eggs_found)}")
+    if eggs_decorated:
+        print(f"   Dekorerede: {', '.join(eggs_decorated)}")
+
+# Tilføj i game loopen:
+elif command == "status":
+    print_status()</code></pre>
+    </details>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- AFSNIT 7: UDVIDELSESOPGAVER                                   -->
+  <!-- ============================================================ -->
+  <h2>Afsnit 7 – Udvidelsesopgaver</h2>
+
+  <div class="code-block">
+    <h3>Opgave A – Tilføj ny lokation: Dybbøl Mølle</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python"># 1. Tilføj lokationen til locations-ordbogen
+locations["dybbøl mølle"] = {
+    "navn": "Dybbøl Mølle",
+    "beskrivelse": (
+        "Du ankommer til den historiske Dybbøl Mølle ved Sønderborg.\n"
+        "Møllevingerne drejer langsomt i vinden.\n"
+        "En historisk guide holder øje med stedet."
+    ),
+    "udgange": ["rådhuspladsen"],
+    "npc": "historisk guide",
+    "æg": None,
+    "genstand": None,
+}
+
+# 2. Tilføj udgang fra rådhuspladsen til møllen
+locations["rådhuspladsen"]["udgange"].append("dybbøl mølle")
+
+# 3. Tilføj NPC-dialog
+npc_dialog["historisk guide"] = (
+    "Guiden siger: 'Dybbøl Mølle er et af Danmarks mest historiske steder.\n"
+    "Her stod slaget i 1864. Men påskeæg? Nej, dem har jeg ikke set herude.\n"
+    "Prøv nede ved strandpromenaden!' 🏛️"
+)</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Opgave B – Skridt-tæller: spilleren taber efter 25 skridt</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python"># Tilføj variabel øverst i koden
+skridt_tilbage = 25
+
+# Opdater game loopen – tæl skridt ned for hver kommando
+while game_state == GameState.Play:
+    command = input("\n👉 Hvad vil du gøre? ").lower().strip()
+
+    if command == "quit":
+        game_state = GameState.Quit
+
+    elif command.startswith("gå "):
+        skridt_tilbage -= 1           # Tæl ned
+        print(f"(Skridt tilbage: {skridt_tilbage})")
+        gå_til(command[3:].strip())
+
+    elif command == "søg":
+        skridt_tilbage -= 1
+        print(f"(Skridt tilbage: {skridt_tilbage})")
+        søg_efter_æg()
+
+    # ... resten af kommandoerne på samme måde ...
+
+    # Tjek om spilleren løber tør for skridt
+    if skridt_tilbage <= 0 and game_state == GameState.Play:
+        game_state = GameState.Lost
+
+# Tilføj GameState.Lost til Enum:
+class GameState(Enum):
+    Play = 1
+    Won  = 2
+    Quit = 3
+    Lost = 4   # Ny tilstand
+
+# Tilføj taber-skærm:
+def taber_skærm():
+    print("\n" + "=" * 50)
+    print("💀  SPILLET ER SLUT!")
+    print("=" * 50)
+    print("Du løb tør for skridt og nåede ikke at finde alle æggene.")
+    print("Prøv igen – du kender vejen nu! 🐣")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Opgave C – Player-klasse</h3>
+    <details>
+      <summary>Løsningsforslag</summary>
+      <pre class="line-numbers"><code class="language-python">class Player:
+    def __init__(self, name):
+        self.name = name
+        self.location = "kasernen"
+        self.inventory = []
+        self.eggs_found = []
+        self.eggs_decorated = []
+
+    def move_to(self, destination):
+        loc = locations[self.location]
+        if destination in loc["udgange"]:
+            self.location = destination
+            return True
+        return False
+
+    def pick_up(self, item):
+        self.inventory.append(item)
+
+    def has_item(self, item):
+        return item in self.inventory
+
+    def found_egg(self, egg):
+        if egg not in self.eggs_found:
+            self.inventory.append(egg)
+            self.eggs_found.append(egg)
+            return True
+        return False
+
+    def decorate_egg(self, egg, decoration):
+        if egg in self.inventory and decoration in self.inventory and egg not in self.eggs_decorated:
+            self.eggs_decorated.append(egg)
+            self.inventory.remove(decoration)
+            return True
+        return False
+
+    def print_status(self):
+        print(f"👤 {self.name} er på {locations[self.location]['navn']}")
+        print(f"🥚 Æg fundet: {len(self.eggs_found)}/4")
+        print(f"🎨 Dekorerede: {len(self.eggs_decorated)}/4")
+
+# Brug klassen i spillet:
+name = input("Hvad hedder du? ").strip()
+player = Player(name if name else "Eventyrer")
+
+# I stedet for: location = "havn"
+# Brug nu:      player.move_to("havn")
+
+# I stedet for: eggs_found.append("blåt æg")
+# Brug nu:      player.found_egg("blåt æg")</code></pre>
+    </details>
+  </div>
+
+  <div class="code-block">
+    <h3>Opgave D – Skabelon til dit eget spil</h3>
+    <details>
+      <summary>Løsningsforslag (skabelon)</summary>
+      <pre class="line-numbers"><code class="language-python"># ============================================================
+# MIT EGET SPIL – [Titel her]
+# ============================================================
+from enum import Enum
+
+class GameState(Enum):
+    Play = 1
+    Won  = 2
+    Quit = 3
+
+# --- Spillerens data ---
+player_name = ""
+location    = "start"    # Skift til din startlokation
+inventory   = []
+mål_opnået  = []         # Tilpas til dit spils mål
+
+# --- Lokationer – udfyld med dine egne ---
+locations = {
+    "start": {
+        "navn": "Dit startsted",
+        "beskrivelse": "Beskriv startstedet her.",
+        "udgange": ["sted2"],
+        "npc": "en person",
+        "æg": None,         # Skift til det der skal samles i dit spil
+        "genstand": None,
+    },
+    "sted2": {
+        "navn": "Andet sted",
+        "beskrivelse": "Beskriv stedet her.",
+        "udgange": ["start", "mål"],
+        "npc": None,
+        "æg": "noget at samle",
+        "genstand": "noget at finde",
+    },
+    "mål": {
+        "navn": "Målet",
+        "beskrivelse": "Her afleveres/bruges det samlede.",
+        "udgange": ["sted2"],
+        "npc": "den der tager imod",
+        "æg": None,
+        "genstand": None,
+    },
+}
+
+# --- NPC dialoger ---
+npc_dialog = {
+    "en person": "Personen siger: 'Velkommen! Her er et hint...'",
+    "den der tager imod": "Personen siger: 'Aflever med kommandoen: aflever'",
+}
+
+# Resten af koden – funktioner og game loop – kopieres fra Påskejagten
+# og tilpasses til dit spils logik.</code></pre>
+    </details>
+  </div>
+
+
+  <!-- Prism.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+</body>
+</html>

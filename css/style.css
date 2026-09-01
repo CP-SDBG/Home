@@ -35,6 +35,11 @@ body{
   color: black;
 }
 
+.topnav a.active {
+  background-color: #ddd;
+  color: black;
+}
+
 .column {
   float: left;
   padding: 10px;
