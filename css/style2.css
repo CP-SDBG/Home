@@ -149,3 +149,14 @@ h1{
   transform: scale(1.03);
   transition: all 1s ease;
 }
+
+.license {
+  color: white;
+  padding: 20px 10px;
+}
+.license a {
+  color: white;
+}
+.license p {
+  margin-bottom: 10px;
+}
