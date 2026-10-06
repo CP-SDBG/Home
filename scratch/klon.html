@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kloner</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#eaf6ff;color:#222;line-height:1.55}
+header{background:#2b8fd9;color:#fff;padding:2rem 1rem;text-align:center}
+main{max-width:800px;margin:auto;padding:1rem}
+img{max-width:100%;border-radius:16px}
+.card{background:#fff;border-radius:16px;padding:1rem 1.25rem;margin:1rem 0;box-shadow:0 2px 8px #0002}
+h2{color:#2b8fd9;margin-top:0}
+.b{display:inline-block;padding:.1rem .6rem;border-radius:8px;color:#fff;font-weight:600;margin:2px;font-size:.9rem}
+.ct{background:#ffab19}.mo{background:#4c97ff}.ev{background:#e6a500}.se{background:#5cb1d6}.va{background:#ff8c1a}
+.script{background:#f3f3f3;border-radius:10px;padding:.7rem 1rem;margin:.5rem 0}
+.script div{margin:3px 0}
+a.back{display:inline-block;margin:1rem 0;color:#2b8fd9;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kraft 2: Kloner</h1>
+  <p>Lav en hel hær ud fra én sprite!</p>
+</header>
+<main>
+<img src="../img/klon-regn.png" alt="Mønter falder ned som regn">
+
+<div class="card">
+  <h2>Idéen</h2>
+  <p>I stedet for at tegne 20 monstre kan du lade <strong>ét</strong> monster lave kopier af sig selv. Hver kopi (klon) kan så bestemme selv, hvad den gør.</p>
+</div>
+
+<div class="card">
+  <h2>Eksempel: Det regner med mønter</h2>
+  <p><strong>Sprite: Mønt</strong> (laver klonerne)</p>
+  <div class="script">
+    <div><span class="b ev">når grønt flag klikkes</span></div>
+    <div><span class="b mo">skjul</span></div>
+    <div><span class="b ct">for evigt</span></div>
+    <div>&nbsp;&nbsp;<span class="b mo">gå til x: (tilfældigt tal mellem -200 og 200) y: 180</span></div>
+    <div>&nbsp;&nbsp;<span class="b ct">opret klon af mig selv</span></div>
+    <div>&nbsp;&nbsp;<span class="b ct">vent 1 sekund</span></div>
+  </div>
+  <p><strong>Samme sprite</strong> (styrer hver klon)</p>
+  <div class="script">
+    <div><span class="b ct">når jeg starter som klon</span></div>
+    <div><span class="b mo">vis</span></div>
+    <div><span class="b ct">gentag indtil y position &lt; -170</span></div>
+    <div>&nbsp;&nbsp;<span class="b mo">skift y med -4</span></div>
+    <div><span class="b ct">slet denne klon</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🎯Din udfordring</h2>
+  <ol>
+    <li>Få mønterne til at regne ned.</li>
+    <li>Lav det sådan, at en mønt <strong>forsvinder</strong> og giver 1 point, når helten rører den.</li>
+    <li>Lav en sværm af mini-monstre, der kommer fra siden.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>Husk</h2>
+  <ul>
+    <li>Husk at <strong>slette</strong> klonerne, ellers bliver spillet langsomt.</li>
+    <li>Der er en grænse på 300 kloner ad gangen.</li>
+  </ul>
+</div>
+
+<a class="back" href="Monster-mission.html">← Tilbage til missionen</a>
+</main>
+</body>
+</html>

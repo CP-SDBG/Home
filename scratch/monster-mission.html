@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monster-missionen</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f4f1ff;color:#222;line-height:1.55}
+header{background:#6c4cf1;color:#fff;padding:2rem 1rem;text-align:center}
+header img{max-width:600px;width:100%;border-radius:16px;margin-top:1rem}
+main{max-width:800px;margin:auto;padding:1rem}
+.card{background:#fff;border-radius:16px;padding:1rem 1.25rem;margin:1rem 0;box-shadow:0 2px 8px #0002}
+h2{color:#6c4cf1;margin-top:0}
+.b{display:inline-block;padding:.1rem .6rem;border-radius:8px;color:#fff;font-weight:600;margin:2px;font-size:.9rem}
+.mo{background:#4c97ff}.ev{background:#e6a500}.ct{background:#ffab19}.se{background:#5cb1d6}.va{background:#ff8c1a}
+.lvl{display:flex;gap:1rem;align-items:flex-start}
+.lvl img{width:90px;height:90px;object-fit:contain}
+label{display:block;margin-top:.5rem;font-weight:600;cursor:pointer}
+.bonus{border:3px dashed #e6a500}
+.tip{background:#fff7d6;border-left:6px solid #e6a500;padding:.7rem 1rem;border-radius:8px}
+nav a{display:inline-block;margin:.3rem;padding:.6rem 1rem;background:#fff;color:#6c4cf1;border-radius:10px;text-decoration:none;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>Monster-missionen</h1>
+  <p>Din opgave: Lav et spil så drilsk, at jeg ikke kan vinde. Men det skal være muligt at vinde!</p>
+  <img src="../img/hero-monster.png" alt="Et lilla monster jagter en lille helt">
+</header>
+<main>
+
+<div class="card">
+  <h2>Sådan fungerer missionen</h2>
+  <p>Du er <strong>monster-designer</strong>. Du bestemmer, hvordan monsteret ser ud, hvordan det bevæger sig, og hvordan det driller. Klar et level ad gangen, og sæt flueben, når du er færdig.</p>
+</div>
+
+<div class="card lvl">
+  <img src="../img/helt.png" alt="Helten">
+  <div>
+    <h2>Level 1: Helten bevæger sig</h2>
+    <p>Få din helt til at gå rundt med piletasterne.</p>
+    <span class="b ev">når tasten pil op trykkes</span> <span class="b mo">skift y med 10</span>
+    <label><input type="checkbox"> Helten kan gå i alle 4 retninger</label>
+  </div>
+</div>
+
+<div class="card lvl">
+  <img src="../img/monster.png" alt="Monsteret">
+  <div>
+    <h2>Level 2: Monsteret jager</h2>
+    <p>Lav et monster, der selv følger efter helten. Hint: Kig i <em>Bevægelse</em>.</p>
+    <span class="b ev">når grønt flag klikkes</span> <span class="b ct">for evigt</span>
+    <span class="b mo">peg mod Helt</span> <span class="b mo">gå 2 trin</span>
+    <label><input type="checkbox"> Monsteret jagter helten</label>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Level 3: Game Over</h2>
+  <p>Hvad skal der ske, når monsteret rører helten? Hvilken blok kan tjekke det? Hint: Kig i <em>Registrering</em>.</p>
+  <span class="b ct">hvis ... så</span> <span class="b se">rører Helt?</span> <span class="b ct">stop alle</span>
+  <label><input type="checkbox"> Spillet viser "Game Over"</label>
+</div>
+
+<div class="card">
+  <h2>Level 4: Point og liv</h2>
+  <p>Lav en variabel, der tæller, hvor længe du overlever. Bonus: Lav en variabel <strong>fart</strong>, som vokser, jo flere point du har.</p>
+  <span class="b va">sæt point til 0</span> <span class="b va">ændr point med 1</span>
+  <label><input type="checkbox"> Point tæller op</label>
+  <label><input type="checkbox"> Monsteret bliver hurtigere</label>
+</div>
+
+<div class="card lvl">
+  <img src="../img/powerup.png" alt="En power-up">
+  <div>
+    <h2>Level 5: Gør det fair</h2>
+    <p>Lav en power-up, som fryser monsteret i 3 sekunder. Så kan man vinde!</p>
+    <span class="b se">rører Helt?</span> <span class="b ct">vent 3 sekunder</span>
+    <label><input type="checkbox"> Power-up fryser monsteret</label>
+  </div>
+</div>
+
+<div class="card bonus">
+  <h2>🏆 Bonus-baner</h2>
+  <label><input type="checkbox"> Monster nr. 2, der opfører sig anderledes (jager vs. patruljerer)</label>
+  <label><input type="checkbox"> Titelskærm og "Spil igen"-knap (→ <a href="broadcast.html">lær broadcasts</a>)</label>
+  <label><input type="checkbox"> 20 mønter eller mini-monstre (→ <a href="klon.html">lær kloner</a>)</label>
+  <label><input type="checkbox"> Flere baner i samme spil</label>
+  <p style="text-align:center"><img src="../img/trofae.png" alt="Trofæ" width="120"></p>
+</div>
+
+<div class="tip">💡 <strong>Sidder du fast?</strong> Spørg dig selv: Hvad skal ske? Hvornår? Og hvilken kategori af blokke passer? Så er du allerede tæt på.</div>
+
+<nav>
+  <a href="broadcast.html">📣 Kraft 1: Broadcast</a>
+  <a href="klon.html">🧬 Kraft 2: Kloner</a>
+</nav>
+</main>
+<script>
+const k=location.pathname;
+document.querySelectorAll('input[type=checkbox]').forEach((c,i)=>{
+  c.checked=localStorage.getItem(k+i)==='1';
+  c.onchange=()=>localStorage.setItem(k+i,c.checked?'1':'0');
+});
+</script>
+</body>
+</html>

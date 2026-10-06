@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Broadcast</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#fff8e6;color:#222;line-height:1.55}
+header{background:#e6a500;color:#fff;padding:2rem 1rem;text-align:center}
+main{max-width:800px;margin:auto;padding:1rem}
+img{max-width:100%;border-radius:16px}
+.card{background:#fff;border-radius:16px;padding:1rem 1.25rem;margin:1rem 0;box-shadow:0 2px 8px #0002}
+h2{color:#b57d00;margin-top:0}
+.b{display:inline-block;padding:.1rem .6rem;border-radius:8px;color:#fff;font-weight:600;margin:2px;font-size:.9rem}
+.ev{background:#e6a500}.lo{background:#9966ff}.mo{background:#4c97ff}
+.script{background:#f3f3f3;border-radius:10px;padding:.7rem 1rem;margin:.5rem 0}
+.script div{margin:3px 0}
+a.back{display:inline-block;margin:1rem 0;color:#b57d00;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <h1>Kraft 1: Broadcast</h1>
+  <p>Sprites kan snakke sammen!</p>
+</header>
+<main>
+<img src="../img/broadcast.png" alt="To sprites sender beskeder til hinanden">
+
+<div class="card">
+  <h2>Idéen</h2>
+  <p>En sprite <strong>råber</strong> en besked, og alle andre sprites kan <strong>lytte</strong> og reagere. Ligesom når læreren siger "frikvarter!", og alle rejser sig.</p>
+</div>
+
+<div class="card">
+  <h2>Eksempel: Start-knap</h2>
+  <p><strong>Sprite: Knap</strong></p>
+  <div class="script">
+    <div><span class="b ev">når denne sprite klikkes</span></div>
+    <div><span class="b ev">send besked start</span></div>
+  </div>
+  <p><strong>Sprite: Monster</strong></p>
+  <div class="script">
+    <div><span class="b ev">når jeg modtager start</span></div>
+    <div><span class="b lo">vis</span></div>
+    <div><span class="b mo">gå til x: 0 y: 100</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>🎯 Din udfordring</h2>
+  <ol>
+    <li>Lav en knap, der får monsteret til at dukke op og musikken til at starte.</li>
+    <li>Lav en besked <strong>gameover</strong>, som sendes, når monsteret rører helten.</li>
+    <li>Lav en "Spil igen"-knap, som sender <strong>start</strong> igen.</li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>Husk</h2>
+  <ul>
+    <li>Beskedens navn skal staves <strong>ens</strong> begge steder.</li>
+    <li>Mange sprites kan lytte til den samme besked.</li>
+  </ul>
+</div>
+
+<a class="back" href="Monster-mission.html">← Tilbage til missionen</a>
+</main>
+</body>
+</html>
